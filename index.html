@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; min-height: 15.0px}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px '.AppleSystemUIFontMonospaced'}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px '.AppleSystemUIFontMonospaced'; min-height: 15.0px}
+  </style>
+</head>
+<body>
+<p class="p1"><br></p>
+<p class="p2">&lt;!DOCTYPE html&gt;</p>
+<p class="p2">&lt;html lang="en"&gt;</p>
+<p class="p2">&lt;head&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;title&gt;PDUFA Market Intelligence&lt;/title&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>* { margin: 0; padding: 0; box-sizing: border-box; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>background: #0a0a0f;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>color: #e0e0e0;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.container {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>max-width: 1200px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>header {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>padding: 40px 0;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>border-bottom: 1px solid #1a1a2e;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>margin-bottom: 30px;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>h1 {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-size: 2.5rem;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #00d4aa 0%, #00a8e8 100%);</p>
+<p class="p2"><span class="Apple-converted-space">            </span>-webkit-background-clip: text;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>-webkit-text-fill-color: transparent;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.subtitle { color: #666; font-size: 1rem; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.stats {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</p>
+<p class="p2"><span class="Apple-converted-space">            </span>gap: 20px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>margin-bottom: 30px;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.stat-card {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>background: #12121a;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>border: 1px solid #1a1a2e;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.stat-value {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-size: 2rem;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>color: #00d4aa;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.stat-label { color: #666; font-size: 0.9rem; margin-top: 5px; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.filters {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>gap: 15px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.filter-btn {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>background: #1a1a2e;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>border: 1px solid #2a2a3e;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>color: #888;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>padding: 10px 20px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>transition: all 0.3s;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.filter-btn:hover, .filter-btn.active {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>background: #00d4aa;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>color: #0a0a0f;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>border-color: #00d4aa;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.pdufa-table {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>border-collapse: collapse;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>background: #12121a;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.pdufa-table th {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>background: #1a1a2e;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>text-align: left;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>color: #888;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-size: 0.85rem;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>letter-spacing: 0.5px;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.pdufa-table td {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>border-bottom: 1px solid #1a1a2e;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.pdufa-table tr:hover { background: #1a1a2e; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.ticker {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>color: #00d4aa;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-size: 1.1rem;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.drug-name { font-weight: 500; color: #fff; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.indication { color: #888; font-size: 0.9rem; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.date-cell { font-family: 'SF Mono', monospace; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.days-remaining {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>display: inline-block;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>padding: 5px 12px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>border-radius: 20px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-size: 0.85rem;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.days-urgent { background: #ff4757; color: #fff; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.days-soon { background: #ffa502; color: #0a0a0f; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.days-future { background: #2ed573; color: #0a0a0f; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.therapeutic-area {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>display: inline-block;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>padding: 4px 10px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-size: 0.75rem;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.ta-oncology { background: #ff6b6b; color: #fff; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.ta-rare { background: #9b59b6; color: #fff; }.ta-immunology { background: #3498db; color: #fff; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.ta-endocrine { background: #e67e22; color: #fff; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.ta-gene { background: #1abc9c; color: #fff; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.ta-other { background: #34495e; color: #fff; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>.last-updated {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>color: #666;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>font-size: 0.85rem;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>margin-top: 30px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>padding-top: 20px;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>border-top: 1px solid #1a1a2e;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span>@media (max-width: 768px) {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>.pdufa-table { font-size: 0.85rem; }</p>
+<p class="p2"><span class="Apple-converted-space">            </span>.pdufa-table th, .pdufa-table td { padding: 10px; }</p>
+<p class="p2"><span class="Apple-converted-space">            </span>h1 { font-size: 1.8rem; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p2">&lt;/head&gt;</p>
+<p class="p2">&lt;body&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>&lt;header&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;h1&gt;PDUFA Market Intelligence&lt;/h1&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;p class="subtitle"&gt;Upcoming FDA Approval Dates &amp; Catalysts&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>&lt;/header&gt;</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>&lt;div class="stats"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;div class="stat-card"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>&lt;div class="stat-value" id="total-count"&gt;0&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>&lt;div class="stat-label"&gt;Upcoming PDUFAs&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;div class="stat-card"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>&lt;div class="stat-value" id="this-month"&gt;0&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>&lt;div class="stat-label"&gt;This Month&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;div class="stat-card"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>&lt;div class="stat-value" id="next-30"&gt;0&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>&lt;div class="stat-label"&gt;Next 30 Days&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;div class="stat-card"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>&lt;div class="stat-value" id="high-priority"&gt;0&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>&lt;div class="stat-label"&gt;High Priority&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>&lt;div class="filters"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;button class="filter-btn active" data-filter="all"&gt;All&lt;/button&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;button class="filter-btn" data-filter="oncology"&gt;Oncology&lt;/button&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;button class="filter-btn" data-filter="rare"&gt;Rare Disease&lt;/button&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;button class="filter-btn" data-filter="gene"&gt;Gene Therapy&lt;/button&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;button class="filter-btn" data-filter="immunology"&gt;Immunology&lt;/button&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>&lt;table class="pdufa-table"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;thead&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>&lt;tr&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>&lt;th&gt;Ticker&lt;/th&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>&lt;th&gt;Drug&lt;/th&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>&lt;th&gt;Indication&lt;/th&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>&lt;th&gt;Area&lt;/th&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>&lt;th&gt;PDUFA Date&lt;/th&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>&lt;th&gt;Days Left&lt;/th&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;/thead&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;tbody id="pdufa-body"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>&lt;/tbody&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>&lt;/table&gt;</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>&lt;p class="last-updated"&gt;Last updated: &lt;span id="update-time"&gt;&lt;/span&gt;&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>const pdufaData = [</p>
+<p class="p2"><span class="Apple-converted-space">            </span>{ ticker: "ASND", drug: "Yuviwel (navepegritide)", indication: "Achondroplasia", area: "rare", date: "2026-02-28", priority: "high" },</p>
+<p class="p2"><span class="Apple-converted-space">            </span>{ ticker: "BMY", drug: "Deucravacitinib (Sotyktu)", indication: "Psoriatic Arthritis", area: "immunology", date: "2026-03-06", priority: "medium" },</p>
+<p class="p2"><span class="Apple-converted-space">            </span>{ ticker: "RYTM", drug: "Imcivree (setmelanotide)", indication: "Acquired Hypothalamic Obesity", area: "endocrine", date: "2026-03-20", priority: "high" },</p>
+<p class="p2"><span class="Apple-converted-space">            </span>{ ticker: "GSK", drug: "Linerixibat", indication: "Cholestatic Pruritus (PBC)", area: "rare", date: "2026-03-24", priority: "medium" },</p>
+<p class="p2"><span class="Apple-converted-space">            </span>{ ticker: "LLY", drug: "Orforglipron", indication: "Type 2 Diabetes", area: "endocrine", date: "2026-03-25", priority: "high" },</p>
+<p class="p2"><span class="Apple-converted-space">            </span>{ ticker: "RCKT", drug: "Kresladi", indication: "LAD-I (Gene Therapy)", area: "gene", date: "2026-03-28", priority: "high" },</p>
+<p class="p2"><span class="Apple-converted-space">            </span>{ ticker: "LNTH", drug: "Ga68-edotreotide", indication: "GEP-NETs Imaging", area: "oncology", date: "2026-03-29", priority: "medium" },</p>
+<p class="p2"><span class="Apple-converted-space">            </span>{ ticker: "DNLI", drug: "Tividenofusp alfa", indication: "MPS-IIIA (Sanfilippo)", area: "gene", date: "2026-04-05", priority: "high" },</p>
+<p class="p2"><span class="Apple-converted-space">            </span>{ ticker: "TVTX", drug: "Pivlicaftor Potentiator", indication: "Cystic Fibrosis", area: "rare", date: "2026-05-15", priority: "medium" },</p>
+<p class="p2"><span class="Apple-converted-space">            </span>{ ticker: "ACLX", drug: "Cytisinicline", indication: "Smoking Cessation", area: "other", date: "2026-06-20", priority: "medium" },</p>
+<p class="p2"><span class="Apple-converted-space">            </span>{ ticker: "KURA", drug: "Tipifarnib", indication: "HRAS-Mutant HNSCC", area: "oncology", date: "2026-07-01", priority: "medium" },</p>
+<p class="p2"><span class="Apple-converted-space">            </span>{ ticker: "VERA", drug: "Atacicept", indication: "IgA Nephropathy", area: "immunology", date: "2026-07-07", priority: "medium" }</p>
+<p class="p2"><span class="Apple-converted-space">        </span>];</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>function calculateDaysRemaining(dateStr) {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>const pdufaDate = new Date(dateStr);</p>
+<p class="p2"><span class="Apple-converted-space">            </span>const today = new Date();</p>
+<p class="p2"><span class="Apple-converted-space">            </span>const diffTime = pdufaDate - today;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));</p>
+<p class="p2"><span class="Apple-converted-space">            </span>return diffDays;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>function getDaysClass(days) {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>if (days &lt;= 7) return 'days-urgent';</p>
+<p class="p2"><span class="Apple-converted-space">            </span>if (days &lt;= 30) return 'days-soon';</p>
+<p class="p2"><span class="Apple-converted-space">            </span>return 'days-future';</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>function formatDate(dateStr) {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>const date = new Date(dateStr);</p>
+<p class="p2"><span class="Apple-converted-space">            </span>return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>function getAreaClass(area) {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>const map = {</p>
+<p class="p2"><span class="Apple-converted-space">                </span>'oncology': 'ta-oncology',</p>
+<p class="p2"><span class="Apple-converted-space">                </span>'rare': 'ta-rare',</p>
+<p class="p2"><span class="Apple-converted-space">                </span>'immunology': 'ta-immunology',</p>
+<p class="p2"><span class="Apple-converted-space">                </span>'endocrine': 'ta-endocrine',</p>
+<p class="p2"><span class="Apple-converted-space">                </span>'gene': 'ta-gene',</p>
+<p class="p2"><span class="Apple-converted-space">                </span>'other': 'ta-other'</p>
+<p class="p2"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><span class="Apple-converted-space">            </span>return map[area] || 'ta-other';</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>function getAreaLabel(area) {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>const map = {</p>
+<p class="p2"><span class="Apple-converted-space">                </span>'oncology': 'Oncology',</p>
+<p class="p2"><span class="Apple-converted-space">                </span>'rare': 'Rare Disease',</p>
+<p class="p2"><span class="Apple-converted-space">                </span>'immunology': 'Immunology',</p>
+<p class="p2"><span class="Apple-converted-space">                </span>'endocrine': 'Endocrine',</p>
+<p class="p2"><span class="Apple-converted-space">                </span>'gene': 'Gene Therapy',</p>
+<p class="p2"><span class="Apple-converted-space">                </span>'other': 'Other'</p>
+<p class="p2"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><span class="Apple-converted-space">            </span>return map[area] || area;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>function renderTable(filter = 'all') {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>const tbody = document.getElementById('pdufa-body');</p>
+<p class="p2"><span class="Apple-converted-space">            </span>tbody.innerHTML = '';</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">            </span>let filteredData = pdufaData;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>if (filter !== 'all') {</p>
+<p class="p2"><span class="Apple-converted-space">                </span>filteredData = pdufaData.filter(item =&gt; item.area === filter);</p>
+<p class="p2"><span class="Apple-converted-space">            </span>}</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">            </span>filteredData.sort((a, b) =&gt; new Date(a.date) - new Date(b.date));filteredData.forEach(item =&gt; {</p>
+<p class="p2"><span class="Apple-converted-space">                </span>const days = calculateDaysRemaining(item.date);</p>
+<p class="p2"><span class="Apple-converted-space">                </span>const row = document.createElement('tr');</p>
+<p class="p2"><span class="Apple-converted-space">                </span>row.innerHTML = `</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>&lt;td class="ticker"&gt;${item.ticker}&lt;/td&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>&lt;td class="drug-name"&gt;${item.drug}&lt;/td&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>&lt;td class="indication"&gt;${item.indication}&lt;/td&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>&lt;td&gt;&lt;span class="therapeutic-area ${getAreaClass(item.area)}"&gt;${getAreaLabel(item.area)}&lt;/span&gt;&lt;/td&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>&lt;td class="date-cell"&gt;${formatDate(item.date)}&lt;/td&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>&lt;td&gt;&lt;span class="days-remaining ${getDaysClass(days)}"&gt;${days} days&lt;/span&gt;&lt;/td&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>tbody.appendChild(row);</p>
+<p class="p2"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>function updateStats() {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>const today = new Date();</p>
+<p class="p2"><span class="Apple-converted-space">            </span>const thisMonth = today.getMonth();</p>
+<p class="p2"><span class="Apple-converted-space">            </span>const thisYear = today.getFullYear();</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">            </span>let thisMonthCount = 0;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>let next30Count = 0;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>let highPriorityCount = 0;</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">            </span>pdufaData.forEach(item =&gt; {</p>
+<p class="p2"><span class="Apple-converted-space">                </span>const date = new Date(item.date);</p>
+<p class="p2"><span class="Apple-converted-space">                </span>const days = calculateDaysRemaining(item.date);</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">                </span>if (date.getMonth() === thisMonth &amp;&amp; date.getFullYear() === thisYear) {</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>thisMonthCount++;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span>if (days &lt;= 30 &amp;&amp; days &gt;= 0) {</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>next30Count++;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span>if (item.priority === 'high') {</p>
+<p class="p2"><span class="Apple-converted-space">                    </span>highPriorityCount++;</p>
+<p class="p2"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span>});</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">            </span>document.getElementById('total-count').textContent = pdufaData.length;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>document.getElementById('this-month').textContent = thisMonthCount;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>document.getElementById('next-30').textContent = next30Count;</p>
+<p class="p2"><span class="Apple-converted-space">            </span>document.getElementById('high-priority').textContent = highPriorityCount;</p>
+<p class="p2"><span class="Apple-converted-space">        </span>}</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>document.querySelectorAll('.filter-btn').forEach(btn =&gt; {</p>
+<p class="p2"><span class="Apple-converted-space">            </span>btn.addEventListener('click', () =&gt; {</p>
+<p class="p2"><span class="Apple-converted-space">                </span>document.querySelectorAll('.filter-btn').forEach(b =&gt; b.classList.remove('active'));</p>
+<p class="p2"><span class="Apple-converted-space">                </span>btn.classList.add('active');</p>
+<p class="p2"><span class="Apple-converted-space">                </span>renderTable(btn.dataset.filter);</p>
+<p class="p2"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">        </span>});</p>
+<p class="p3"><br></p>
+<p class="p2"><span class="Apple-converted-space">        </span>renderTable();</p>
+<p class="p2"><span class="Apple-converted-space">        </span>updateStats();</p>
+<p class="p2"><span class="Apple-converted-space">        </span>document.getElementById('update-time').textContent = new Date().toLocaleString('en-US', {<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-converted-space">            </span>month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p2">&lt;/body&gt;</p>
+<p class="p2">&lt;/html&gt;</p>
+</body>
+</html>
