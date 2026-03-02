@@ -1,339 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDUFA Market Intelligence</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0f;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            text-align: center;
-            padding: 40px 0;
-            border-bottom: 1px solid #1a1a2e;
-            margin-bottom: 30px;
-        }
-        h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, #00d4aa 0%, #00a8e8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
-        .subtitle { color: #666; font-size: 1rem; }
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .stat-card {
-            background: #12121a;
-            border: 1px solid #1a1a2e;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #00d4aa;
-        }
-        .stat-label { color: #666; font-size: 0.9rem; margin-top: 5px; }
-        .filters {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .filter-btn {
-            background: #1a1a2e;
-            border: 1px solid #2a2a3e;
-            color: #888;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: #00d4aa;
-            color: #0a0a0f;
-            border-color: #00d4aa;
-        }
-        .pdufa-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #12121a;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        .pdufa-table th {
-            background: #1a1a2e;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            color: #888;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .pdufa-table td {
-            padding: 15px;
-            border-bottom: 1px solid #1a1a2e;
-        }
-        .pdufa-table tr:hover { background: #1a1a2e; }
-        .ticker {
-            font-weight: bold;
-            color: #00d4aa;
-            font-size: 1.1rem;
-        }
-        .drug-name { font-weight: 500; color: #fff; }
-        .indication { color: #888; font-size: 0.9rem; }
-        .date-cell { font-family: 'SF Mono', monospace; }
-        .days-remaining {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        .days-urgent { background: #ff4757; color: #fff; }
-        .days-soon { background: #ffa502; color: #0a0a0f; }
-        .days-future { background: #2ed573; color: #0a0a0f; }
-        .therapeutic-area {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-        .ta-oncology { background: #ff6b6b; color: #fff; }
-        .ta-rare { background: #9b59b6; color: #fff; }.ta-immunology { background: #3498db; color: #fff; }
-        .ta-endocrine { background: #e67e22; color: #fff; }
-        .ta-gene { background: #1abc9c; color: #fff; }
-        .ta-other { background: #34495e; color: #fff; }
-        .last-updated {
-            text-align: center;
-            color: #666;
-            font-size: 0.85rem;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #1a1a2e;
-        }
-        @media (max-width: 768px) {
-            .pdufa-table { font-size: 0.85rem; }
-            .pdufa-table th, .pdufa-table td { padding: 10px; }
-            h1 { font-size: 1.8rem; }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDUFA Market Intelligence</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 1px solid #1a1a2e;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #00d4aa 0%, #00a8e8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .subtitle { color: #666; font-size: 1rem; }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: #12121a;
+            border: 1px solid #1a1a2e;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00d4aa;
+        }
+        .stat-label { color: #666; font-size: 0.9rem; margin-top: 5px; }
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: #1a1a2e;
+            border: 1px solid #2a2a3e;
+            color: #888;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #00d4aa;
+            color: #0a0a0f;
+            border-color: #00d4aa;
+        }
+        .pdufa-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #12121a;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .pdufa-table th {
+            background: #1a1a2e;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #888;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .pdufa-table td {
+            padding: 15px;
+            border-bottom: 1px solid #1a1a2e;
+        }
+        .pdufa-table tr:hover { background: #1a1a2e; }
+        .ticker {
+            font-weight: bold;
+            color: #00d4aa;
+            font-size: 1.1rem;
+        }
+        .drug-name { font-weight: 500; color: #fff; }
+        .indication { color: #888; font-size: 0.9rem; }
+        .date-cell { font-family: 'SF Mono', monospace; }
+        .days-remaining {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .days-urgent { background: #ff4757; color: #fff; }
+        .days-soon { background: #ffa502; color: #0a0a0f; }
+        .days-future { background: #2ed573; color: #0a0a0f; }
+        .therapeutic-area {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        .ta-oncology { background: #ff6b6b; color: #fff; }
+        .ta-rare { background: #9b59b6; color: #fff; }
+        .ta-immunology { background: #3498db; color: #fff; }
+        .ta-endocrine { background: #e67e22; color: #fff; }
+        .ta-gene { background: #1abc9c; color: #fff; }
+        .ta-other { background: #34495e; color: #fff; }
+        .last-updated {
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #1a1a2e;
+        }
+        @media (max-width: 768px) {
+            .pdufa-table { font-size: 0.85rem; }
+            .pdufa-table th, .pdufa-table td { padding: 10px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>PDUFA Market Intelligence</h1>
-            <p class="subtitle">Upcoming FDA Approval Dates & Catalysts</p>
-        </header>
+    <div class="container">
+        <header>
+            <h1>PDUFA Market Intelligence</h1>
+            <p class="subtitle">Upcoming FDA Approval Dates &amp; Catalysts</p>
+        </header>
 
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="total-count">0</div>
+                <div class="stat-label">Upcoming PDUFAs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="this-month">0</div>
+                <div class="stat-label">This Month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="next-30">0</div>
+                <div class="stat-label">Next 30 Days</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="high-priority">0</div>
+                <div class="stat-label">High Priority</div>
+            </div>
+        </div>
 
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-value" id="total-count">0</div>
-                <div class="stat-label">Upcoming PDUFAs</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="this-month">0</div>
-                <div class="stat-label">This Month</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="next-30">0</div>
-                <div class="stat-label">Next 30 Days</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="high-priority">0</div>
-                <div class="stat-label">High Priority</div>
-            </div>
-        </div>
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="oncology">Oncology</button>
+            <button class="filter-btn" data-filter="rare">Rare Disease</button>
+            <button class="filter-btn" data-filter="gene">Gene Therapy</button>
+            <button class="filter-btn" data-filter="immunology">Immunology</button>
+            <button class="filter-btn" data-filter="endocrine">Endocrine</button>
+        </div>
 
+        <table class="pdufa-table">
+            <thead>
+                <tr>
+                    <th>Ticker</th>
+                    <th>Drug</th>
+                    <th>Indication</th>
+                    <th>Area</th>
+                    <th>PDUFA Date</th>
+                    <th>Days Left</th>
+                </tr>
+            </thead>
+            <tbody id="pdufa-body">
+            </tbody>
+        </table>
 
-        <div class="filters">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="oncology">Oncology</button>
-            <button class="filter-btn" data-filter="rare">Rare Disease</button>
-            <button class="filter-btn" data-filter="gene">Gene Therapy</button>
-            <button class="filter-btn" data-filter="immunology">Immunology</button>
-        </div>
+        <p class="last-updated">Last updated: <span id="update-time"></span></p>
+    </div>
+    <script>
+        const pdufaData = [
+            // --- MARCH 2026 ---
+            { ticker: "BMY",   drug: "Deucravacitinib (Sotyktu)",     indication: "Psoriatic Arthritis",             area: "immunology", date: "2026-03-06", priority: "medium" },
+            { ticker: "ALDX",  drug: "Reproxalap",                    indication: "Dry Eye Disease",                 area: "other",      date: "2026-03-16", priority: "medium" },
+            { ticker: "RYTM",  drug: "Imcivree (setmelanotide)",      indication: "Acquired Hypothalamic Obesity",   area: "endocrine",  date: "2026-03-20", priority: "high"   },
+            { ticker: "GSK",   drug: "Linerixibat",                   indication: "Cholestatic Pruritus (PBC)",      area: "rare",       date: "2026-03-24", priority: "medium" },
+            { ticker: "LLY",   drug: "Orforglipron",                  indication: "Type 2 Diabetes",                 area: "endocrine",  date: "2026-03-25", priority: "high"   },
+            { ticker: "RCKT",  drug: "Kresladi (marnetegragene)",     indication: "LAD-I (Gene Therapy)",            area: "gene",       date: "2026-03-28", priority: "high"   },
+            { ticker: "LNTH",  drug: "Ga68-edotreotide",              indication: "GEP-NETs Imaging",                area: "oncology",   date: "2026-03-29", priority: "medium" },
+            // --- APRIL 2026 ---
+            { ticker: "DNLI",  drug: "Tividenofusp alfa",             indication: "MPS-IIIA (Sanfilippo)",           area: "gene",       date: "2026-04-05", priority: "high"   },
+            { ticker: "ORCA",  drug: "Orca-T",                        indication: "AML / ALL / MDS (Heme Malignancies)", area: "oncology", date: "2026-04-06", priority: "high" },
+            { ticker: "PRAX",  drug: "Riluzole (Glykoprex)",          indication: "Spinocerebellar Ataxia (SCA)",    area: "rare",       date: "2026-04-06", priority: "high"   },
+            { ticker: "ITCI",  drug: "Sparsentan (Filspari)",         indication: "FSGS",                            area: "rare",       date: "2026-04-13", priority: "high"   },
+            // --- MAY 2026 ---
+            { ticker: "TVTX",  drug: "Pivlicaftor Potentiator",       indication: "Cystic Fibrosis",                 area: "rare",       date: "2026-05-15", priority: "medium" },
+            { ticker: "SNY",   drug: "Dupixent (dupilumab)",          indication: "COPD Maintenance",                area: "immunology", date: "2026-05-20", priority: "high"   },
+            // --- JUNE 2026 ---
+            { ticker: "ACLX",  drug: "Cytisinicline",                 indication: "Smoking Cessation",               area: "other",      date: "2026-06-20", priority: "medium" },
+            // --- JULY 2026 ---
+            { ticker: "KURA",  drug: "Tipifarnib",                    indication: "HRAS-Mutant HNSCC",               area: "oncology",   date: "2026-07-01", priority: "medium" },
+            { ticker: "VERA",  drug: "Atacicept",                     indication: "IgA Nephropathy",                 area: "immunology", date: "2026-07-07", priority: "medium" },
+        ];
 
+        function parseLocalDate(dateStr) {
+            const [year, month, day] = dateStr.split('-').map(Number);
+            return new Date(year, month - 1, day);
+        }
 
-        <table class="pdufa-table">
-            <thead>
-                <tr>
-                    <th>Ticker</th>
-                    <th>Drug</th>
-                    <th>Indication</th>
-                    <th>Area</th>
-                    <th>PDUFA Date</th>
-                    <th>Days Left</th>
-                </tr>
-            </thead>
-            <tbody id="pdufa-body">
-            </tbody>
-        </table>
+        function calculateDaysRemaining(dateStr) {
+            const pdufaDate = parseLocalDate(dateStr);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const diffTime = pdufaDate - today;
+            return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        }
 
+        function getDaysClass(days) {
+            if (days <= 7)  return 'days-urgent';
+            if (days <= 30) return 'days-soon';
+            return 'days-future';
+        }
 
-        <p class="last-updated">Last updated: <span id="update-time"></span></p>
-    </div>
-    <script>
-        const pdufaData = [
-            { ticker: "ASND", drug: "Yuviwel (navepegritide)", indication: "Achondroplasia", area: "rare", date: "2026-02-28", priority: "high" },
-            { ticker: "BMY", drug: "Deucravacitinib (Sotyktu)", indication: "Psoriatic Arthritis", area: "immunology", date: "2026-03-06", priority: "medium" },
-            { ticker: "RYTM", drug: "Imcivree (setmelanotide)", indication: "Acquired Hypothalamic Obesity", area: "endocrine", date: "2026-03-20", priority: "high" },
-            { ticker: "GSK", drug: "Linerixibat", indication: "Cholestatic Pruritus (PBC)", area: "rare", date: "2026-03-24", priority: "medium" },
-            { ticker: "LLY", drug: "Orforglipron", indication: "Type 2 Diabetes", area: "endocrine", date: "2026-03-25", priority: "high" },
-            { ticker: "RCKT", drug: "Kresladi", indication: "LAD-I (Gene Therapy)", area: "gene", date: "2026-03-28", priority: "high" },
-            { ticker: "LNTH", drug: "Ga68-edotreotide", indication: "GEP-NETs Imaging", area: "oncology", date: "2026-03-29", priority: "medium" },
-            { ticker: "DNLI", drug: "Tividenofusp alfa", indication: "MPS-IIIA (Sanfilippo)", area: "gene", date: "2026-04-05", priority: "high" },
-            { ticker: "TVTX", drug: "Pivlicaftor Potentiator", indication: "Cystic Fibrosis", area: "rare", date: "2026-05-15", priority: "medium" },
-            { ticker: "ACLX", drug: "Cytisinicline", indication: "Smoking Cessation", area: "other", date: "2026-06-20", priority: "medium" },
-            { ticker: "KURA", drug: "Tipifarnib", indication: "HRAS-Mutant HNSCC", area: "oncology", date: "2026-07-01", priority: "medium" },
-            { ticker: "VERA", drug: "Atacicept", indication: "IgA Nephropathy", area: "immunology", date: "2026-07-07", priority: "medium" }
-        ];
+        function formatDate(dateStr) {
+            const date = parseLocalDate(dateStr);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
 
+        function getAreaClass(area) {
+            const map = {
+                'oncology':   'ta-oncology',
+                'rare':       'ta-rare',
+                'immunology': 'ta-immunology',
+                'endocrine':  'ta-endocrine',
+                'gene':       'ta-gene',
+                'other':      'ta-other'
+            };
+            return map[area] || 'ta-other';
+        }
 
-        function calculateDaysRemaining(dateStr) {
-            const pdufaDate = new Date(dateStr);
-            const today = new Date();
-            const diffTime = pdufaDate - today;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            return diffDays;
-        }
+        function getAreaLabel(area) {
+            const map = {
+                'oncology':   'Oncology',
+                'rare':       'Rare Disease',
+                'immunology': 'Immunology',
+                'endocrine':  'Endocrine',
+                'gene':       'Gene Therapy',
+                'other':      'Other'
+            };
+            return map[area] || area;
+        }
 
+        function renderTable(filter = 'all') {
+            const tbody = document.getElementById('pdufa-body');
+            tbody.innerHTML = '';
 
-        function getDaysClass(days) {
-            if (days <= 7) return 'days-urgent';
-            if (days <= 30) return 'days-soon';
-            return 'days-future';
-        }
+            let filteredData = pdufaData;
+            if (filter !== 'all') {
+                filteredData = pdufaData.filter(item => item.area === filter);
+            }
 
+            // Only show future dates
+            filteredData = filteredData.filter(item => calculateDaysRemaining(item.date) >= 0);
+            filteredData.sort((a, b) => parseLocalDate(a.date) - parseLocalDate(b.date));
 
-        function formatDate(dateStr) {
-            const date = new Date(dateStr);
-            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        }
+            filteredData.forEach(item => {
+                const days = calculateDaysRemaining(item.date);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="ticker">${item.ticker}</td>
+                    <td class="drug-name">${item.drug}</td>
+                    <td class="indication">${item.indication}</td>
+                    <td><span class="therapeutic-area ${getAreaClass(item.area)}">${getAreaLabel(item.area)}</span></td>
+                    <td class="date-cell">${formatDate(item.date)}</td>
+                    <td><span class="days-remaining ${getDaysClass(days)}">${days} days</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
 
+        function updateStats() {
+            const today = new Date();
+            const thisMonth = today.getMonth();
+            const thisYear = today.getFullYear();
 
-        function getAreaClass(area) {
-            const map = {
-                'oncology': 'ta-oncology',
-                'rare': 'ta-rare',
-                'immunology': 'ta-immunology',
-                'endocrine': 'ta-endocrine',
-                'gene': 'ta-gene',
-                'other': 'ta-other'
-            };
-            return map[area] || 'ta-other';
-        }
+            let thisMonthCount = 0;
+            let next30Count = 0;
+            let highPriorityCount = 0;
 
+            const upcoming = pdufaData.filter(item => calculateDaysRemaining(item.date) >= 0);
 
-        function getAreaLabel(area) {
-            const map = {
-                'oncology': 'Oncology',
-                'rare': 'Rare Disease',
-                'immunology': 'Immunology',
-                'endocrine': 'Endocrine',
-                'gene': 'Gene Therapy',
-                'other': 'Other'
-            };
-            return map[area] || area;
-        }
+            upcoming.forEach(item => {
+                const date = parseLocalDate(item.date);
+                const days = calculateDaysRemaining(item.date);
 
+                if (date.getMonth() === thisMonth && date.getFullYear() === thisYear) {
+                    thisMonthCount++;
+                }
+                if (days <= 30) {
+                    next30Count++;
+                }
+                if (item.priority === 'high') {
+                    highPriorityCount++;
+                }
+            });
 
-        function renderTable(filter = 'all') {
-            const tbody = document.getElementById('pdufa-body');
-            tbody.innerHTML = '';
+            document.getElementById('total-count').textContent = upcoming.length;
+            document.getElementById('this-month').textContent = thisMonthCount;
+            document.getElementById('next-30').textContent = next30Count;
+            document.getElementById('high-priority').textContent = highPriorityCount;
+        }
 
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderTable(btn.dataset.filter);
+            });
+        });
 
-            let filteredData = pdufaData;
-            if (filter !== 'all') {
-                filteredData = pdufaData.filter(item => item.area === filter);
-            }
-
-
-            filteredData.sort((a, b) => new Date(a.date) - new Date(b.date));filteredData.forEach(item => {
-                const days = calculateDaysRemaining(item.date);
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td class="ticker">${item.ticker}</td>
-                    <td class="drug-name">${item.drug}</td>
-                    <td class="indication">${item.indication}</td>
-                    <td><span class="therapeutic-area ${getAreaClass(item.area)}">${getAreaLabel(item.area)}</span></td>
-                    <td class="date-cell">${formatDate(item.date)}</td>
-                    <td><span class="days-remaining ${getDaysClass(days)}">${days} days</span></td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-
-        function updateStats() {
-            const today = new Date();
-            const thisMonth = today.getMonth();
-            const thisYear = today.getFullYear();
-
-
-            let thisMonthCount = 0;
-            let next30Count = 0;
-            let highPriorityCount = 0;
-
-
-            pdufaData.forEach(item => {
-                const date = new Date(item.date);
-                const days = calculateDaysRemaining(item.date);
-
-
-                if (date.getMonth() === thisMonth && date.getFullYear() === thisYear) {
-                    thisMonthCount++;
-                }
-                if (days <= 30 && days >= 0) {
-                    next30Count++;
-                }
-                if (item.priority === 'high') {
-                    highPriorityCount++;
-                }
-            });
-
-
-            document.getElementById('total-count').textContent = pdufaData.length;
-            document.getElementById('this-month').textContent = thisMonthCount;
-            document.getElementById('next-30').textContent = next30Count;
-            document.getElementById('high-priority').textContent = highPriorityCount;
-        }
-
-
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderTable(btn.dataset.filter);
-            });
-        });
-
-
-        renderTable();
-        updateStats();
-        document.getElementById('update-time').textContent = new Date().toLocaleString('en-US', { 
-            month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' 
-        });
-    </script>
+        renderTable();
+        updateStats();
+        document.getElementById('update-time').textContent = new Date().toLocaleString('en-US', {
+            month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'
+        });
+    </script>
 </body>
 </html>
