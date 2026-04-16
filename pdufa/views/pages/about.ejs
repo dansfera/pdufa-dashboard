@@ -1,0 +1,92 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<div class="about-page">
+  <h1>About the PDUFA Calendar</h1>
+  <p style="color: var(--text-secondary); font-size: 17px; line-height: 1.7;">
+    A free, live biotech catalyst calendar — PDUFA dates, AdCom meetings, Phase 3 trial readouts, conference schedules, and earnings. Built for retail biotech investors who track FDA catalysts without a Bloomberg terminal.
+  </p>
+
+  <h2>What This Tool Tracks</h2>
+  <p>
+    The calendar aggregates every major FDA catalyst in one place:
+  </p>
+  <ul>
+    <li><strong>PDUFA Dates</strong> — FDA target action dates for NDA and BLA submissions</li>
+    <li><strong>AdCom Meetings</strong> — FDA Advisory Committee votes with public dockets</li>
+    <li><strong>Phase 3 Trial Readouts</strong> — Pivotal data releases that move stocks</li>
+    <li><strong>Conferences</strong> — ASCO, ASH, ESMO, and other scientific meetings with major presentations</li>
+    <li><strong>Earnings</strong> — Quarterly calls where pipeline updates typically land</li>
+  </ul>
+  <p>
+    Each entry includes urgency color-coding (overdue / today / this week / this month / upcoming),
+    designation badges (Breakthrough Therapy, Priority Review, Fast Track, Orphan, Rare Pediatric),
+    and where applicable, a <strong>Probability of Approval (PoA)</strong> score based on historical FDA approval rates.
+  </p>
+
+  <h2>Who Built This</h2>
+  <p>
+    This tool was built and is maintained by <strong><a href="/dan-sfera" style="color: var(--accent);">Dan Sfera</a></strong> —
+    a clinical trials veteran with 20+ years of experience in site management, trial design, and FDA interactions.
+    Dan also runs a <a href="https://substack.com/@dansfera1" target="_blank" rel="noopener">Substack newsletter</a> with 10,000+ subscribers
+    covering biotech investing, clinical trial analysis, and FDA catalyst tracking.
+  </p>
+  <p>
+    This tracker was built because existing tools are either paywalled, cluttered with noise, or don't give investors
+    a clear probability estimate with real clinical context. <a href="/dan-sfera" style="color: var(--accent);">Learn more about Dan →</a>
+  </p>
+
+  <h2>What is a PDUFA Date?</h2>
+  <p>
+    A PDUFA date (Prescription Drug User Fee Act date) is the FDA's self-imposed deadline to complete its review of a New Drug Application (NDA)
+    or Biologics License Application (BLA). Under the PDUFA agreement, the FDA commits to reviewing:
+  </p>
+  <ul>
+    <li><strong>Standard review</strong> applications within <strong>10 months</strong> of filing</li>
+    <li><strong>Priority review</strong> applications within <strong>6 months</strong> of filing</li>
+  </ul>
+  <p>
+    The PDUFA date is the most-watched catalyst in biotech investing. On or before this date, the FDA will typically:
+    approve the drug, issue a Complete Response Letter (CRL) rejecting it, or request more time (extension).
+  </p>
+
+  <h2>How Probability of Approval (PoA) Works</h2>
+  <p>
+    The baseline PoA scores shown on this site are <strong>Bayesian base rates</strong> derived from historical FDA approval data:
+  </p>
+  <ul>
+    <li><strong>NDA/BLA (standard)</strong>: 92% historical approval rate at submission stage</li>
+    <li><strong>NDA/BLA (priority review)</strong>: ~90% (slightly lower because priority drugs often have less mature data)</li>
+    <li><strong>Phase III data</strong>: 25–58% depending on indication</li>
+    <li><strong>Phase II data</strong>: 28–33%</li>
+    <li><strong>Phase I data</strong>: 70–76% (high because most IND failures never reach FDA review)</li>
+  </ul>
+  <p>
+    <strong>Dynamic sentiment-adjusted PoA is coming soon</strong> — powered by xAI/Grok API, analyzing real-time social sentiment
+    from biotech investor communities to adjust the baseline upward or downward based on current market expectations.
+  </p>
+
+  <h2>Data Sources</h2>
+  <p>
+    PDUFA dates are publicly available from FDA's official calendar, company press releases, and verified by cross-referencing
+    multiple public sources including BiopharmaWatch, RTTNews FDA Calendar, and company SEC filings.
+  </p>
+  <p>
+    This site is <strong>updated regularly</strong>. New PDUFA dates are added as companies announce FDA filing acceptances.
+    If you notice a missing or incorrect date, <a href="https://x.com/dansfera" target="_blank" rel="noopener">reach out on X (@dansfera)</a>.
+  </p>
+
+  <h2>Disclaimer</h2>
+  <div class="disclaimer-box">
+    Nothing on this site constitutes investment advice. PDUFA dates are target dates only — the FDA is not legally required
+    to act by this date, and may extend the review clock, issue a CRL, or request additional information.
+    Probability of approval scores are historical base rates and do not account for drug-specific clinical, regulatory,
+    or manufacturing factors. Always do your own due diligence.
+  </div>
+
+  <div style="margin-top: 32px; text-align: center;">
+    <a href="/" class="btn btn-primary">View the Calendar →</a>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

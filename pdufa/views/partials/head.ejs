@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <meta name="description" content="<%= metaDescription %>">
+  <link rel="canonical" href="<%= BASE_URL %><%= canonicalUrl %>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="<%= title %>">
+  <meta property="og:description" content="<%= metaDescription %>">
+  <meta property="og:url" content="<%= BASE_URL %><%= canonicalUrl %>">
+  <meta property="og:type" content="<%= typeof ogType !== 'undefined' ? ogType : 'website' %>">
+  <meta property="og:site_name" content="Dan Sfera | Biotech Catalyst Calendar">
+  <meta property="og:image" content="<%= typeof ogImage !== 'undefined' && ogImage ? ogImage : BASE_URL + '/pdufa/og-default.png' %>">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="<%= typeof ogImageAlt !== 'undefined' ? ogImageAlt : 'Dan Sfera Biotech Catalyst Calendar — FDA PDUFA Dates & Trial Readouts' %>">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dansfera">
+  <meta name="twitter:creator" content="@dansfera">
+  <meta name="twitter:title" content="<%= title %>">
+  <meta name="twitter:description" content="<%= metaDescription %>">
+  <meta name="twitter:image" content="<%= typeof ogImage !== 'undefined' && ogImage ? ogImage : BASE_URL + '/pdufa/og-default.png' %>">
+  <meta name="twitter:image:alt" content="<%= typeof ogImageAlt !== 'undefined' ? ogImageAlt : 'Dan Sfera Biotech Catalyst Calendar — FDA PDUFA Dates & Trial Readouts' %>">
+
+  <!-- SEO / structured data keywords -->
+  <meta name="keywords" content="PDUFA dates 2026, FDA approval calendar, biotech catalyst tracker, Dan Sfera, FDA drug approvals, biotech investing, PDUFA calendar">
+  <meta name="author" content="Dan Sfera">
+  <meta name="robots" content="index, follow">
+
+  <!-- Google Search Console Verification -->
+  <% if (typeof googleVerification !== 'undefined' && googleVerification) { %>
+  <meta name="google-site-verification" content="<%= googleVerification %>">
+  <% } %>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="TrialAlpha Biotech Catalyst Calendar" href="<%= BASE_URL %>/feed.xml">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/pdufa/css/pdufa.css">
+
+  <!-- Expose appBase for JS -->
+  <script>window._pdufaBase = '<%= typeof appBase !== "undefined" ? appBase : "" %>';</script>
+
+  <!-- Analytics -->
+  <% if (analyticsSlug) { %>
+  <script defer src="https://analytics.polsia.app/<%= analyticsSlug %>/script.js"></script>
+  <% } %>
+
+  <!-- Schema.org: WebSite + Organization (global) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "<%= BASE_URL %>/#website",
+        "name": "Dan Sfera | Biotech Catalyst Calendar",
+        "url": "<%= BASE_URL %>",
+        "description": "Free biotech catalyst calendar tracking FDA PDUFA dates, AdCom meetings, Phase 3 trial readouts, and conference schedules. Probability of approval scores included. By Dan Sfera, 20+ years in clinical trials.",
+        "inLanguage": "en-US",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "<%= BASE_URL %>/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        },
+        "author": {
+          "@type": "Person",
+          "@id": "<%= BASE_URL %>/#dan-sfera",
+          "name": "Dan Sfera",
+          "url": "<%= BASE_URL %>/about",
+          "sameAs": [
+            "https://substack.com/@dansfera1",
+            "https://x.com/dansfera"
+          ]
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "<%= BASE_URL %>/#organization",
+        "name": "Dan Sfera | Biotech Catalyst Calendar",
+        "url": "<%= BASE_URL %>",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "<%= BASE_URL %>/pdufa/og-default.png",
+          "width": 1200,
+          "height": 630
+        },
+        "sameAs": [
+          "https://x.com/dansfera",
+          "https://substack.com/@dansfera1"
+        ],
+        "founder": {
+          "@type": "Person",
+          "name": "Dan Sfera"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Page-specific structured data -->
+  <% if (typeof pageSchema !== 'undefined' && pageSchema) { %>
+  <script type="application/ld+json"><%- pageSchema %></script>
+  <% } %>
+</head>
+<body>

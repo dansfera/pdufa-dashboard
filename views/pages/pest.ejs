@@ -1,0 +1,140 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, pests, analyticsSlug }) %>
+
+  <!-- Breadcrumbs -->
+  <div class="bg-white border-b border-earth-200">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <nav class="text-sm text-gray-500" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-sunbelt-600">Home</a>
+        <span class="mx-2">&rsaquo;</span>
+        <span class="text-gray-400">Pest Types</span>
+        <span class="mx-2">&rsaquo;</span>
+        <span class="text-earth-800 font-medium"><%= pest.name %></span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-earth-700 to-earth-900 text-white py-12" style="background:linear-gradient(to bottom right,#5e4625,#2d1f10)">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-4 mb-4">
+        <span class="text-5xl"><%= pest.icon %></span>
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold font-heading"><%= pest.name %> Control Guide</h1>
+          <p class="text-earth-200 text-lg"><%= pest.description %></p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-4 text-sm mt-6">
+        <span class="bg-white/10 px-3 py-1.5 rounded-full">Danger: <%= pest.dangerLevel %></span>
+        <span class="bg-white/10 px-3 py-1.5 rounded-full">Peak: <%= pest.seasonalPeak %></span>
+        <span class="bg-white/10 px-3 py-1.5 rounded-full">Treatment: <%= pest.avgTreatmentCost %></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+        <!-- Signs of Infestation -->
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-earth-200 mb-8">
+          <h2 class="text-2xl font-bold text-earth-800 mb-4">Signs of <%= pest.name %></h2>
+          <ul class="space-y-3">
+            <% pest.signs.forEach(sign => { %>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-0.5 flex-shrink-0">&#9888;</span>
+                <span class="text-gray-700"><%= sign %></span>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
+
+        <!-- Prevention Tips -->
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-earth-200 mb-8">
+          <h2 class="text-2xl font-bold text-earth-800 mb-4">Prevention Tips</h2>
+          <ul class="space-y-3">
+            <% pest.prevention.forEach(tip => { %>
+              <li class="flex items-start gap-3">
+                <span class="text-green-500 mt-0.5 flex-shrink-0">&#10003;</span>
+                <span class="text-gray-700"><%= tip %></span>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
+
+        <%- include('../partials/ad-inline') %>
+
+        <!-- Cities Affected -->
+        <% if (pestCities.length > 0) { %>
+          <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-earth-200 mb-8">
+            <h2 class="text-2xl font-bold text-earth-800 mb-6"><%= pest.name %> by City</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <% pestCities.forEach(c => { %>
+                <a href="/<%= c.slug %>/" class="flex items-center gap-3 p-4 rounded-lg hover:bg-earth-50 border border-earth-100 hover:border-earth-300 transition-all group">
+                  <div>
+                    <h3 class="font-semibold text-earth-800 group-hover:text-sunbelt-700"><%= c.fullName %></h3>
+                    <p class="text-xs text-gray-500"><%= c.climate %></p>
+                  </div>
+                </a>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+
+        <!-- Related Articles -->
+        <% if (pestArticles.length > 0) { %>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-earth-800 mb-6"><%= pest.name %> Guides</h2>
+            <div class="space-y-4">
+              <% pestArticles.forEach(a => { %>
+                <% const articleCity = cities.find(c => c.slug === a.city); %>
+                <article class="bg-white rounded-xl p-6 shadow-sm border border-earth-200 hover:shadow-md hover:border-earth-300 transition-all group">
+                  <div class="flex items-center gap-2 mb-2">
+                    <% if (articleCity) { %>
+                      <span class="text-xs bg-sunbelt-50 text-sunbelt-600 px-2 py-0.5 rounded-full"><%= articleCity.fullName %></span>
+                    <% } %>
+                    <span class="text-xs text-gray-400"><%= a.readTime %></span>
+                  </div>
+                  <h3 class="font-bold text-lg text-earth-800 group-hover:text-sunbelt-700 mb-2">
+                    <a href="/<%= a.city %>/<%= a.slug %>/"><%= a.title %></a>
+                  </h3>
+                  <p class="text-gray-600 text-sm"><%= a.excerpt %></p>
+                </article>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+
+        <%- include('../partials/ad-adsterra') %>
+
+        <!-- Cost Section -->
+        <div class="bg-sunbelt-50 rounded-xl p-6 md:p-8 border border-sunbelt-200">
+          <h2 class="text-xl font-bold text-earth-800 mb-3"><%= pest.name %> Treatment Costs</h2>
+          <p class="text-gray-700">Professional <%= pest.name.toLowerCase() %> treatment typically costs <strong><%= pest.avgTreatmentCost %></strong>. Costs vary by severity, property size, and treatment method. Get multiple quotes and ask about guarantees.</p>
+        </div>
+
+        <%- include('../partials/affiliate-cta') %>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <%- include('../partials/ad-sidebar') %>
+        <%- include('../partials/affiliate-cta-sidebar') %>
+
+        <!-- Other Pest Types -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-earth-200 mt-6">
+          <h3 class="font-semibold text-earth-800 mb-4">Other Pest Types</h3>
+          <ul class="space-y-2">
+            <% pests.filter(p => p.slug !== pest.slug).forEach(p => { %>
+              <li>
+                <a href="/pests/<%= p.slug %>/" class="text-sm text-sunbelt-600 hover:text-sunbelt-800 font-medium flex items-center gap-2">
+                  <span><%= p.icon %></span> <%= p.name %>
+                </a>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+<%- include('../partials/footer', { cities, pests, analyticsSlug }) %>

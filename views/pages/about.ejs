@@ -1,0 +1,55 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, pests, analyticsSlug }) %>
+
+  <div class="bg-white border-b border-earth-200">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <nav class="text-sm text-gray-500" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-sunbelt-600">Home</a>
+        <span class="mx-2">&rsaquo;</span>
+        <span class="text-earth-800 font-medium">About</span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <div class="bg-white rounded-xl p-8 md:p-12 shadow-sm border border-earth-200">
+      <div class="text-center mb-10">
+        <span class="text-5xl mb-4 block">&#127797;</span>
+        <h1 class="text-3xl md:text-4xl font-bold text-earth-900 mb-4 font-heading">About Sunbelt Pest Guide</h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Your trusted, independent resource for pest control information across the Sunbelt region.</p>
+      </div>
+
+      <div class="article-content max-w-3xl mx-auto">
+        <h2>Our Mission</h2>
+        <p>Sunbelt Pest Guide exists for one reason: to give homeowners the information they need to make smart decisions about pest control &mdash; without the sales pressure.</p>
+        <p>We don't sell pest control services. We don't broker leads. We don't take commissions from exterminators. Instead, we provide thoroughly researched, locally-focused guides that help you understand what's bugging you (literally), what it costs to fix, and what you can do yourself.</p>
+
+        <h2>Why the Sunbelt?</h2>
+        <p>The Sunbelt region &mdash; stretching from the Southwest deserts through the humid Southeast &mdash; faces unique pest challenges that colder climates simply don't. Scorpions in Arizona, termites in South Carolina, mosquitoes along the Gulf &mdash; each city has its own pest profile shaped by local climate, geography, and building practices.</p>
+        <p>Generic pest control advice doesn't cut it here. That's why every guide on this site is tailored to a specific city, with local cost data, seasonal timelines, and region-specific prevention tips.</p>
+
+        <h2>What We Cover</h2>
+        <p>We currently cover five cities with plans to expand:</p>
+        <ul>
+          <% cities.forEach(c => { %>
+            <li><a href="/<%= c.slug %>/"><strong><%= c.fullName %></strong></a> &mdash; <%= c.climate %></li>
+          <% }) %>
+        </ul>
+        <p>Each city guide includes information on local pests, average treatment costs, seasonal patterns, and prevention strategies. We also publish in-depth articles on specific pest types and treatment methods.</p>
+
+        <h2>Our Standards</h2>
+        <ul>
+          <li><strong>Research-Based:</strong> Our content is informed by entomological research, EPA guidelines, and industry data from the National Pest Management Association.</li>
+          <li><strong>Locally Accurate:</strong> Cost estimates and seasonal timelines reflect real conditions in each city, not national averages.</li>
+          <li><strong>Regularly Updated:</strong> We review and update our guides annually (and more frequently when conditions change).</li>
+          <li><strong>No Conflicts of Interest:</strong> We're supported by display advertising, not by pest control companies. Our advice is independent.</li>
+        </ul>
+
+        <h2>Contact</h2>
+        <p>Have a question, correction, or suggestion? We'd love to hear from you. Reach us at <strong>hello@sunbeltpestguide.com</strong>.</p>
+
+        <p class="text-sm text-gray-500 mt-8 pt-6 border-t border-earth-200"><em>Disclaimer: The information on Sunbelt Pest Guide is provided for educational purposes only. We are not licensed pest control professionals. For active infestations, always consult a licensed exterminator in your area.</em></p>
+      </div>
+    </div>
+  </div>
+
+<%- include('../partials/footer', { cities, pests, analyticsSlug }) %>

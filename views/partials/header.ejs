@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title : 'Sunbelt Pest Guide - Expert Pest Control Information' %></title>
+  <meta name="description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Your trusted source for pest control information across the Sunbelt region. Identify pests, find local exterminators, and protect your home.' %>">
+  <link rel="canonical" href="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://sunbeltpestguide.com' %>">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : 'Sunbelt Pest Guide' %>">
+  <meta property="og:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Your trusted source for pest control information across the Sunbelt region.' %>">
+  <meta property="og:type" content="<%= typeof ogType !== 'undefined' ? ogType : 'website' %>">
+  <meta property="og:url" content="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://sunbeltpestguide.com' %>">
+  <meta property="og:image" content="<%= typeof ogImage !== 'undefined' ? ogImage : 'https://sunbeltpestguide.com/images/og-default.jpg' %>">
+  <meta property="og:site_name" content="Sunbelt Pest Guide">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= typeof title !== 'undefined' ? title : 'Sunbelt Pest Guide' %>">
+  <meta name="twitter:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Your trusted source for pest control information across the Sunbelt region.' %>">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sunbelt: {
+              50: '#fefce8',
+              100: '#fef9c3',
+              200: '#fef08a',
+              300: '#fde047',
+              400: '#facc15',
+              500: '#eab308',
+              600: '#ca8a04',
+              700: '#a16207',
+              800: '#854d0e',
+              900: '#713f12'
+            },
+            earth: {
+              50: '#faf5f0',
+              100: '#f0e6d8',
+              200: '#e0ccb0',
+              300: '#c9a87c',
+              400: '#b08950',
+              500: '#96733f',
+              600: '#7a5c32',
+              700: '#5e4625',
+              800: '#432f19',
+              900: '#2d1f10'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            heading: ['Georgia', 'Cambria', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/css/style.css">
+
+
+  <!-- Google Analytics 4 -->
+  <% if (typeof ga4Id !== 'undefined' && ga4Id) { %>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ga4Id %>"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '<%= ga4Id %>');
+  </script>
+  <% } %>
+
+  <!-- Schema.org WebSite Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Sunbelt Pest Guide",
+    "url": "https://sunbeltpestguide.com",
+    "description": "Expert pest control guides for Sunbelt cities. Find local pest info, treatment costs, seasonal tips, and prevention strategies.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Sunbelt Pest Guide",
+      "url": "https://sunbeltpestguide.com"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://sunbeltpestguide.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+</head>
+<body class="bg-earth-50 text-gray-800 min-h-screen flex flex-col antialiased">
+
+
+  <!-- Site Header & Navigation -->
+  <header class="bg-white shadow-sm border-b border-earth-200 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2 text-xl font-bold text-earth-800 hover:text-earth-600 transition-colors shrink-0">
+          <span class="text-2xl" aria-hidden="true">&#127797;</span>
+          <span class="font-heading tracking-tight">Sunbelt Pest Guide</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
+          <a href="/" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-earth-700 hover:text-earth-900 hover:bg-earth-100 transition-colors">Home</a>
+
+          <!-- Cities Dropdown -->
+          <div class="nav-dropdown relative group">
+            <button class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-earth-700 hover:text-earth-900 hover:bg-earth-100 transition-colors inline-flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+              Cities
+              <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="nav-dropdown__menu absolute left-0 top-full mt-1 w-56 bg-white rounded-xl shadow-lg border border-earth-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="/yuma-az/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Yuma, AZ</a>
+              <a href="/tucson-az/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Tucson, AZ</a>
+              <a href="/tulsa-ok/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Tulsa, OK</a>
+              <a href="/greenville-sc/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Greenville, SC</a>
+              <a href="/kansas-city-mo/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Kansas City, MO</a>
+              <% if (typeof cities !== 'undefined' && cities.length > 0) { %>
+                <div class="border-t border-earth-100 mt-1 pt-1">
+                  <% cities.forEach(function(c) { %>
+                    <% if (!['yuma-az','tucson-az','tulsa-ok','greenville-sc','kansas-city-mo'].includes(c.slug)) { %>
+                      <a href="/<%= c.slug %>/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors"><%= c.fullName %></a>
+                    <% } %>
+                  <% }); %>
+                </div>
+              <% } %>
+            </div>
+          </div>
+
+          <!-- Pest Types Dropdown -->
+          <div class="nav-dropdown relative group">
+            <button class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-earth-700 hover:text-earth-900 hover:bg-earth-100 transition-colors inline-flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+              Pest Types
+              <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="nav-dropdown__menu absolute left-0 top-full mt-1 w-56 bg-white rounded-xl shadow-lg border border-earth-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <a href="/pests/scorpions/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Scorpions</a>
+              <a href="/pests/termites/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Termites</a>
+              <a href="/pests/roaches/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Roaches</a>
+              <a href="/pests/ants/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Ants</a>
+              <a href="/pests/spiders/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Spiders</a>
+              <a href="/pests/mosquitoes/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Mosquitoes</a>
+              <a href="/pests/bed-bugs/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Bed Bugs</a>
+              <a href="/pests/rodents/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors">Rodents</a>
+              <% if (typeof pests !== 'undefined' && pests.length > 0) { %>
+                <div class="border-t border-earth-100 mt-1 pt-1">
+                  <% pests.forEach(function(p) { %>
+                    <% if (!['scorpions','termites','roaches','ants','spiders','mosquitoes','bed-bugs','rodents'].includes(p.slug)) { %>
+                      <a href="/pests/<%= p.slug %>/" class="block px-4 py-2 text-sm text-earth-700 hover:bg-sunbelt-50 hover:text-earth-900 transition-colors"><%= p.icon ? p.icon + ' ' : '' %><%= p.name %></a>
+                    <% } %>
+                  <% }); %>
+                </div>
+              <% } %>
+            </div>
+          </div>
+
+          <a href="/about" class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-earth-700 hover:text-earth-900 hover:bg-earth-100 transition-colors">About</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-earth-600 hover:text-earth-900 hover:bg-earth-100 transition-colors" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg class="hamburger-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg class="close-icon w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav id="mobile-menu" class="md:hidden hidden border-t border-earth-200 bg-white" aria-label="Mobile navigation">
+      <div class="px-4 py-3 space-y-1 max-h-[70vh] overflow-y-auto">
+        <a href="/" class="block px-3 py-2 rounded-lg text-base font-medium text-earth-700 hover:bg-earth-100">Home</a>
+
+        <!-- Mobile Cities Accordion -->
+        <details class="mobile-accordion">
+          <summary class="px-3 py-2 rounded-lg text-base font-medium text-earth-700 hover:bg-earth-100 cursor-pointer list-none flex items-center justify-between">
+            Cities
+            <svg class="w-4 h-4 transition-transform duration-200 accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="pl-4 pb-2 space-y-0.5 mt-1">
+            <a href="/yuma-az/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Yuma, AZ</a>
+            <a href="/tucson-az/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Tucson, AZ</a>
+            <a href="/tulsa-ok/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Tulsa, OK</a>
+            <a href="/greenville-sc/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Greenville, SC</a>
+            <a href="/kansas-city-mo/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Kansas City, MO</a>
+          </div>
+        </details>
+
+        <!-- Mobile Pest Types Accordion -->
+        <details class="mobile-accordion">
+          <summary class="px-3 py-2 rounded-lg text-base font-medium text-earth-700 hover:bg-earth-100 cursor-pointer list-none flex items-center justify-between">
+            Pest Types
+            <svg class="w-4 h-4 transition-transform duration-200 accordion-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="pl-4 pb-2 space-y-0.5 mt-1">
+            <a href="/pests/scorpions/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Scorpions</a>
+            <a href="/pests/termites/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Termites</a>
+            <a href="/pests/roaches/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Roaches</a>
+            <a href="/pests/ants/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Ants</a>
+            <a href="/pests/spiders/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Spiders</a>
+            <a href="/pests/mosquitoes/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Mosquitoes</a>
+            <a href="/pests/bed-bugs/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Bed Bugs</a>
+            <a href="/pests/rodents/" class="block px-3 py-1.5 text-sm text-earth-600 hover:text-earth-900 hover:bg-earth-50 rounded">Rodents</a>
+          </div>
+        </details>
+
+        <a href="/about" class="block px-3 py-2 rounded-lg text-base font-medium text-earth-700 hover:bg-earth-100">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1">

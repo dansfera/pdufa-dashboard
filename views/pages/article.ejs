@@ -1,0 +1,156 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, pests, analyticsSlug }) %>
+
+  <!-- Breadcrumbs -->
+  <div class="bg-white border-b border-earth-200">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <nav class="text-sm text-gray-500" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-sunbelt-600">Home</a>
+        <span class="mx-2">&rsaquo;</span>
+        <% if (city) { %>
+          <a href="/<%= city.slug %>/" class="hover:text-sunbelt-600"><%= city.fullName %></a>
+          <span class="mx-2">&rsaquo;</span>
+        <% } %>
+        <span class="text-earth-800 font-medium line-clamp-1"><%= article.title %></span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Article Content -->
+      <article class="lg:col-span-2">
+        <div class="bg-white rounded-xl p-6 md:p-10 shadow-sm border border-earth-200">
+          <!-- Article Header -->
+          <header class="mb-8">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <% if (city) { %>
+                <a href="/<%= city.slug %>/" class="text-xs font-semibold uppercase tracking-wider text-sunbelt-600 bg-sunbelt-50 px-2.5 py-1 rounded-full hover:bg-sunbelt-100">
+                  <%= city.fullName %>
+                </a>
+              <% } %>
+              <% article.categories.forEach(cat => { %>
+                <% const catPest = pests.find(p => p.slug === cat); %>
+                <% if (catPest) { %>
+                  <a href="/pests/<%= catPest.slug %>/" class="text-xs font-semibold text-earth-600 bg-earth-100 px-2.5 py-1 rounded-full hover:bg-earth-200">
+                    <%= catPest.icon %> <%= catPest.name %>
+                  </a>
+                <% } %>
+              <% }) %>
+            </div>
+
+            <h1 class="text-3xl md:text-4xl font-bold text-earth-900 leading-tight mb-4 font-heading"><%= article.title %></h1>
+
+            <div class="flex flex-wrap items-center gap-3 text-sm text-gray-500">
+              <span>By <%= article.author %></span>
+              <span>&bull;</span>
+              <time datetime="<%= article.updatedDate %>">Updated <%= new Date(article.updatedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></time>
+              <span>&bull;</span>
+              <span><%= article.readTime %></span>
+            </div>
+          </header>
+
+          <!-- Article Body -->
+          <div class="article-content">
+            <%- article.content %>
+          </div>
+
+          <%- include('../partials/ad-inline') %>
+          <%- include('../partials/affiliate-cta') %>
+
+          <%- include('../partials/ad-adsterra') %>
+
+          <!-- FAQ Section -->
+          <% if (article.faqs && article.faqs.length > 0) { %>
+            <section class="mt-10 pt-8 border-t border-earth-200">
+              <h2 class="text-2xl font-bold text-earth-800 mb-6">Frequently Asked Questions</h2>
+              <div class="space-y-3">
+                <% article.faqs.forEach(faq => { %>
+                  <details class="faq-item bg-earth-50 rounded-lg border border-earth-200 overflow-hidden group">
+                    <summary class="px-5 py-4 cursor-pointer font-medium text-earth-800 hover:bg-earth-100 transition-colors flex items-center justify-between">
+                      <span><%= faq.question %></span>
+                      <svg class="w-5 h-5 text-gray-400 transition-transform group-open:rotate-180 flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-5 pb-4 text-gray-600 leading-relaxed"><%= faq.answer %></div>
+                  </details>
+                <% }) %>
+              </div>
+            </section>
+          <% } %>
+
+          <!-- Related Articles -->
+          <% if (related && related.length > 0) { %>
+            <section class="mt-10 pt-8 border-t border-earth-200">
+              <h2 class="text-xl font-bold text-earth-800 mb-4">Related Articles</h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <% related.forEach(r => { %>
+                  <a href="/<%= r.city %>/<%= r.slug %>/" class="block bg-earth-50 rounded-lg p-4 hover:bg-earth-100 border border-earth-200 hover:border-earth-300 transition-all group">
+                    <h3 class="font-semibold text-earth-800 group-hover:text-sunbelt-700 text-sm mb-1"><%= r.title %></h3>
+                    <p class="text-xs text-gray-500"><%= r.readTime %></p>
+                  </a>
+                <% }) %>
+              </div>
+            </section>
+          <% } %>
+        </div>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <%- include('../partials/ad-sidebar') %>
+
+        <% if (city) { %>
+          <div class="bg-white rounded-xl p-6 shadow-sm border border-earth-200 mt-6">
+            <h3 class="font-semibold text-earth-800 mb-3">More in <%= city.fullName %></h3>
+            <ul class="space-y-2">
+              <% articles.filter(a => a.city === city.slug && a.slug !== article.slug).forEach(a => { %>
+                <li><a href="/<%= a.city %>/<%= a.slug %>/" class="text-sm text-sunbelt-600 hover:text-sunbelt-800 font-medium"><%= a.title %></a></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "<%- article.title.replace(/"/g, '\\"') %>",
+    "description": "<%- article.metaDescription.replace(/"/g, '\\"') %>",
+    "datePublished": "<%= article.publishDate %>",
+    "dateModified": "<%= article.updatedDate %>",
+    "author": {
+      "@type": "Organization",
+      "name": "<%= article.author %>"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Sunbelt Pest Guide"
+    }
+  }
+  </script>
+
+  <% if (article.faqs && article.faqs.length > 0) { %>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      <% article.faqs.forEach((faq, i) => { %>
+      {
+        "@type": "Question",
+        "name": "<%- faq.question.replace(/"/g, '\\"') %>",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "<%- faq.answer.replace(/"/g, '\\"') %>"
+        }
+      }<%= i < article.faqs.length - 1 ? ',' : '' %>
+      <% }) %>
+    ]
+  }
+  </script>
+  <% } %>
+
+<%- include('../partials/footer', { cities, pests, analyticsSlug }) %>

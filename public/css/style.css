@@ -1,0 +1,107 @@
+/* Sunbelt Pest Guide - Custom Styles (complements Tailwind CSS) */
+
+html { scroll-behavior: smooth; }
+
+/* --- Ad Slots --- */
+.ad-container {
+  display: flex; align-items: center; justify-content: center;
+  border: 2px dashed #d1d5db; border-radius: 0.5rem;
+  background: #f9fafb; color: #9ca3af; position: relative;
+}
+.ad-container--728x90 { max-width: 728px; height: 90px; margin: 0 auto; }
+.ad-label { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; color: #9ca3af; }
+.ad-slot--sidebar .ad-container { width: 100%; }
+
+/* --- Article Content Typography --- */
+.article-content h2 {
+  font-family: Georgia, Cambria, serif; font-size: 1.5rem; font-weight: 700;
+  color: #432f19; margin-top: 2rem; margin-bottom: 0.75rem; line-height: 1.3;
+}
+.article-content h3 {
+  font-family: Georgia, Cambria, serif; font-size: 1.25rem; font-weight: 600;
+  color: #5e4625; margin-top: 1.5rem; margin-bottom: 0.5rem; line-height: 1.35;
+}
+.article-content p {
+  margin-bottom: 1rem; line-height: 1.75; color: #374151;
+}
+.article-content ul, .article-content ol {
+  margin-bottom: 1rem; padding-left: 1.5rem;
+}
+.article-content ul { list-style-type: disc; }
+.article-content ol { list-style-type: decimal; }
+.article-content li {
+  margin-bottom: 0.375rem; line-height: 1.65; color: #374151;
+}
+.article-content table {
+  width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9375rem;
+}
+.article-content thead th {
+  background: #f0e6d8; color: #432f19; font-weight: 600;
+  text-align: left; padding: 0.625rem 0.75rem; border-bottom: 2px solid #e0ccb0;
+}
+.article-content tbody td {
+  padding: 0.5rem 0.75rem; border-bottom: 1px solid #e5e7eb; color: #374151;
+}
+.article-content tbody tr:hover { background: #faf5f0; }
+.article-content blockquote {
+  border-left: 4px solid #eab308; padding: 0.75rem 1rem; margin: 1.25rem 0;
+  background: #fefce8; border-radius: 0 0.5rem 0.5rem 0; color: #854d0e; font-style: italic;
+}
+.article-content a { color: #a16207; text-decoration: underline; text-underline-offset: 2px; }
+.article-content a:hover { color: #854d0e; }
+
+/* --- Breadcrumbs --- */
+.breadcrumb {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 0.375rem; font-size: 0.875rem; color: #96733f;
+}
+.breadcrumb a { color: #7a5c32; text-decoration: none; transition: color 0.15s; }
+.breadcrumb a:hover { color: #432f19; text-decoration: underline; }
+.breadcrumb .separator { color: #c9a87c; user-select: none; }
+
+/* --- Article Card Hover --- */
+.article-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.article-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0,0,0,0.1), 0 4px 10px -5px rgba(0,0,0,0.04);
+}
+
+/* --- FAQ Accordion (details/summary) --- */
+.faq-item summary {
+  cursor: pointer; list-style: none; padding: 0.875rem 1rem;
+  font-weight: 600; color: #432f19; background: white;
+  border: 1px solid #e0ccb0; border-radius: 0.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.faq-item summary:hover { background: #faf5f0; border-color: #c9a87c; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item[open] summary {
+  border-radius: 0.5rem 0.5rem 0 0; border-bottom-color: transparent; background: #faf5f0;
+}
+.faq-item .faq-answer {
+  padding: 0.75rem 1rem 1rem; border: 1px solid #e0ccb0; border-top: none;
+  border-radius: 0 0 0.5rem 0.5rem; background: white; color: #374151; line-height: 1.7;
+}
+.faq-item + .faq-item { margin-top: 0.5rem; }
+details[open] > summary .accordion-chevron { transform: rotate(180deg); }
+
+/* --- Navigation Hover Effect --- */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: ''; position: absolute; bottom: 0; left: 50%;
+  width: 0; height: 2px; background: #eab308;
+  transition: width 0.2s ease, left 0.2s ease;
+}
+.nav-link:hover::after { width: 60%; left: 20%; }
+
+/* --- Print Styles --- */
+@media print {
+  .ad-slot, .ad-slot--header, .ad-slot--sidebar,
+  #mobile-menu-btn, #mobile-menu, .nav-dropdown__menu,
+  footer, .no-print { display: none !important; }
+  header { position: static !important; box-shadow: none !important; }
+  body { background: white !important; color: black !important; font-size: 12pt; }
+  .article-content a { color: black; text-decoration: underline; }
+  .article-content a::after { content: ' (' attr(href) ')'; font-size: 0.8em; color: #666; }
+}

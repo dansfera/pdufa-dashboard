@@ -1,0 +1,186 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, services, analyticsSlug, baseUrl }) %>
+
+  <!-- Breadcrumbs -->
+  <div class="bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <nav class="text-sm text-gray-500" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-1 flex-wrap" itemscope itemtype="https://schema.org/BreadcrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/hvac/" itemprop="item" class="hover:text-hvac-600"><span itemprop="name">Home</span></a>
+            <meta itemprop="position" content="1" />
+          </li>
+          <span class="mx-1">&rsaquo;</span>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span class="text-gray-400" itemprop="name">Services</span>
+            <meta itemprop="position" content="2" />
+          </li>
+          <span class="mx-1">&rsaquo;</span>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span class="text-slate-800 font-medium" itemprop="name"><%= service.name %></span>
+            <meta itemprop="position" content="3" />
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-hvac-700 to-slate-900 text-white py-12" style="background:linear-gradient(to bottom right,#c2410c,#0f172a)">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-4 mb-4">
+        <span class="text-5xl"><%= service.icon %></span>
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold font-heading"><%= service.name %></h1>
+          <p class="text-hvac-200 text-lg"><%= service.description %></p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-4 text-sm mt-6">
+        <span class="bg-white/10 px-3 py-1.5 rounded-full">💰 <%= service.avgCost %></span>
+        <span class="bg-white/10 px-3 py-1.5 rounded-full">⏱ <%= service.timeline %></span>
+        <span class="bg-red-500/80 px-3 py-1.5 rounded-full font-semibold">⚡ <%= service.urgencyLevel %></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+
+        <!-- Warning Signs -->
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-red-200 mb-8">
+          <h2 class="text-2xl font-bold text-slate-800 mb-4">⚠️ Warning Signs You Need <%= service.name %></h2>
+          <ul class="space-y-3">
+            <% service.warningSign.forEach(sign => { %>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-0.5 flex-shrink-0">⚠</span>
+                <span class="text-gray-700"><%= sign %></span>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
+
+        <!-- Step-by-Step Process -->
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-slate-200 mb-8">
+          <h2 class="text-2xl font-bold text-slate-800 mb-4">What to Do: Step-by-Step</h2>
+          <ol class="space-y-4">
+            <% service.steps.forEach((step, i) => { %>
+              <li class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-7 h-7 bg-hvac-600 text-white rounded-full flex items-center justify-center text-sm font-bold"><%= i + 1 %></span>
+                <span class="text-gray-700 pt-0.5"><%= step %></span>
+              </li>
+            <% }) %>
+          </ol>
+        </div>
+
+        <%- include('../partials/ad-inline') %>
+
+        <!-- Cities Where This Is Common -->
+        <% if (serviceCities.length > 0) { %>
+          <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-slate-200 mb-8">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 font-heading"><%= service.name %> by City</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <% serviceCities.forEach(c => { %>
+                <a href="/hvac/<%= c.slug %>/" class="flex items-center gap-3 p-4 rounded-lg hover:bg-hvac-50 border border-slate-100 hover:border-hvac-300 transition-all group">
+                  <div>
+                    <h3 class="font-semibold text-slate-800 group-hover:text-hvac-700"><%= c.fullName %></h3>
+                    <p class="text-xs text-gray-500"><%= c.climate %></p>
+                    <p class="text-xs text-hvac-600 font-medium mt-1"><%= c.avgHvacCost %></p>
+                  </div>
+                </a>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+
+        <!-- Related Articles -->
+        <% if (serviceArticles.length > 0) { %>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 font-heading">Related Guides</h2>
+            <div class="space-y-4">
+              <% serviceArticles.forEach(a => { %>
+                <% const aCity = cities.find(c => c.slug === a.city); %>
+                <a href="/hvac/<%= a.city %>/<%= a.slug %>/" class="block bg-white rounded-xl p-5 border border-slate-200 hover:border-hvac-300 hover:bg-hvac-50 transition-all group">
+                  <div class="flex items-start justify-between gap-3">
+                    <div>
+                      <div class="flex items-center gap-2 mb-1">
+                        <span class="text-xs text-hvac-600 font-semibold"><%= aCity ? aCity.fullName : '' %></span>
+                        <span class="text-xs text-gray-400"><%= a.readTime %></span>
+                      </div>
+                      <h3 class="font-bold text-slate-800 group-hover:text-hvac-700 transition-colors"><%= a.title %></h3>
+                      <p class="text-sm text-gray-600 mt-1 line-clamp-2"><%= a.excerpt %></p>
+                    </div>
+                  </div>
+                </a>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+
+        <%- include('../partials/ad-adsterra') %>
+
+        <%- include('../partials/affiliate-cta') %>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <div class="sidebar-sticky space-y-6">
+
+          <!-- Quick Facts -->
+          <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+            <h3 class="font-bold text-slate-800 mb-3">📋 Quick Facts</h3>
+            <div class="space-y-3 text-sm">
+              <div>
+                <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Typical Cost</p>
+                <p class="font-semibold text-slate-800"><%= service.avgCost %></p>
+              </div>
+              <div>
+                <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Timeline</p>
+                <p class="font-medium text-slate-700"><%= service.timeline %></p>
+              </div>
+              <div>
+                <p class="text-gray-500 text-xs uppercase tracking-wider mb-0.5">Urgency</p>
+                <p class="font-medium text-orange-700"><%= service.urgencyLevel %></p>
+              </div>
+            </div>
+          </div>
+
+          <%- include('../partials/ad-sidebar') %>
+          <%- include('../partials/affiliate-cta-sidebar') %>
+
+          <!-- Other Services -->
+          <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+            <h3 class="font-bold text-slate-800 mb-3">🔧 Other HVAC Services</h3>
+            <ul class="space-y-1.5">
+              <% services.filter(s => s.slug !== service.slug).slice(0, 7).forEach(s => { %>
+                <li>
+                  <a href="/hvac/services/<%= s.slug %>/" class="text-sm text-hvac-600 hover:text-hvac-800 hover:underline flex items-center gap-1.5">
+                    <span><%= s.icon %></span> <%= s.name %>
+                  </a>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Service Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "<%= service.name %>",
+    "description": "<%= service.description %>",
+    "provider": {
+      "@type": "Organization",
+      "name": "Sunbelt HVAC Guide",
+      "url": "<%= baseUrl %>"
+    }
+  }
+  </script>
+
+<%- include('../partials/footer', { cities, services, analyticsSlug }) %>

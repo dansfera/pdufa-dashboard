@@ -1,0 +1,55 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, services, analyticsSlug, baseUrl }) %>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-hvac-700 to-slate-900 text-white py-14" style="background:linear-gradient(to bottom right,#c2410c,#0f172a)">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 font-heading">About Sunbelt HVAC Guide</h1>
+      <p class="text-hvac-100 text-xl max-w-2xl mx-auto">Honest HVAC information for homeowners in the cities where air conditioning isn't optional.</p>
+    </div>
+  </section>
+
+  <div class="max-w-4xl mx-auto px-4 py-12">
+
+    <!-- Main Content -->
+    <div class="bg-white rounded-xl p-8 shadow-sm border border-slate-200 mb-8">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 font-heading">What We Do</h2>
+      <div class="space-y-4 text-gray-700 leading-relaxed">
+        <p>Sunbelt HVAC Guide is an independent information resource for homeowners in Sunbelt cities where air conditioning and heating systems are essential to daily life — not seasonal luxuries. In Yuma, Tucson, Tulsa, Greenville, and Kansas City, a failed AC in July or a broken furnace in January isn't just uncomfortable. It's a health risk, a financial emergency, and a situation where homeowners deserve accurate information rather than sales pitches.</p>
+        <p>We publish detailed guides on HVAC repair costs, maintenance best practices, service categories, and the repair-versus-replace decision for each of our covered cities. Every guide is written with the specific climate, housing stock, and seasonal demands of that city in mind — because HVAC advice that works for a Phoenix summer is different from what matters in a Kansas City winter.</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl p-8 shadow-sm border border-slate-200 mb-8">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 font-heading">What We Don't Do</h2>
+      <div class="space-y-4 text-gray-700 leading-relaxed">
+        <p><strong>We don't sell contractor referrals or leads.</strong> We have no financial relationship with any HVAC contractor, manufacturer, or service provider. Our content is purely informational.</p>
+        <p><strong>We don't have hidden affiliate relationships</strong> with the equipment brands or products we mention. When we discuss SEER ratings, system types, or thermostat models, it's based on what we believe is accurate and useful, not what pays a commission.</p>
+        <p><strong>We're not a substitute for professional diagnosis.</strong> Our guides help you understand what's happening with your HVAC system, ask better questions, and evaluate contractor quotes — but actual diagnosis and repair should always be performed by a licensed HVAC professional.</p>
+      </div>
+    </div>
+
+    <%- include('../partials/ad-inline') %>
+
+    <div class="bg-white rounded-xl p-8 shadow-sm border border-slate-200 mb-8">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 font-heading">Our Coverage</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <% cities.forEach(c => { %>
+          <a href="/hvac/<%= c.slug %>/" class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200 hover:bg-hvac-50 hover:border-hvac-300 transition-all group">
+            <div>
+              <h3 class="font-semibold text-slate-800 group-hover:text-hvac-700"><%= c.fullName %></h3>
+              <p class="text-sm text-gray-600"><%= c.climate %></p>
+            </div>
+          </a>
+        <% }) %>
+      </div>
+      <p class="text-gray-600 text-sm">Phase 2 expansion planned for Dallas, TX &bull; Houston, TX &bull; Charlotte, NC</p>
+    </div>
+
+    <div class="bg-hvac-50 rounded-xl p-6 border border-hvac-200">
+      <h2 class="text-xl font-bold text-hvac-800 mb-3">A Note on Accuracy</h2>
+      <p class="text-hvac-700 text-sm leading-relaxed">HVAC costs, equipment specifications, and service practices change over time. We update our guides periodically to reflect current market conditions, but local pricing and equipment availability vary. The cost ranges we publish are based on general market research and should be treated as starting points for your own research, not quotes. Always get multiple estimates from licensed local contractors before authorizing significant HVAC work.</p>
+    </div>
+
+  </div>
+
+<%- include('../partials/footer', { cities, services, analyticsSlug }) %>

@@ -1,0 +1,342 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<div class="about-page">
+
+  <!-- Breadcrumb -->
+  <nav style="font-size: 13px; color: var(--text-secondary); margin-bottom: 24px;">
+    <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/" style="color: var(--accent); text-decoration: none;">Home</a>
+    <span style="margin: 0 8px; color: var(--border);">›</span>
+    <span>Q2 2026 Biotech Catalysts</span>
+  </nav>
+
+  <h1 style="margin-bottom: 12px;">Q2 2026 Biotech Catalysts: Complete FDA Calendar</h1>
+
+  <p style="color: var(--text-secondary); font-size: 17px; line-height: 1.7; margin-bottom: 8px;">
+    Every major biotech catalyst from <strong style="color: var(--text-primary);">April through June 2026</strong> — PDUFA dates, FDA Advisory Committee meetings, Phase 3 trial readouts, and conference schedules. All entries auto-generated from the live catalyst database and refreshed every Monday.
+  </p>
+
+  <!-- Live badge + stats -->
+  <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 28px;">
+    <span style="background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.3); border-radius: 20px; padding: 5px 14px; font-size: 13px; color: var(--accent); font-weight: 600;">
+      🔄 Live Database
+    </span>
+    <span style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 13px; color: var(--text-secondary);">
+      <%= catalysts.length %> Q2 2026 catalyst<%= catalysts.length !== 1 ? 's' : '' %>
+    </span>
+    <span style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 13px; color: var(--text-secondary);">
+      April 1 – June 30, 2026
+    </span>
+    <span style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 13px; color: var(--text-secondary);">
+      Updated weekly
+    </span>
+  </div>
+
+  <!-- Intro -->
+  <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 32px; line-height: 1.75; color: var(--text-secondary);">
+    <p style="margin: 0 0 12px;">
+      <strong style="color: var(--text-primary);">Q2 2026 (April–June)</strong> is one of the busiest FDA decision quarters of the year.
+      PDUFA dates mark the FDA's self-imposed deadline to approve or reject a New Drug Application (NDA) or Biologics License Application (BLA).
+      Missing a key catalyst date can mean missing a 40–200% move in a single session — in either direction.
+    </p>
+    <p style="margin: 0;">
+      This calendar aggregates every tracked catalyst across PDUFA decisions, Advisory Committee votes, Phase 3 trial data readouts,
+      and major biotech conferences. <strong style="color: var(--text-primary);">Probability of Approval (PoA)</strong> scores use FDA historical approval rates by application type
+      and designation. The database updates every Monday so this page reflects the latest data.
+    </p>
+  </div>
+
+  <!-- Color key -->
+  <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; font-size: 13px;">
+    <span style="color: var(--text-secondary); font-weight: 600; align-self: center;">Urgency:</span>
+    <span style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 6px; padding: 3px 10px; color: #ef4444;">🔴 Overdue</span>
+    <span style="background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); border-radius: 6px; padding: 3px 10px; color: #f97316;">🟠 Today</span>
+    <span style="background: rgba(234,179,8,0.1); border: 1px solid rgba(234,179,8,0.3); border-radius: 6px; padding: 3px 10px; color: #eab308;">🟡 This Week</span>
+    <span style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); border-radius: 6px; padding: 3px 10px; color: #3b82f6;">🔵 This Month</span>
+    <span style="background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); border-radius: 6px; padding: 3px 10px; color: #22c55e;">🟢 Upcoming</span>
+  </div>
+
+  <% if (catalysts.length === 0) { %>
+  <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 40px; text-align: center; color: var(--text-secondary);">
+    <p style="font-size: 18px; margin: 0 0 8px; color: var(--text-primary);">No Q2 2026 catalysts loaded yet.</p>
+    <p style="margin: 0;">Check back — the database refreshes every Monday.</p>
+  </div>
+  <% } else { %>
+
+  <!-- Catalyst Table -->
+  <div style="overflow-x: auto; margin-bottom: 32px; border: 1px solid var(--border); border-radius: 10px;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 700px;">
+      <thead>
+        <tr style="background: var(--bg-secondary);">
+          <th style="padding: 12px 16px; text-align: left; border-bottom: 2px solid var(--border); color: var(--text-primary); font-weight: 700; white-space: nowrap;">Date</th>
+          <th style="padding: 12px 16px; text-align: left; border-bottom: 2px solid var(--border); color: var(--text-primary); font-weight: 700;">Ticker</th>
+          <th style="padding: 12px 16px; text-align: left; border-bottom: 2px solid var(--border); color: var(--text-primary); font-weight: 700;">Drug / Company</th>
+          <th style="padding: 12px 16px; text-align: left; border-bottom: 2px solid var(--border); color: var(--text-primary); font-weight: 700; white-space: nowrap;">Type</th>
+          <th style="padding: 12px 16px; text-align: right; border-bottom: 2px solid var(--border); color: var(--text-primary); font-weight: 700; white-space: nowrap;">PoA</th>
+          <th style="padding: 12px 16px; text-align: left; border-bottom: 2px solid var(--border); color: var(--text-primary); font-weight: 700; white-space: nowrap;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% catalysts.forEach(function(d, i) {
+          const config = getCatalystConfig(d.catalyst_type);
+          const rowBg = i % 2 === 0 ? '' : 'background: var(--bg-secondary);';
+          const drugName = d.brand_name || d.drug_name;
+
+          // Urgency color
+          let urgencyDot = '';
+          let urgencyBorder = '';
+          if (d.statusClass === 'overdue') { urgencyDot = '🔴'; urgencyBorder = 'border-left: 3px solid #ef4444;'; }
+          else if (d.statusClass === 'today') { urgencyDot = '🟠'; urgencyBorder = 'border-left: 3px solid #f97316;'; }
+          else if (d.statusClass === 'this-week') { urgencyDot = '🟡'; urgencyBorder = 'border-left: 3px solid #eab308;'; }
+          else if (d.statusClass === 'this-month') { urgencyDot = '🔵'; urgencyBorder = 'border-left: 3px solid #3b82f6;'; }
+          else { urgencyDot = '🟢'; urgencyBorder = 'border-left: 3px solid #22c55e;'; }
+        %>
+        <tr style="<%= rowBg %> <%= urgencyBorder %>">
+          <td style="padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-primary); white-space: nowrap; font-weight: 600;">
+            <%= d.formattedDate %>
+            <div style="font-size: 12px; color: var(--text-secondary); font-weight: 400; margin-top: 2px;"><%= d.daysUntil %></div>
+          </td>
+          <td style="padding: 12px 16px; border-bottom: 1px solid var(--border);">
+            <% if (d.ticker) { %>
+            <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/drug/<%= d.slug %>"
+               style="color: var(--accent); font-weight: 700; text-decoration: none; font-size: 15px;">
+              $<%= d.ticker %>
+            </a>
+            <% } else { %>
+            <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/drug/<%= d.slug %>"
+               style="color: var(--accent); font-weight: 600; text-decoration: none; font-size: 13px;">
+              View →
+            </a>
+            <% } %>
+          </td>
+          <td style="padding: 12px 16px; border-bottom: 1px solid var(--border);">
+            <div style="font-weight: 600; color: var(--text-primary);">
+              <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/drug/<%= d.slug %>"
+                 style="color: var(--text-primary); text-decoration: none;">
+                <%= drugName %>
+              </a>
+            </div>
+            <% if (d.company) { %>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;"><%= d.company %></div>
+            <% } %>
+            <% if (d.indication) { %>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px; font-style: italic;"><%= d.indication %></div>
+            <% } %>
+            <% if (d.designation && d.designation.length > 0) { %>
+            <div style="margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px;">
+              <% d.designation.forEach(function(desig) { %>
+              <span style="font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px;
+                background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.3); color: var(--accent);">
+                <%= desig %>
+              </span>
+              <% }); %>
+            </div>
+            <% } %>
+          </td>
+          <td style="padding: 12px 16px; border-bottom: 1px solid var(--border); white-space: nowrap;">
+            <span style="font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px;
+              <% if (d.catalyst_type === 'pdufa') { %>
+                background: rgba(0,212,170,0.15); color: var(--accent); border: 1px solid rgba(0,212,170,0.3);
+              <% } else if (d.catalyst_type === 'adcom') { %>
+                background: rgba(249,115,22,0.15); color: #f97316; border: 1px solid rgba(249,115,22,0.3);
+              <% } else if (d.catalyst_type === 'trial_readout') { %>
+                background: rgba(168,85,247,0.15); color: #a855f7; border: 1px solid rgba(168,85,247,0.3);
+              <% } else if (d.catalyst_type === 'conference') { %>
+                background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3);
+              <% } else { %>
+                background: rgba(59,130,246,0.15); color: #3b82f6; border: 1px solid rgba(59,130,246,0.3);
+              <% } %>">
+              <%= config.icon %> <%= config.label %>
+            </span>
+          </td>
+          <td style="padding: 12px 16px; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap;">
+            <% if (d.showPoA && d.basePoA) { %>
+            <span title="<%= d.poaRationale %>"
+              style="font-weight: 700; font-size: 16px;
+              <% if (d.basePoA >= 85) { %>color: var(--color-green);<% } else if (d.basePoA >= 60) { %>color: var(--color-orange);<% } else { %>color: var(--color-red);<% } %>">
+              <%= d.basePoA %>%
+            </span>
+            <div style="font-size: 10px; color: var(--text-secondary); margin-top: 2px;">hist. base rate</div>
+            <% } else { %>
+            <span style="color: var(--text-secondary); font-size: 13px;">—</span>
+            <% } %>
+          </td>
+          <td style="padding: 12px 16px; border-bottom: 1px solid var(--border); white-space: nowrap;">
+            <% if (d.outcomeResult) { %>
+            <span class="outcome-badge outcome-<%= d.outcomeClass %>" style="font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px;
+              <% if (d.outcomeResult === 'approved') { %>
+                background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3);
+              <% } else if (d.outcomeResult === 'crl') { %>
+                background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3);
+              <% } else { %>
+                background: rgba(249,115,22,0.1); color: #f97316; border: 1px solid rgba(249,115,22,0.3);
+              <% } %>">
+              <%= d.outcomeLabel %>
+            </span>
+            <% } else { %>
+            <span style="color: var(--text-secondary); font-size: 12px;">Pending</span>
+            <% } %>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+
+  <!-- How to Use This Calendar -->
+  <h2 id="how-to-use" style="margin: 40px 0 16px;">How to Use This Catalyst Calendar</h2>
+  <p style="color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px;">
+    Each row in the table represents a binary event — a date when a drug could be approved, rejected, or delayed.
+    For biotech investors, these dates are the highest-volatility moments in a stock's lifecycle.
+  </p>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 20px 0 32px;">
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px;">
+      <div style="font-weight: 700; color: var(--accent); margin-bottom: 8px; font-size: 14px;">💊 PDUFA Dates</div>
+      <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+        FDA's self-imposed target date to approve or issue a Complete Response Letter (CRL).
+        The highest-stakes binary event for most small-cap biotechs.
+      </p>
+    </div>
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px;">
+      <div style="font-weight: 700; color: #f97316; margin-bottom: 8px; font-size: 14px;">🏛️ AdCom Meetings</div>
+      <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+        Advisory Committee panel votes on whether a drug should be approved.
+        The FDA follows AdCom recommendations the majority of the time.
+      </p>
+    </div>
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px;">
+      <div style="font-weight: 700; color: #a855f7; margin-bottom: 8px; font-size: 14px;">🔬 Trial Readouts</div>
+      <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+        Phase 3 trial data releases. Positive data can trigger NDA filing; failure can be catastrophic
+        for single-asset biotechs. PoA scores for trials use Phase 3 historical success rates (~58%).
+      </p>
+    </div>
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px;">
+      <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 8px; font-size: 14px;">📊 PoA Score</div>
+      <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+        Historical Probability of Approval — an evidence-based base rate, not a prediction.
+        NDA standard = 85%, NDA priority = 90%, orphan = 93%.
+        A prior CRL reduces PoA by ~28%.
+      </p>
+    </div>
+  </div>
+
+  <!-- CTA: how-to-trade guide -->
+  <div style="background: var(--bg-card); border: 1px solid rgba(0,212,170,0.25); border-radius: 10px; padding: 24px; margin-bottom: 32px;">
+    <p style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 0 0 8px;">
+      Ready to trade these catalysts?
+    </p>
+    <p style="color: var(--text-secondary); margin: 0 0 16px; line-height: 1.65;">
+      Understanding what these dates mean is step one. Trading them profitably — position sizing for binary events,
+      options strategies around IV crush, reading AdCom signals — is a different skill.
+    </p>
+    <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/how-to-trade-pdufa-dates"
+       style="color: var(--accent); font-weight: 700; text-decoration: none; font-size: 15px;">
+      How to Trade PDUFA Dates: Strategy Guide →
+    </a>
+  </div>
+
+  <!-- Monthly breakdown -->
+  <% const aprilCats = catalysts.filter(function(d) { return d.pdufa_date && new Date(d.pdufa_date).getUTCMonth() === 3; });
+     const mayCats   = catalysts.filter(function(d) { return d.pdufa_date && new Date(d.pdufa_date).getUTCMonth() === 4; });
+     const juneCats  = catalysts.filter(function(d) { return d.pdufa_date && new Date(d.pdufa_date).getUTCMonth() === 5; }); %>
+
+  <% if (aprilCats.length > 0 || mayCats.length > 0 || juneCats.length > 0) { %>
+  <h2 style="margin: 40px 0 16px;">Q2 2026 Month-by-Month Breakdown</h2>
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px;">
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center;">
+      <div style="font-size: 28px; font-weight: 800; color: var(--accent);"><%= aprilCats.length %></div>
+      <div style="font-size: 13px; font-weight: 700; color: var(--text-secondary); margin-top: 4px;">April 2026</div>
+      <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
+        <%= aprilCats.filter(function(d) { return d.catalyst_type === 'pdufa'; }).length %> PDUFA &bull;
+        <%= aprilCats.filter(function(d) { return d.catalyst_type === 'adcom'; }).length %> AdCom
+      </div>
+    </div>
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center;">
+      <div style="font-size: 28px; font-weight: 800; color: var(--accent);"><%= mayCats.length %></div>
+      <div style="font-size: 13px; font-weight: 700; color: var(--text-secondary); margin-top: 4px;">May 2026</div>
+      <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
+        <%= mayCats.filter(function(d) { return d.catalyst_type === 'pdufa'; }).length %> PDUFA &bull;
+        <%= mayCats.filter(function(d) { return d.catalyst_type === 'adcom'; }).length %> AdCom
+      </div>
+    </div>
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center;">
+      <div style="font-size: 28px; font-weight: 800; color: var(--accent);"><%= juneCats.length %></div>
+      <div style="font-size: 13px; font-weight: 700; color: var(--text-secondary); margin-top: 4px;">June 2026</div>
+      <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
+        <%= juneCats.filter(function(d) { return d.catalyst_type === 'pdufa'; }).length %> PDUFA &bull;
+        <%= juneCats.filter(function(d) { return d.catalyst_type === 'adcom'; }).length %> AdCom
+      </div>
+    </div>
+  </div>
+  <% } %>
+
+  <!-- Cross-links to sister SEO pages -->
+  <h2 style="margin: 40px 0 16px;">More Resources</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 32px;">
+    <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/pdufa-explained"
+       style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-decoration: none; display: block;">
+      <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 6px; font-size: 15px;">PDUFA Dates Explained →</div>
+      <div style="color: var(--text-secondary); font-size: 13px; line-height: 1.6;">How the FDA review process works, what a CRL means, and how to read PoA scores.</div>
+    </a>
+    <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/how-to-trade-pdufa-dates"
+       style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-decoration: none; display: block;">
+      <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 6px; font-size: 15px;">How to Trade PDUFA Dates →</div>
+      <div style="color: var(--text-secondary); font-size: 13px; line-height: 1.6;">Position sizing, options IV crush, AdCom signals, and the most common mistakes in biotech catalyst trading.</div>
+    </a>
+    <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/"
+       style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-decoration: none; display: block;">
+      <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 6px; font-size: 15px;">Full Catalyst Calendar →</div>
+      <div style="color: var(--text-secondary); font-size: 13px; line-height: 1.6;">All upcoming PDUFA dates, AdCom meetings, trial readouts, and conferences — not just Q2.</div>
+    </a>
+  </div>
+
+  <!-- Substack CTA -->
+  <div style="background: var(--bg-card); border: 1px solid rgba(0,212,170,0.3); border-radius: 10px; padding: 24px; margin: 28px 0; text-align: center;">
+    <p style="font-size: 18px; font-weight: 700; color: var(--text-primary); margin: 0 0 8px;">
+      Don't Miss a Q2 Catalyst
+    </p>
+    <p style="color: var(--text-secondary); margin: 0 0 20px;">
+      Get ahead of PDUFA decisions and trial readouts before the market moves.
+    </p>
+    <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/go/substack?p=table_block"
+       onclick="trackCtaClick('table_block')"
+       class="btn btn-primary" style="display: inline-block;">
+      Follow on Substack →
+    </a>
+  </div>
+
+  <div class="disclaimer-box" style="margin-top: 32px;">
+    Nothing on this page constitutes investment advice. PDUFA dates are FDA target dates — the agency is not legally required to act by this date.
+    Probability of Approval scores are historical base rates derived from FDA CDER data and do not account for drug-specific clinical, regulatory, or manufacturing factors.
+    Catalyst dates may change without notice. Always do your own due diligence before making any investment decision.
+  </div>
+
+</div>
+
+<script>
+function trackCtaClick(placement) {
+  try {
+    var payload = JSON.stringify({
+      event_type: 'cta_click',
+      placement: placement,
+      page: window.location.pathname
+    });
+    if (navigator.sendBeacon) {
+      var blob = new Blob([payload], { type: 'application/json' });
+      navigator.sendBeacon('/api/evt', blob);
+    } else {
+      fetch('/api/evt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true
+      }).catch(function() {});
+    }
+  } catch(e) {}
+}
+</script>
+
+<%- include('../partials/footer') %>

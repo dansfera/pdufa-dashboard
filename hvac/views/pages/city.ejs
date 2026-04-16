@@ -1,0 +1,180 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, services, analyticsSlug, baseUrl }) %>
+
+  <!-- Breadcrumbs -->
+  <div class="bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <nav class="text-sm text-gray-500" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-1 flex-wrap" itemscope itemtype="https://schema.org/BreadcrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/hvac/" itemprop="item" class="hover:text-hvac-600"><span itemprop="name">Home</span></a>
+            <meta itemprop="position" content="1" />
+          </li>
+          <span class="mx-1">&rsaquo;</span>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span class="text-slate-800 font-medium" itemprop="name"><%= city.fullName %></span>
+            <meta itemprop="position" content="2" />
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-hvac-700 to-slate-900 text-white py-12 md:py-16" style="background:linear-gradient(to bottom right,#c2410c,#0f172a)">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="max-w-3xl">
+        <p class="text-hvac-300 text-sm font-semibold uppercase tracking-wider mb-3"><%= city.region %> &bull; <%= city.state %></p>
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-heading"><%= city.heroText %></h1>
+        <p class="text-hvac-100 text-lg mb-6"><%= city.climate %></p>
+        <div class="flex flex-wrap gap-3 text-sm">
+          <span class="bg-white/10 px-3 py-1.5 rounded-full">💰 <%= city.avgHvacCost %></span>
+          <span class="bg-white/10 px-3 py-1.5 rounded-full">📍 <%= city.fullName %></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+
+        <!-- City Intro -->
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-slate-200 mb-8">
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 font-heading">HVAC in <%= city.fullName %></h2>
+          <div class="text-gray-700 leading-relaxed space-y-4">
+            <% city.intro.split('\n\n').forEach(para => { %>
+              <p><%= para.trim() %></p>
+            <% }) %>
+          </div>
+        </div>
+
+        <!-- Seasonal Notes -->
+        <div class="bg-hvac-50 rounded-xl p-6 border border-hvac-200 mb-8">
+          <h2 class="text-xl font-bold text-hvac-800 mb-3">📅 Seasonal HVAC Tips for <%= city.fullName %></h2>
+          <p class="text-hvac-700"><%= city.seasonalNotes %></p>
+        </div>
+
+        <%- include('../partials/ad-inline') %>
+
+        <!-- Services for This City -->
+        <% if (cityServices.length > 0) { %>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 font-heading">Common HVAC Services in <%= city.name %></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <% cityServices.forEach(s => { %>
+                <a href="/hvac/services/<%= s.slug %>/" class="flex items-start gap-3 p-4 bg-white rounded-xl border border-slate-200 hover:border-hvac-300 hover:bg-hvac-50 transition-all group">
+                  <span class="text-2xl flex-shrink-0"><%= s.icon %></span>
+                  <div>
+                    <h3 class="font-semibold text-slate-800 group-hover:text-hvac-700 text-sm"><%= s.name %></h3>
+                    <p class="text-xs text-gray-500 mt-0.5"><%= s.shortDesc %></p>
+                    <p class="text-xs text-hvac-600 font-medium mt-1"><%= s.avgCost %></p>
+                  </div>
+                </a>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+
+        <!-- Local Articles -->
+        <% if (cityArticles.length > 0) { %>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 font-heading">HVAC Guides for <%= city.name %></h2>
+            <div class="space-y-4">
+              <% cityArticles.forEach(a => { %>
+                <a href="/hvac/<%= a.city %>/<%= a.slug %>/" class="block bg-white rounded-xl p-5 border border-slate-200 hover:border-hvac-300 hover:bg-hvac-50 transition-all group">
+                  <div class="flex items-start justify-between gap-4">
+                    <div class="flex-1 min-w-0">
+                      <h3 class="font-bold text-slate-800 group-hover:text-hvac-700 transition-colors mb-1 leading-snug"><%= a.title %></h3>
+                      <p class="text-gray-600 text-sm line-clamp-2"><%= a.excerpt %></p>
+                    </div>
+                    <span class="text-xs text-gray-400 flex-shrink-0 pt-0.5"><%= a.readTime %></span>
+                  </div>
+                </a>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+
+        <%- include('../partials/ad-adsterra') %>
+
+        <%- include('../partials/affiliate-cta') %>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <div class="sidebar-sticky space-y-6">
+
+          <!-- Cost Summary -->
+          <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+            <h3 class="font-bold text-slate-800 mb-3">💰 HVAC Cost Summary</h3>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between items-start gap-2">
+                <span class="text-gray-600">Typical repair</span>
+                <span class="font-semibold text-slate-800 text-right">$150–$600</span>
+              </div>
+              <div class="flex justify-between items-start gap-2">
+                <span class="text-gray-600">Full replacement</span>
+                <span class="font-semibold text-slate-800 text-right"><%= city.avgHvacCost.split(' / ')[1] || city.avgHvacCost %></span>
+              </div>
+              <div class="border-t border-slate-100 pt-2 mt-2">
+                <p class="text-xs text-gray-500">Cost ranges based on local market data for <%= city.fullName %>. Actual costs vary by system size and service scope.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Services -->
+          <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+            <h3 class="font-bold text-slate-800 mb-3">🔧 Most Common Services</h3>
+            <ul class="space-y-1.5">
+              <% city.topServices.forEach(svc => { %>
+                <% const matchedSvc = services.find(s => s.slug === svc); %>
+                <% if (matchedSvc) { %>
+                  <li>
+                    <a href="/hvac/services/<%= svc %>/" class="text-sm text-hvac-600 hover:text-hvac-800 hover:underline flex items-center gap-1.5">
+                      <span><%= matchedSvc.icon %></span> <%= matchedSvc.name %>
+                    </a>
+                  </li>
+                <% } %>
+              <% }) %>
+            </ul>
+          </div>
+
+          <%- include('../partials/ad-sidebar') %>
+          <%- include('../partials/affiliate-cta-sidebar') %>
+
+          <!-- Other Cities -->
+          <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+            <h3 class="font-bold text-slate-800 mb-3">📍 Other Cities</h3>
+            <ul class="space-y-1.5">
+              <% cities.filter(c => c.slug !== city.slug).forEach(c => { %>
+                <li><a href="/hvac/<%= c.slug %>/" class="text-sm text-hvac-600 hover:text-hvac-800 hover:underline"><%= c.fullName %></a></li>
+              <% }) %>
+            </ul>
+          </div>
+
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "HVAC & AC Repair Guide for <%= city.fullName %>",
+    "description": "<%= city.metaDescription %>",
+    "url": "<%= baseUrl %>/<%= city.slug %>/",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "<%= baseUrl %>/"},
+        {"@type": "ListItem", "position": 2, "name": "<%= city.fullName %>", "item": "<%= baseUrl %>/<%= city.slug %>/"}
+      ]
+    }
+  }
+  </script>
+
+<%- include('../partials/footer', { cities, services, analyticsSlug }) %>

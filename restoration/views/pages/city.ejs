@@ -1,0 +1,160 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, services, analyticsSlug }) %>
+
+  <!-- Breadcrumbs -->
+  <div class="bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <nav class="text-sm text-gray-500" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-1" itemscope itemtype="https://schema.org/BreadcrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/restoration/" itemprop="item" class="hover:text-water-600"><span itemprop="name">Home</span></a>
+            <meta itemprop="position" content="1" />
+          </li>
+          <span class="mx-1">&rsaquo;</span>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span class="text-slate-800 font-medium" itemprop="name"><%= city.fullName %></span>
+            <meta itemprop="position" content="2" />
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- City Hero -->
+  <section class="bg-gradient-to-br from-water-700 to-slate-900 text-white py-12 md:py-16" style="background:linear-gradient(to bottom right,#1d4ed8,#0f172a)">
+    <div class="max-w-6xl mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-heading">
+        Water Damage Restoration in <span class="text-water-300"><%= city.fullName %></span>
+      </h1>
+      <p class="text-xl text-water-100 max-w-3xl mb-6"><%= city.heroText %></p>
+      <div class="flex flex-wrap gap-4 text-sm">
+        <span class="bg-white/10 px-3 py-1.5 rounded-full"><%= city.climate %></span>
+        <span class="bg-white/10 px-3 py-1.5 rounded-full">Avg: <%= city.avgRestorationCost %></span>
+        <span class="bg-white/10 px-3 py-1.5 rounded-full"><%= city.region %></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+        <!-- City Intro -->
+        <div class="prose-content bg-white rounded-xl p-6 md:p-8 shadow-sm border border-slate-200 mb-8">
+          <h2 class="text-2xl font-bold text-slate-800 mb-4">About Water Damage Restoration in <%= city.name %></h2>
+          <%- city.intro %>
+          <p class="mt-4 text-gray-600"><strong>Seasonal note:</strong> <%= city.seasonalNotes %></p>
+        </div>
+
+        <%- include('../partials/ad-inline') %>
+
+        <!-- Common Services in This City -->
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-slate-200 mb-8">
+          <h2 class="text-2xl font-bold text-slate-800 mb-6">Common Restoration Services in <%= city.name %></h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <% cityServices.forEach(s => { %>
+              <a href="/restoration/services/<%= s.slug %>/" class="flex items-start gap-3 p-4 rounded-lg hover:bg-water-50 border border-slate-100 hover:border-water-300 transition-all group">
+                <span class="text-2xl"><%= s.icon %></span>
+                <div>
+                  <h3 class="font-semibold text-slate-800 group-hover:text-water-700 text-sm"><%= s.name %></h3>
+                  <p class="text-xs text-gray-500 mt-0.5"><%= s.urgencyLevel %></p>
+                  <p class="text-xs text-water-600 font-medium mt-1"><%= s.avgCost %></p>
+                </div>
+              </a>
+            <% }) %>
+          </div>
+        </div>
+
+        <!-- City Articles -->
+        <% if (cityArticles.length > 0) { %>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Guides for <%= city.fullName %></h2>
+            <div class="space-y-4">
+              <% cityArticles.forEach(a => { %>
+                <article class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md hover:border-slate-300 transition-all group">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="text-xs text-gray-400"><%= a.readTime %></span>
+                  </div>
+                  <h3 class="font-bold text-lg text-slate-800 group-hover:text-water-700 mb-2">
+                    <a href="/restoration/<%= a.city %>/<%= a.slug %>/"><%= a.title %></a>
+                  </h3>
+                  <p class="text-gray-600 text-sm"><%= a.excerpt %></p>
+                </article>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+
+        <%- include('../partials/ad-adsterra') %>
+
+        <!-- FAQ Schema -->
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-slate-200 mb-8">
+          <h2 class="text-2xl font-bold text-slate-800 mb-6">Frequently Asked Questions</h2>
+          <div class="space-y-4" itemscope itemtype="https://schema.org/FAQPage">
+            <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 class="font-semibold text-slate-800 mb-2" itemprop="name">How much does water damage restoration cost in <%= city.name %>?</h3>
+              <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                <p class="text-gray-600 text-sm" itemprop="text">Water damage restoration in <%= city.fullName %> typically costs between <%= city.avgRestorationCost %>, depending on the extent of damage, water category, and materials affected. Mold remediation, if required, adds $1,500–$5,000 to the total.</p>
+              </div>
+            </div>
+            <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 class="font-semibold text-slate-800 mb-2" itemprop="name">How quickly should I call a restoration company after water damage?</h3>
+              <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                <p class="text-gray-600 text-sm" itemprop="text">Within 24 hours — ideally within 4 hours. Mold begins growing in 24–48 hours, and delay allows moisture to migrate further into structural materials, increasing both cost and the likelihood that contents and structural elements will be non-salvageable.</p>
+              </div>
+            </div>
+            <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 class="font-semibold text-slate-800 mb-2" itemprop="name">Does homeowner's insurance cover water damage in <%= city.name %>?</h3>
+              <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                <p class="text-gray-600 text-sm" itemprop="text">Standard homeowner's insurance covers sudden and accidental water damage from internal sources (burst pipes, appliance failures, roof leaks). It does NOT cover flood damage from external water sources — that requires separate flood insurance. Slow or gradual leaks are typically also excluded.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <%- include('../partials/affiliate-cta') %>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="lg:col-span-1">
+        <%- include('../partials/ad-sidebar') %>
+        <%- include('../partials/affiliate-cta-sidebar') %>
+
+        <!-- Quick Facts Card -->
+        <div class="bg-water-50 rounded-xl p-6 border border-water-200 mt-6">
+          <h3 class="font-bold text-slate-800 mb-4">Quick Facts: <%= city.name %></h3>
+          <ul class="space-y-3 text-sm">
+            <li class="flex justify-between"><span class="text-gray-600">Avg restoration cost:</span><span class="font-medium text-slate-800"><%= city.avgRestorationCost %></span></li>
+            <li class="flex justify-between"><span class="text-gray-600">Region:</span><span class="font-medium text-slate-800"><%= city.region %></span></li>
+            <li><span class="text-gray-600">Seasonal risk:</span><p class="text-slate-700 mt-1"><%= city.seasonalNotes %></p></li>
+          </ul>
+        </div>
+
+        <!-- Other Cities -->
+        <div class="bg-white rounded-xl p-6 border border-slate-200 mt-6">
+          <h3 class="font-bold text-slate-800 mb-4">Other Cities</h3>
+          <ul class="space-y-2">
+            <% cities.filter(c => c.slug !== city.slug).forEach(c => { %>
+              <li><a href="/restoration/<%= c.slug %>/" class="text-water-600 hover:text-water-800 text-sm font-medium"><%= c.fullName %> &rarr;</a></li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Water Damage Restoration in <%= city.fullName %>",
+    "description": "<%= city.metaDescription %>",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Sunbelt Restoration Guide",
+      "url": "https://sunbeltrestorationguide.com"
+    }
+  }
+  </script>
+
+<%- include('../partials/footer', { cities, services, analyticsSlug }) %>

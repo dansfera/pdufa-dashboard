@@ -1,0 +1,130 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, pests, analyticsSlug }) %>
+
+  <!-- Breadcrumbs -->
+  <div class="bg-white border-b border-earth-200">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <nav class="text-sm text-gray-500" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-sunbelt-600">Home</a>
+        <span class="mx-2">&rsaquo;</span>
+        <span class="text-earth-800 font-medium"><%= city.fullName %></span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- City Hero -->
+  <section class="bg-gradient-to-br from-earth-700 to-earth-900 text-white py-12 md:py-16" style="background:linear-gradient(to bottom right,#5e4625,#2d1f10)">
+    <div class="max-w-6xl mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-heading">
+        Pest Control in <span class="text-sunbelt-400"><%= city.fullName %></span>
+      </h1>
+      <p class="text-xl text-earth-200 max-w-3xl mb-6"><%= city.heroText %></p>
+      <div class="flex flex-wrap gap-4 text-sm">
+        <span class="bg-white/10 px-3 py-1.5 rounded-full"><%= city.climate %></span>
+        <span class="bg-white/10 px-3 py-1.5 rounded-full">Avg: <%= city.avgPestControlCost %></span>
+        <span class="bg-white/10 px-3 py-1.5 rounded-full"><%= city.region %></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+        <!-- City Intro -->
+        <div class="prose-content bg-white rounded-xl p-6 md:p-8 shadow-sm border border-earth-200 mb-8">
+          <h2 class="text-2xl font-bold text-earth-800 mb-4">About Pest Control in <%= city.name %></h2>
+          <%- city.intro %>
+          <p class="mt-4 text-gray-600"><strong>Seasonal note:</strong> <%= city.seasonalNotes %></p>
+        </div>
+
+        <%- include('../partials/ad-inline') %>
+
+        <!-- Common Pests in This City -->
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-earth-200 mb-8">
+          <h2 class="text-2xl font-bold text-earth-800 mb-6">Common Pests in <%= city.name %></h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <% cityPests.forEach(p => { %>
+              <a href="/pests/<%= p.slug %>/" class="flex items-start gap-3 p-4 rounded-lg hover:bg-earth-50 border border-earth-100 hover:border-earth-300 transition-all group">
+                <span class="text-2xl"><%= p.icon %></span>
+                <div>
+                  <h3 class="font-semibold text-earth-800 group-hover:text-sunbelt-700"><%= p.name %></h3>
+                  <p class="text-xs text-gray-500">Danger: <%= p.dangerLevel %> &bull; Peak: <%= p.seasonalPeak %></p>
+                  <p class="text-xs text-gray-400 mt-1">Treatment: <%= p.avgTreatmentCost %></p>
+                </div>
+              </a>
+            <% }) %>
+          </div>
+        </div>
+
+        <!-- City Articles -->
+        <% if (cityArticles.length > 0) { %>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-earth-800 mb-6">Guides for <%= city.fullName %></h2>
+            <div class="space-y-4">
+              <% cityArticles.forEach(a => { %>
+                <article class="bg-white rounded-xl p-6 shadow-sm border border-earth-200 hover:shadow-md hover:border-earth-300 transition-all group">
+                  <div class="flex items-center gap-2 mb-2">
+                    <% a.categories.forEach(cat => { %>
+                      <% const catPest = pests.find(p => p.slug === cat); %>
+                      <% if (catPest) { %>
+                        <span class="text-xs bg-earth-100 text-earth-600 px-2 py-0.5 rounded-full"><%= catPest.icon %> <%= catPest.name %></span>
+                      <% } %>
+                    <% }) %>
+                    <span class="text-xs text-gray-400"><%= a.readTime %></span>
+                  </div>
+                  <h3 class="font-bold text-lg text-earth-800 group-hover:text-sunbelt-700 mb-2">
+                    <a href="/<%= a.city %>/<%= a.slug %>/"><%= a.title %></a>
+                  </h3>
+                  <p class="text-gray-600 text-sm"><%= a.excerpt %></p>
+                </article>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+
+        <%- include('../partials/ad-adsterra') %>
+
+        <!-- Cost Overview -->
+        <div class="bg-sunbelt-50 rounded-xl p-6 md:p-8 border border-sunbelt-200">
+          <h2 class="text-xl font-bold text-earth-800 mb-3">Pest Control Costs in <%= city.name %></h2>
+          <p class="text-gray-700 mb-4">Average pest control costs in <%= city.fullName %> range from <strong><%= city.avgPestControlCost %></strong> per treatment, depending on the type of pest and severity of infestation.</p>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li class="flex items-start gap-2"><span class="text-sunbelt-500 flex-shrink-0">&#10003;</span> One-time treatments typically cost $100&ndash;$300</li>
+            <li class="flex items-start gap-2"><span class="text-sunbelt-500 flex-shrink-0">&#10003;</span> Monthly plans range from $40&ndash;$70/month</li>
+            <li class="flex items-start gap-2"><span class="text-sunbelt-500 flex-shrink-0">&#10003;</span> Annual contracts offer the best per-visit value</li>
+            <li class="flex items-start gap-2"><span class="text-sunbelt-500 flex-shrink-0">&#10003;</span> Specialized treatments (termites, bed bugs) cost more</li>
+          </ul>
+        </div>
+
+        <%- include('../partials/affiliate-cta') %>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <%- include('../partials/ad-sidebar') %>
+        <%- include('../partials/affiliate-cta-sidebar') %>
+
+        <!-- Other Cities -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-earth-200 mt-6">
+          <h3 class="font-semibold text-earth-800 mb-4">Other Cities</h3>
+          <ul class="space-y-2">
+            <% cities.filter(c => c.slug !== city.slug).forEach(c => { %>
+              <li><a href="/<%= c.slug %>/" class="text-sunbelt-600 hover:text-sunbelt-800 text-sm font-medium"><%= c.fullName %></a></li>
+            <% }) %>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- City Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Place",
+    "name": "<%= city.fullName %>",
+    "description": "<%= city.metaDescription %>"
+  }
+  </script>
+
+<%- include('../partials/footer', { cities, pests, analyticsSlug }) %>

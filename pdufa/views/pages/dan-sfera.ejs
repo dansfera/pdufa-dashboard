@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dan Sfera — Investor</title>
+  <meta name="description" content="Dan Sfera — 20+ years in clinical trials. Seed investor backing early-stage healthcare technology companies at the intersection of clinical operations, AI, and FDA strategy." />
+  <link rel="canonical" href="<%= BASE_URL %>/dan-sfera" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Dan Sfera — Investor" />
+  <meta property="og:description" content="20+ years in clinical trials. Seed investor in healthcare technology at the intersection of clinical operations, AI, and FDA strategy." />
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="<%= BASE_URL %>/dan-sfera" />
+  <meta property="og:site_name" content="Dan Sfera" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@dansfera" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Lato:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #f5f0e8;
+      color: #1a1a1a;
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Tokens ── */
+    :root {
+      --cream:      #f5f0e8;
+      --cream-dark: #ede6d6;
+      --ink:        #1a1a1a;
+      --ink-muted:  #4a4a4a;
+      --ink-light:  #888;
+      --teal:       #00897b;
+      --teal-light: #4db6ac;
+      --dark-bg:    #111714;
+      --dark-card:  #1a2420;
+      --dark-border:#2a3a35;
+      --gold:       #c9a84c;
+      --serif:      'DM Serif Display', Georgia, serif;
+      --display:    'Bebas Neue', sans-serif;
+      --mono:       'DM Mono', monospace;
+    }
+
+    /* ── Site Nav ── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(245, 240, 232, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .site-nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .site-nav a.nav-home {
+      font-family: var(--display);
+      font-size: 18px;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .site-nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .site-nav-links a {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .site-nav-links a:hover { color: var(--teal); }
+
+    /* ── Hero Header ── */
+    .hero {
+      background: var(--dark-bg);
+      color: #f0ede6;
+      padding: 80px 24px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: -120px;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(0,137,123,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 20px;
+    }
+    .hero-name {
+      font-family: var(--display);
+      font-size: clamp(64px, 10vw, 120px);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(20px, 3vw, 28px);
+      color: rgba(240, 237, 230, 0.65);
+      margin-bottom: 36px;
+      max-width: 600px;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 5px 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 2px;
+      color: rgba(240,237,230,0.7);
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* ── Section Wrapper ── */
+    .section {
+      padding: 80px 24px;
+    }
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-family: var(--display);
+      font-size: clamp(36px, 6vw, 64px);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 40px;
+    }
+
+    /* ── Thesis ── */
+    .thesis-section { background: var(--cream); }
+    .thesis-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .thesis-quote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.45;
+      color: var(--ink);
+      border-left: 3px solid var(--teal);
+      padding-left: 24px;
+    }
+    .thesis-text p {
+      font-size: 16px;
+      color: var(--ink-muted);
+      margin-bottom: 16px;
+    }
+    .thesis-text p:last-child { margin-bottom: 0; }
+
+    /* ── What I Back ── */
+    .back-section { background: var(--cream-dark); }
+    .back-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 8px;
+    }
+    .back-card {
+      background: var(--cream);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 4px;
+      padding: 28px;
+    }
+    .back-card-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+    .back-card-title {
+      font-family: var(--display);
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .back-card-text {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.65;
+    }
+
+    /* ── Edge / Dark section ── */
+    .edge-section {
+      background: var(--dark-bg);
+      color: #f0ede6;
+    }
+    .edge-section .section-heading { color: #fff; }
+    .edge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1px;
+      background: var(--dark-border);
+      border: 1px solid var(--dark-border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .edge-cell {
+      background: var(--dark-card);
+      padding: 32px 28px;
+    }
+    .edge-num {
+      font-family: var(--display);
+      font-size: 52px;
+      letter-spacing: 0.02em;
+      color: var(--teal-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .edge-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(240,237,230,0.4);
+      margin-bottom: 12px;
+    }
+    .edge-desc {
+      font-size: 14px;
+      color: rgba(240,237,230,0.65);
+      line-height: 1.65;
+    }
+
+    /* ── Portfolio ── */
+    .portfolio-section { background: var(--cream); }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 8px;
+    }
+    .portfolio-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 4px;
+      padding: 32px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .portfolio-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .portfolio-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .portfolio-company {
+      font-family: var(--display);
+      font-size: 26px;
+      letter-spacing: 0.03em;
+      color: var(--ink);
+    }
+    .portfolio-stage {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: rgba(0,137,123,0.08);
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+    .portfolio-stage.acquired {
+      color: var(--gold);
+      background: rgba(201,168,76,0.1);
+    }
+    .portfolio-desc {
+      font-size: 14px;
+      color: var(--ink-muted);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .portfolio-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .portfolio-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--ink-light);
+      border: 1px solid rgba(0,0,0,0.1);
+      padding: 2px 9px;
+      border-radius: 2px;
+    }
+
+    /* ── Contact / Dark ── */
+    .contact-section {
+      background: var(--dark-bg);
+      color: #f0ede6;
+    }
+    .contact-section .section-heading { color: #fff; }
+    .contact-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact-intro {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.55;
+      color: rgba(240,237,230,0.8);
+      margin-bottom: 28px;
+    }
+    .contact-note {
+      font-size: 14px;
+      color: rgba(240,237,230,0.45);
+      line-height: 1.7;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 8px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 4px;
+      text-decoration: none;
+      color: #f0ede6;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .contact-link:hover {
+      border-color: var(--teal);
+      background: rgba(0,137,123,0.06);
+    }
+    .contact-link-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .contact-link-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(240,237,230,0.4);
+      margin-bottom: 2px;
+    }
+    .contact-link-value {
+      font-size: 15px;
+      font-weight: 400;
+      color: #f0ede6;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      background: #0c0f0d;
+      color: rgba(240,237,230,0.3);
+      padding: 32px 24px;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+    .site-footer a {
+      color: rgba(240,237,230,0.4);
+      text-decoration: none;
+    }
+    .site-footer a:hover { color: var(--teal-light); }
+    .site-footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ── Divider ── */
+    .ruled {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      margin: 40px 0;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .thesis-body { grid-template-columns: 1fr; gap: 32px; }
+      .contact-body { grid-template-columns: 1fr; gap: 40px; }
+      .edge-grid { grid-template-columns: 1fr; }
+      .site-nav-links { display: none; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 56px 20px 56px; }
+      .section { padding: 56px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Site Nav ── -->
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a href="<%= appBase %>/" class="nav-home">Dan Sfera</a>
+    <ul class="site-nav-links">
+      <li><a href="#thesis">Thesis</a></li>
+      <li><a href="#back">What I Back</a></li>
+      <li><a href="#edge">Edge</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="<%= appBase %>/">← Calendar</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Seed Investor · Clinical Trials Veteran · Biotech Analyst</p>
+    <h1 class="hero-name">DAN<br>SFERA</h1>
+    <p class="hero-title">Backing the infrastructure of clinical medicine — before the rest of the market knows it exists.</p>
+    <div class="hero-badges">
+      <span class="badge">21+ Years Clinical Trials</span>
+      <span class="badge">100K+ Audience</span>
+      <span class="badge">FDA Strategy</span>
+      <span class="badge">Early Stage</span>
+      <span class="badge">Healthcare Technology</span>
+    </div>
+  </div>
+</header>
+
+<!-- ── Thesis ── -->
+<section class="section thesis-section" id="thesis">
+  <div class="section-inner">
+    <p class="section-label">01 — Investment Thesis</p>
+    <h2 class="section-heading">The Thesis</h2>
+    <div class="thesis-body">
+      <div class="thesis-quote">
+        "The next billion-dollar clinical research company will be built by an operator — probably someone who's managed a site. That's not a prediction. That's pattern recognition from 21 years of watching where the real problems actually live."
+      </div>
+      <div class="thesis-text">
+        <p>
+          The clinical trial and regulatory ecosystem is massively under-tooled. I've spent 21 years on the ground — site management, protocol design, FDA interactions, sponsor negotiations. I've watched billion-dollar drugs fail not because the science broke down, but because operations did: data errors, site dropout, patient retention failures, communication gaps that everyone accepted as just part of the job.
+        </p>
+        <p>
+          The normalized workaround is exactly where the biggest companies get built. When everyone treats the pain as inevitable, the person who removes it looks like a miracle worker. Most software in this space was built by people who never ran a trial — Veeva came from Salesforce. The exceptions — Creo, Realtime, Yisa — were built by operators who lived the problems first. That difference shows in the product.
+        </p>
+        <p>
+          Jensen Huang said the new programming language is English. The cost of building has collapsed. The scarcity now isn't technical ability — it's operator knowledge. The accumulated frustration of someone who has been in the room. That intel no VC can buy reading research reports, and no academic framework captures. I write <a href="https://substack.com/@dansfera1" target="_blank" rel="noopener" style="color: var(--teal); text-decoration: none;">a Substack</a> read by 10,000+ retail biotech investors. I build free tools like this PDUFA calendar. My angle is earned from the inside.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── What I Back ── -->
+<section class="section back-section" id="back">
+  <div class="section-inner">
+    <p class="section-label">02 — Focus Areas</p>
+    <h2 class="section-heading">What I Back</h2>
+    <div class="back-grid">
+      <div class="back-card">
+        <div class="back-card-icon">🏥</div>
+        <div class="back-card-title">Clinical Operations</div>
+        <div class="back-card-text">Software and services that make trial sites run better — patient recruitment, data capture, site coordination, and the day-to-day reality of running a clinical study.</div>
+      </div>
+      <div class="back-card">
+        <div class="back-card-icon">🧬</div>
+        <div class="back-card-title">Patient Technology</div>
+        <div class="back-card-text">Tools that put patients at the center. Retention, engagement, remote monitoring, and decentralized trial infrastructure that makes participation actually feasible.</div>
+      </div>
+      <div class="back-card">
+        <div class="back-card-icon">📊</div>
+        <div class="back-card-title">Regulatory Intelligence</div>
+        <div class="back-card-text">Data platforms and AI tools that help sponsors, consultants, and investors understand the FDA's patterns — approval history, CRL analysis, advisory committee trends.</div>
+      </div>
+      <div class="back-card">
+        <div class="back-card-icon">🤖</div>
+        <div class="back-card-title">AI for Drug Development</div>
+        <div class="back-card-text">Intelligent automation that cuts the operational overhead of running trials — not AI that pretends to replace scientists, but AI that handles the work scientists shouldn't be doing.</div>
+      </div>
+      <div class="back-card">
+        <div class="back-card-icon">🔬</div>
+        <div class="back-card-title">Site Networks</div>
+        <div class="back-card-text">Companies building better clinical trial site ecosystems — qualified investigator networks, site readiness infrastructure, and technology that connects sponsors to the right sites faster.</div>
+      </div>
+      <div class="back-card">
+        <div class="back-card-icon">💡</div>
+        <div class="back-card-title">Biotech Enablement</div>
+        <div class="back-card-text">Platform companies that help small biotechs punch above their weight — pre-clinical strategy, IND preparation, FDA meeting support, and early commercial planning.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Edge ── -->
+<section class="section edge-section" id="edge">
+  <div class="section-inner">
+    <p class="section-label" style="color: var(--teal-light);">03 — Why It Matters</p>
+    <h2 class="section-heading">The Edge</h2>
+    <div class="edge-grid">
+      <div class="edge-cell">
+        <div class="edge-num">21+</div>
+        <div class="edge-label">Years on the Ground</div>
+        <div class="edge-desc">Two decades in clinical operations — not finance, not journalism, but actual trial work. Site management, protocol design, FDA interactions, sponsor negotiations. I know what breaks and why. That pattern recognition doesn't come from a spreadsheet.</div>
+      </div>
+      <div class="edge-cell">
+        <div class="edge-num">100K+</div>
+        <div class="edge-label">Life Sciences Investor Audience</div>
+        <div class="edge-desc">A growing audience of retail life sciences investors across <a href="https://youtube.com/dansfera" target="_blank" rel="noopener" style="color: var(--teal-light); text-decoration: none;">YouTube</a> and Substack — tracking PDUFA dates, AdCom transcripts, and clinical trial data seriously. Direct signal from a market segment most VCs ignore.</div>
+      </div>
+      <div class="edge-cell">
+        <div class="edge-num">56+</div>
+        <div class="edge-label">FDA Catalysts Tracked Live</div>
+        <div class="edge-desc">The PDUFA calendar is a passion project — built because I genuinely love tracking small-cap biopharmas and following catalysts. But it's also grounded in operational reality: I understand what sponsors face from the inside, which makes the analysis sharper than what you get from a pure investor lens.</div>
+      </div>
+      <div class="edge-cell">
+        <div class="edge-num" style="font-size: 36px; line-height: 1.1;">Co-Founded</div>
+        <div class="edge-label">Save Our Sites — Industry Conference</div>
+        <div class="edge-desc">Co-founder of <a href="https://www.saveoursites.com" target="_blank" rel="noopener" style="color: var(--teal-light); text-decoration: none;">Save Our Sites</a>, a major industry conference for clinical research sites. Built to address the sustainability crisis facing independent investigator sites — the operational backbone of clinical trials. This isn't an investment thesis. It's something that needs to exist.</div>
+      </div>
+      <div class="edge-cell">
+        <div class="edge-num">Day 1</div>
+        <div class="edge-label">Access at Formation</div>
+        <div class="edge-desc">My network spans founders, site directors, CRO veterans, medical affairs leads, and finance professionals across the clinical research ecosystem. Most of my deal flow comes before a pitch deck exists.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Portfolio ── -->
+<section class="section portfolio-section" id="portfolio">
+  <div class="section-inner">
+    <p class="section-label">04 — Portfolio</p>
+    <h2 class="section-heading">Companies</h2>
+    <div class="portfolio-grid">
+
+      <div class="portfolio-card">
+        <div class="portfolio-card-header">
+          <div class="portfolio-company"><a href="https://joingleam.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Gleam</a></div>
+          <span class="portfolio-stage">Seed</span>
+        </div>
+        <p class="portfolio-desc">Browser extension that automates data entry for clinical research sites. Gleam lets site staff copy source data from any eSource directly into EDC CRFs — fast, accurate, and without the transcription errors that create downstream audit findings. YC S23.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Clinical Operations</span>
+          <span class="portfolio-tag">EDC / eSource</span>
+          <span class="portfolio-tag">Site Tools</span>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-card-header">
+          <div class="portfolio-company"><a href="https://medvector.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">MedVector</a></div>
+          <span class="portfolio-stage">Seed</span>
+        </div>
+        <p class="portfolio-desc">Enables non-investigator treating physicians to host clinical trial appointments from their local practices without becoming investigators. MedVector keeps patients in their trusted provider's office — unlocking a pool of enrolled candidates that traditional site networks can't reach.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Patient Access</span>
+          <span class="portfolio-tag">HCP Recruitment</span>
+          <span class="portfolio-tag">Decentralized Trials</span>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-card-header">
+          <div class="portfolio-company">PatientAce</div>
+          <span class="portfolio-stage">Pre-Seed</span>
+        </div>
+        <p class="portfolio-desc">AI-powered patient navigator for clinical trial recruitment and matching. PatientAce connects patients who qualify for trials with sites actively enrolling — reducing the median time-to-first-patient-in.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Recruitment</span>
+          <span class="portfolio-tag">AI Matching</span>
+          <span class="portfolio-tag">Patient Access</span>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-card-header">
+          <div class="portfolio-company">Save Our Sites</div>
+          <span class="portfolio-stage">Seed</span>
+        </div>
+        <p class="portfolio-desc">Infrastructure and support network for independent clinical trial sites. Site sustainability is a real crisis — qualified investigators are leaving the business. Save Our Sites builds the operational backbone to keep them viable.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Site Networks</span>
+          <span class="portfolio-tag">Site Sustainability</span>
+          <span class="portfolio-tag">Investigator Support</span>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-card-header">
+          <div class="portfolio-company">SelectIQ</div>
+          <span class="portfolio-stage">Seed</span>
+        </div>
+        <p class="portfolio-desc">Data-driven site selection platform for clinical trial sponsors. SelectIQ uses enrollment history, therapeutic area expertise, and real-time capacity data to match sponsors with the sites most likely to deliver.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Site Selection</span>
+          <span class="portfolio-tag">Predictive Analytics</span>
+          <span class="portfolio-tag">CRO Tooling</span>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-card-header">
+          <div class="portfolio-company">VerSatrial <span style="font-size:13px;font-family:var(--mono);font-weight:300;color:var(--gold);">acq. Florence</span></div>
+          <span class="portfolio-stage acquired">Acquired</span>
+        </div>
+        <p class="portfolio-desc">Browser extension providing bookmark management, feasibility tracking, and collaboration tools for clinical research site teams. Built for coordinators managing multiple concurrent studies. Advisory board. Acquired by Florence Healthcare in September 2023.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Site Tools</span>
+          <span class="portfolio-tag">Feasibility</span>
+          <span class="portfolio-tag">Site Ops</span>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-card-header">
+          <div class="portfolio-company"><a href="https://coordinare.co" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Coordinare</a></div>
+          <span class="portfolio-stage">Seed</span>
+        </div>
+        <p class="portfolio-desc">Clinical trial site coordination platform built to reduce the operational drag that stalls enrollment. Coordinare streamlines communication, task management, and document workflows between sites and sponsors — targeting the coordination failures that account for most preventable trial delays.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Site Coordination</span>
+          <span class="portfolio-tag">Trial Operations</span>
+          <span class="portfolio-tag">Sponsor-Site</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<section class="section contact-section" id="contact">
+  <div class="section-inner">
+    <p class="section-label" style="color: var(--teal-light);">05 — Get in Touch</p>
+    <h2 class="section-heading">Contact</h2>
+    <div class="contact-body">
+      <div>
+        <p class="contact-intro">If you're building at the intersection of clinical operations, regulatory strategy, or patient technology — I want to hear from you.</p>
+        <p class="contact-note">
+          I look at pre-seed and seed rounds. I'm most useful to founders who need someone who's actually been in the room — FDA meetings, site visits, sponsor negotiations, protocol reviews. Check/wire amounts are modest; time and pattern-matching are the real value.<br><br>
+          If you're a GP, LP, or angel looking to co-invest alongside deep domain expertise in clinical research, I'm interested in that conversation too. Capital that knows what it's backing moves faster and makes better decisions. This space needs more of it.<br><br>
+          Twitter DMs and email are the fastest paths in.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a href="https://x.com/dansfera" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">𝕏</span>
+          <div>
+            <div class="contact-link-label">Twitter / X</div>
+            <div class="contact-link-value">@dansfera</div>
+          </div>
+        </a>
+        <a href="mailto:dan@theclinicaltrialsguru.com" class="contact-link">
+          <span class="contact-link-icon">✉</span>
+          <div>
+            <div class="contact-link-label">Email</div>
+            <div class="contact-link-value">dan@theclinicaltrialsguru.com</div>
+          </div>
+        </a>
+        <a href="https://substack.com/@dansfera1" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">📰</span>
+          <div>
+            <div class="contact-link-label">Newsletter</div>
+            <div class="contact-link-value">Substack — @dansfera1</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/dansfera/" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">🔗</span>
+          <div>
+            <div class="contact-link-label">LinkedIn</div>
+            <div class="contact-link-value">linkedin.com/in/dansfera</div>
+          </div>
+        </a>
+        <a href="https://www.yumaclinicaltrials.com" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">🏥</span>
+          <div>
+            <div class="contact-link-label">Clinical Site</div>
+            <div class="contact-link-value">Yuma Clinical Trials</div>
+          </div>
+        </a>
+        <a href="https://www.theclinicaltrialsguru.com" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">🔬</span>
+          <div>
+            <div class="contact-link-label">CRO / Consulting</div>
+            <div class="contact-link-value">DSCS CRO</div>
+          </div>
+        </a>
+        <a href="<%= appBase %>/" class="contact-link">
+          <span class="contact-link-icon">📅</span>
+          <div>
+            <div class="contact-link-label">Free Resource</div>
+            <div class="contact-link-value">PDUFA Calendar — dansfera.com</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="site-footer">
+  <nav class="site-footer-nav">
+    <a href="<%= appBase %>/">PDUFA Calendar</a>
+    <a href="<%= appBase %>/about">About the Calendar</a>
+    <a href="<%= appBase %>/dan-sfera">About Dan Sfera</a>
+    <a href="https://substack.com/@dansfera1" target="_blank" rel="noopener">Substack</a>
+    <a href="https://x.com/dansfera" target="_blank" rel="noopener">Twitter / X</a>
+  </nav>
+  <p>© <%= new Date().getFullYear() %> Dan Sfera. Nothing on this site constitutes investment advice.</p>
+</footer>
+
+</body>
+</html>

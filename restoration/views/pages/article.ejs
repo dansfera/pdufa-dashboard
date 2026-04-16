@@ -1,0 +1,141 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, services, analyticsSlug }) %>
+
+  <!-- Breadcrumbs -->
+  <div class="bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <nav class="text-sm text-gray-500" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-1 flex-wrap" itemscope itemtype="https://schema.org/BreadcrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/restoration/" itemprop="item" class="hover:text-water-600"><span itemprop="name">Home</span></a>
+            <meta itemprop="position" content="1" />
+          </li>
+          <span class="mx-1">&rsaquo;</span>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/restoration/<%= city.slug %>/" itemprop="item" class="hover:text-water-600"><span itemprop="name"><%= city.fullName %></span></a>
+            <meta itemprop="position" content="2" />
+          </li>
+          <span class="mx-1">&rsaquo;</span>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span class="text-slate-800 font-medium line-clamp-1" itemprop="name"><%= article.title %></span>
+            <meta itemprop="position" content="3" />
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+      <!-- Main Article -->
+      <article class="lg:col-span-2" itemscope itemtype="https://schema.org/Article">
+        <!-- Article Header -->
+        <header class="mb-8">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <a href="/restoration/<%= city.slug %>/" class="text-xs font-semibold uppercase tracking-wider text-water-600 bg-water-50 px-2 py-0.5 rounded-full hover:bg-water-100"><%= city.fullName %></a>
+            <span class="text-xs text-gray-400"><%= article.readTime %></span>
+            <span class="text-xs text-gray-400">Updated <time datetime="<%= article.updatedDate %>" itemprop="dateModified"><%= article.updatedDate %></time></span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold text-slate-800 leading-tight font-heading mb-4" itemprop="headline">
+            <%= article.title %>
+          </h1>
+          <p class="text-xl text-gray-600 leading-relaxed" itemprop="description"><%= article.excerpt %></p>
+        </header>
+
+        <!-- Article Content -->
+        <div class="article-content bg-white rounded-xl p-6 md:p-10 shadow-sm border border-slate-200 mb-8" itemprop="articleBody">
+          <%- article.content %>
+        </div>
+
+        <%- include('../partials/ad-inline') %>
+        <%- include('../partials/affiliate-cta') %>
+
+        <%- include('../partials/ad-adsterra') %>
+
+        <!-- Author Bio -->
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 mb-8">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-water-600 flex items-center justify-center text-white font-bold text-lg">S</div>
+            <div>
+              <p class="font-semibold text-slate-800"><%= article.author %></p>
+              <p class="text-sm text-gray-500">Restoration & insurance information for Sunbelt homeowners</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Related Articles -->
+        <% if (related && related.length > 0) { %>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Related Guides</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <% related.forEach(r => { %>
+                <% const relCity = cities.find(c => c.slug === r.city); %>
+                <article class="bg-white rounded-xl p-5 shadow-sm border border-slate-200 hover:shadow-md hover:border-slate-300 transition-all group">
+                  <% if (relCity) { %>
+                    <span class="text-xs font-semibold text-water-600 bg-water-50 px-2 py-0.5 rounded-full"><%= relCity.fullName %></span>
+                  <% } %>
+                  <h3 class="font-bold text-slate-800 group-hover:text-water-700 mt-2">
+                    <a href="/restoration/<%= r.city %>/<%= r.slug %>/"><%= r.title %></a>
+                  </h3>
+                </article>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <%- include('../partials/ad-sidebar') %>
+
+        <!-- Quick Emergency Box -->
+        <div class="bg-red-50 rounded-xl p-6 border border-red-200 mt-6">
+          <h3 class="font-bold text-red-700 mb-3">🚨 Emergency?</h3>
+          <p class="text-sm text-red-600 mb-3">Water damage requires immediate action. Mold begins in 24–48 hours.</p>
+          <ul class="text-sm text-red-700 space-y-1.5">
+            <li>✓ Shut off water source</li>
+            <li>✓ Document with photos/video</li>
+            <li>✓ Call insurance company</li>
+            <li>✓ Call IICRC-certified restorer</li>
+          </ul>
+        </div>
+
+        <!-- City Guide Link -->
+        <div class="bg-white rounded-xl p-6 border border-slate-200 mt-6">
+          <h3 class="font-bold text-slate-800 mb-3">Local Guide: <%= city.fullName %></h3>
+          <p class="text-sm text-gray-600 mb-4"><%= city.climate %></p>
+          <a href="/restoration/<%= city.slug %>/" class="block w-full text-center bg-water-600 hover:bg-water-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors text-sm">View <%= city.name %> Guide &rarr;</a>
+        </div>
+
+        <!-- Other Cities -->
+        <div class="bg-white rounded-xl p-6 border border-slate-200 mt-6">
+          <h3 class="font-bold text-slate-800 mb-4">Other Cities</h3>
+          <ul class="space-y-2">
+            <% cities.filter(c => c.slug !== city.slug).forEach(c => { %>
+              <li><a href="/restoration/<%= c.slug %>/" class="text-water-600 hover:text-water-800 text-sm font-medium"><%= c.fullName %> &rarr;</a></li>
+            <% }) %>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Article Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "<%= article.metaTitle.replace(/"/g, '&quot;') %>",
+    "description": "<%= article.metaDescription.replace(/"/g, '&quot;') %>",
+    "datePublished": "<%= article.publishDate %>",
+    "dateModified": "<%= article.updatedDate %>",
+    "author": { "@type": "Organization", "name": "<%= article.author %>" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Sunbelt Restoration Guide",
+      "url": "https://sunbeltrestorationguide.com"
+    }
+  }
+  </script>
+
+<%- include('../partials/footer', { cities, services, analyticsSlug }) %>

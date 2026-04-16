@@ -1,0 +1,87 @@
+node_modules/
+.env
+.env.*
+.DS_Store
+
+# Polsia safety
+.claude/
+.claude.json
+.claude.json.*
+projects/
+*.jsonl
+
+# Polsia agent debug/session files (prevent rebase conflicts)
+debug/
+shell-snapshots/
+todos/
+session-env/
+
+# Polsia safety (auto-injected)
+.env
+.env.*
+.claude/
+projects/
+*.jsonl
+
+# Polsia safety (auto-injected)
+.env
+.env.*
+.claude/
+projects/
+*.jsonl
+
+# Polsia safety (auto-injected)
+.env
+.env.*
+.claude/
+projects/
+*.jsonl
+
+# Polsia safety (auto-injected)
+.env
+.env.*
+.claude/
+projects/
+*.jsonl
+
+# Polsia safety (auto-injected)
+.env
+.env.*
+.claude/
+projects/
+*.jsonl
+
+# Polsia safety (auto-injected)
+.env
+.env.*
+.claude/
+projects/
+*.jsonl
+
+# Polsia safety (auto-injected)
+.env
+.env.*
+.claude/
+projects/
+*.jsonl
+
+# Polsia safety (auto-injected)
+.env
+.env.*
+.claude/
+projects/
+*.jsonl
+
+# Polsia safety (auto-injected)
+.env
+.env.*
+.claude/
+projects/
+*.jsonl
+
+# Polsia safety (auto-injected)
+.env
+.env.*
+.claude/
+projects/
+*.jsonl

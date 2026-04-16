@@ -1,0 +1,186 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, services, analyticsSlug }) %>
+
+  <!-- Breadcrumbs -->
+  <div class="bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <nav class="text-sm text-gray-500" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-1" itemscope itemtype="https://schema.org/BreadcrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/restoration/" itemprop="item" class="hover:text-water-600"><span itemprop="name">Home</span></a>
+            <meta itemprop="position" content="1" />
+          </li>
+          <span class="mx-1">&rsaquo;</span>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span class="text-gray-400" itemprop="name">Services</span>
+            <meta itemprop="position" content="2" />
+          </li>
+          <span class="mx-1">&rsaquo;</span>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span class="text-slate-800 font-medium" itemprop="name"><%= service.name %></span>
+            <meta itemprop="position" content="3" />
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-water-700 to-slate-900 text-white py-12" style="background:linear-gradient(to bottom right,#1d4ed8,#0f172a)">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-4 mb-4">
+        <span class="text-5xl"><%= service.icon %></span>
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold font-heading"><%= service.name %></h1>
+          <p class="text-water-200 text-lg"><%= service.description %></p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-4 text-sm mt-6">
+        <span class="bg-white/10 px-3 py-1.5 rounded-full">💰 <%= service.avgCost %></span>
+        <span class="bg-white/10 px-3 py-1.5 rounded-full">⏱ <%= service.timeline %></span>
+        <span class="bg-red-500/80 px-3 py-1.5 rounded-full font-semibold">⚡ <%= service.urgencyLevel %></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+
+        <!-- Warning Signs -->
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-red-200 mb-8">
+          <h2 class="text-2xl font-bold text-slate-800 mb-4">⚠️ Warning Signs You Need <%= service.name %></h2>
+          <ul class="space-y-3">
+            <% service.warningSign.forEach(sign => { %>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-0.5 flex-shrink-0">⚠</span>
+                <span class="text-gray-700"><%= sign %></span>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
+
+        <!-- Step-by-Step Process -->
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-slate-200 mb-8">
+          <h2 class="text-2xl font-bold text-slate-800 mb-4">What to Do: Step-by-Step</h2>
+          <ol class="space-y-4">
+            <% service.steps.forEach((step, i) => { %>
+              <li class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-7 h-7 bg-water-600 text-white rounded-full flex items-center justify-center text-sm font-bold"><%= i + 1 %></span>
+                <span class="text-gray-700 pt-0.5"><%= step %></span>
+              </li>
+            <% }) %>
+          </ol>
+        </div>
+
+        <%- include('../partials/ad-inline') %>
+
+        <!-- Cities Where This Is Common -->
+        <% if (serviceCities.length > 0) { %>
+          <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-slate-200 mb-8">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6"><%= service.name %> by City</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <% serviceCities.forEach(c => { %>
+                <a href="/restoration/<%= c.slug %>/" class="flex items-center gap-3 p-4 rounded-lg hover:bg-water-50 border border-slate-100 hover:border-water-300 transition-all group">
+                  <div>
+                    <h3 class="font-semibold text-slate-800 group-hover:text-water-700"><%= c.fullName %></h3>
+                    <p class="text-xs text-gray-500"><%= c.climate %></p>
+                    <p class="text-xs text-water-600 font-medium mt-1">Avg: <%= c.avgRestorationCost %></p>
+                  </div>
+                </a>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+
+        <!-- Related Articles -->
+        <% if (serviceArticles.length > 0) { %>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Related Guides</h2>
+            <div class="space-y-4">
+              <% serviceArticles.forEach(a => { %>
+                <article class="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md hover:border-slate-300 transition-all group">
+                  <h3 class="font-bold text-lg text-slate-800 group-hover:text-water-700 mb-2">
+                    <a href="/restoration/<%= a.city %>/<%= a.slug %>/"><%= a.title %></a>
+                  </h3>
+                  <p class="text-gray-600 text-sm"><%= a.excerpt %></p>
+                </article>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+
+        <%- include('../partials/ad-adsterra') %>
+
+        <!-- FAQ Schema -->
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-slate-200 mb-8">
+          <h2 class="text-2xl font-bold text-slate-800 mb-6">Frequently Asked Questions</h2>
+          <div class="space-y-4" itemscope itemtype="https://schema.org/FAQPage">
+            <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 class="font-semibold text-slate-800 mb-2" itemprop="name">How much does <%= service.name %> cost?</h3>
+              <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                <p class="text-gray-600 text-sm" itemprop="text">The typical cost range for <%= service.name.toLowerCase() %> is <%= service.avgCost %>. Costs vary based on the scope of damage, affected materials, water category, and whether mold remediation is also required.</p>
+              </div>
+            </div>
+            <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 class="font-semibold text-slate-800 mb-2" itemprop="name">How long does <%= service.name %> take?</h3>
+              <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                <p class="text-gray-600 text-sm" itemprop="text">Timeline: <%= service.timeline %>. Structural drying alone typically takes 3–7 days using industrial equipment. Complex jobs involving mold remediation or reconstruction take longer.</p>
+              </div>
+            </div>
+            <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+              <h3 class="font-semibold text-slate-800 mb-2" itemprop="name">Does insurance cover <%= service.name.toLowerCase() %>?</h3>
+              <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                <p class="text-gray-600 text-sm" itemprop="text">Coverage depends on the cause of damage. Sudden and accidental water events (burst pipes, appliance failures) are typically covered by standard homeowner's insurance. Flood damage requires separate flood insurance. Gradual or maintenance-related damage is generally excluded.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <%- include('../partials/affiliate-cta') %>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="lg:col-span-1">
+        <%- include('../partials/ad-sidebar') %>
+        <%- include('../partials/affiliate-cta-sidebar') %>
+
+        <!-- Service Quick Facts -->
+        <div class="bg-water-50 rounded-xl p-6 border border-water-200 mt-6">
+          <h3 class="font-bold text-slate-800 mb-4"><%= service.icon %> Quick Facts</h3>
+          <ul class="space-y-3 text-sm">
+            <li><span class="text-gray-500 block">Average Cost</span><span class="font-semibold text-water-700"><%= service.avgCost %></span></li>
+            <li><span class="text-gray-500 block">Timeline</span><span class="font-medium text-slate-800"><%= service.timeline %></span></li>
+            <li><span class="text-gray-500 block">Urgency</span><span class="font-medium text-red-600"><%= service.urgencyLevel %></span></li>
+          </ul>
+        </div>
+
+        <!-- All Services -->
+        <div class="bg-white rounded-xl p-6 border border-slate-200 mt-6">
+          <h3 class="font-bold text-slate-800 mb-4">All Service Types</h3>
+          <ul class="space-y-2">
+            <% services.filter(s => s.slug !== service.slug).forEach(s => { %>
+              <li><a href="/restoration/services/<%= s.slug %>/" class="text-water-600 hover:text-water-800 text-sm"><%= s.icon %> <%= s.name %></a></li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "<%= service.name %>",
+    "description": "<%= service.description %>",
+    "provider": {
+      "@type": "Organization",
+      "name": "Sunbelt Restoration Guide",
+      "url": "https://sunbeltrestorationguide.com"
+    }
+  }
+  </script>
+
+<%- include('../partials/footer', { cities, services, analyticsSlug }) %>

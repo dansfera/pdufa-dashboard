@@ -1,0 +1,57 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, services, analyticsSlug }) %>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-water-700 to-slate-900 text-white py-12 md:py-16" style="background:linear-gradient(to bottom right,#1d4ed8,#0f172a)">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold font-heading mb-4">About Sunbelt Restoration Guide</h1>
+      <p class="text-xl text-water-100">Trusted water damage restoration information for Sunbelt homeowners — no sales pitches, no contractor referrals, just real information.</p>
+    </div>
+  </section>
+
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <div class="bg-white rounded-xl p-8 md:p-12 shadow-sm border border-slate-200 prose-content">
+
+      <h2>Our Mission</h2>
+      <p>Water damage is one of the most stressful and expensive events a homeowner can face. In the critical first hours after a flood, burst pipe, or sewage backup, most people are searching frantically for answers: What do I do first? How much will this cost? Will insurance pay? Who should I call?</p>
+
+      <p>Sunbelt Restoration Guide was built to answer those questions clearly, quickly, and without an ulterior motive. We don't sell restoration services. We don't refer contractors for a fee. We don't have a financial relationship with any restoration company. Our only goal is to give homeowners in the Sunbelt region the accurate, actionable information they need to navigate water damage events successfully.</p>
+
+      <h2>What We Cover</h2>
+      <p>We focus on the Sunbelt region — Yuma, Tucson, Tulsa, Greenville, Kansas City, and expanding to Dallas, Houston, and Charlotte — because these markets have distinct water damage risk profiles that differ from the rest of the country. Monsoon flooding, ice storm pipe bursts, hurricane rainfall, basement flooding from clay-heavy soils: each city has its own patterns, and generic national guides don't capture them adequately.</p>
+
+      <p>Our content covers:</p>
+      <ul>
+        <li>Real cost ranges for water damage restoration, mold remediation, and related services</li>
+        <li>Step-by-step guidance for common water damage scenarios</li>
+        <li>Insurance claim navigation — what's covered, what's not, and how to file successfully</li>
+        <li>How to evaluate and hire certified restoration contractors</li>
+        <li>Seasonal risk information specific to each city's climate</li>
+      </ul>
+
+      <h2>Our Standards</h2>
+      <p>All content on Sunbelt Restoration Guide is based on:</p>
+      <ul>
+        <li><strong>IICRC S500 and S520 standards</strong> — the industry benchmarks for water damage and mold remediation</li>
+        <li><strong>EPA guidelines</strong> for mold and indoor air quality</li>
+        <li><strong>FEMA flood mapping data</strong> and National Flood Insurance Program resources</li>
+        <li><strong>Local market data</strong> for cost ranges, compiled from contractor pricing in each covered city</li>
+      </ul>
+
+      <h2>A Note on Independence</h2>
+      <p>This site is supported by display advertising (Google AdSense). This means we earn revenue when visitors view ads — completely independent of any restoration company or contractor. We do not have paid relationships with any restoration service, and our editorial content is never influenced by advertisers.</p>
+
+      <p>If you see an ad for a restoration company on this site, that company has no editorial relationship with us — they are simply purchasing display advertising through Google's advertising network, the same network that serves ads across millions of websites.</p>
+
+      <h2>Coverage Area</h2>
+      <p>Phase 1 cities (currently live):</p>
+      <ul>
+        <% cities.forEach(c => { %>
+          <li><%= c.fullName %></li>
+        <% }) %>
+      </ul>
+      <p>Phase 2 expansion cities (coming soon): Dallas, TX &bull; Houston, TX &bull; Charlotte, NC</p>
+
+    </div>
+  </div>
+
+<%- include('../partials/footer', { cities, services, analyticsSlug }) %>

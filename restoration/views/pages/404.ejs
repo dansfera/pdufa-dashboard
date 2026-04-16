@@ -1,0 +1,25 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, services, analyticsSlug }) %>
+
+  <div class="max-w-4xl mx-auto px-4 py-24 text-center">
+    <div class="text-6xl mb-6">💧</div>
+    <h1 class="text-4xl font-bold text-slate-800 mb-4 font-heading">Page Not Found</h1>
+    <p class="text-xl text-gray-600 mb-8">This page doesn't exist — but our water damage guides do. Find what you need below.</p>
+
+    <div class="flex flex-wrap justify-center gap-3 mb-10">
+      <a href="/restoration/" class="px-5 py-2.5 bg-water-600 hover:bg-water-700 text-white rounded-full font-medium transition-colors">Go to Home</a>
+      <% cities.forEach(c => { %>
+        <a href="/restoration/<%= c.slug %>/" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full font-medium transition-colors"><%= c.fullName %></a>
+      <% }) %>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+      <% services.slice(0, 6).forEach(s => { %>
+        <a href="/restoration/services/<%= s.slug %>/" class="bg-white rounded-xl p-4 border border-slate-200 hover:border-water-300 hover:shadow-sm transition-all text-center">
+          <span class="text-2xl block mb-1"><%= s.icon %></span>
+          <span class="text-sm font-medium text-slate-700"><%= s.name %></span>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+
+<%- include('../partials/footer', { cities, services, analyticsSlug }) %>

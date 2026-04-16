@@ -1,0 +1,31 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, services, analyticsSlug, baseUrl }) %>
+
+  <div class="flex flex-col items-center justify-center py-24 px-4 text-center">
+    <div class="text-6xl mb-6">🌡️</div>
+    <h1 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4 font-heading">Page Not Found</h1>
+    <p class="text-xl text-gray-600 mb-8 max-w-lg">This page seems to have gone offline — kind of like your AC on a 110°F day. Let's get you back on track.</p>
+    <div class="flex flex-col sm:flex-row gap-4 mb-12">
+      <a href="/hvac/" class="bg-hvac-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-hvac-700 transition-colors">
+        Back to HVAC Guide Home
+      </a>
+    </div>
+
+    <!-- Popular Links -->
+    <div class="max-w-2xl w-full">
+      <h2 class="text-lg font-semibold text-slate-800 mb-4">Popular Pages</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <% cities.forEach(c => { %>
+          <a href="/hvac/<%= c.slug %>/" class="bg-white rounded-lg p-3 border border-slate-200 hover:border-hvac-300 hover:bg-hvac-50 transition-all text-sm font-medium text-slate-700 hover:text-hvac-700">
+            <%= c.fullName %>
+          </a>
+        <% }) %>
+        <% services.slice(0, 3).forEach(s => { %>
+          <a href="/hvac/services/<%= s.slug %>/" class="bg-white rounded-lg p-3 border border-slate-200 hover:border-hvac-300 hover:bg-hvac-50 transition-all text-sm font-medium text-slate-700 hover:text-hvac-700">
+            <%= s.icon %> <%= s.name %>
+          </a>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+
+<%- include('../partials/footer', { cities, services, analyticsSlug }) %>

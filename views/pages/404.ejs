@@ -1,0 +1,23 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, pests, analyticsSlug }) %>
+
+  <div class="flex-1 flex items-center justify-center py-20">
+    <div class="text-center px-4">
+      <span class="text-6xl mb-6 block">&#127964;</span>
+      <h1 class="text-4xl font-bold text-earth-800 mb-4 font-heading">Page Not Found</h1>
+      <p class="text-xl text-gray-600 mb-8 max-w-md mx-auto">Looks like this page has wandered off into the desert. Let's get you back on track.</p>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <a href="/" class="px-6 py-3 bg-sunbelt-500 hover:bg-sunbelt-600 text-white rounded-lg font-medium transition-colors">Go Home</a>
+        <a href="/about" class="px-6 py-3 bg-earth-200 hover:bg-earth-300 text-earth-800 rounded-lg font-medium transition-colors">About Us</a>
+      </div>
+      <div class="mt-12">
+        <h2 class="text-lg font-semibold text-earth-700 mb-4">Popular City Guides</h2>
+        <div class="flex flex-wrap gap-2 justify-center">
+          <% cities.forEach(c => { %>
+            <a href="/<%= c.slug %>/" class="px-4 py-2 bg-white border border-earth-200 hover:border-sunbelt-400 rounded-full text-sm text-earth-700 hover:text-sunbelt-700 transition-colors"><%= c.fullName %></a>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%- include('../partials/footer', { cities, pests, analyticsSlug }) %>

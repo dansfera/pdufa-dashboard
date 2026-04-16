@@ -1,0 +1,131 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, services, analyticsSlug }) %>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-water-700 via-water-800 to-slate-900 text-white py-16 md:py-24" style="background:linear-gradient(to bottom right,#1d4ed8,#1e40af,#0f172a)">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight font-heading">
+        Your Complete <span class="text-water-300">Sunbelt</span> Water Damage Restoration Guide
+      </h1>
+      <p class="text-xl md:text-2xl text-water-100 max-w-3xl mx-auto mb-10">
+        Expert restoration information for homeowners across the Sunbelt region. Local guides, insurance tips, and real cost data — no sales pitches, just answers.
+      </p>
+
+      <!-- City Selector -->
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <% cities.forEach(c => { %>
+          <a href="/restoration/<%= c.slug %>/" class="px-5 py-2.5 bg-white/10 hover:bg-water-500 hover:text-white rounded-full text-white font-medium transition-all duration-200 backdrop-blur-sm border border-white/20 hover:border-water-500">
+            <%= c.fullName %>
+          </a>
+        <% }) %>
+      </div>
+      <p class="text-water-300 text-sm">5 cities covered &bull; 9 service categories &bull; Updated for 2026</p>
+    </div>
+  </section>
+
+  <!-- Emergency Banner -->
+  <div class="bg-red-600 text-white py-3 px-4 text-center text-sm font-medium">
+    ⚡ <strong>Water damage emergency?</strong> Act within 24 hours to prevent mold — call an IICRC-certified restoration company immediately.
+  </div>
+
+  <!-- Featured Articles -->
+  <section class="py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-8 font-heading">Latest Guides</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% articles.slice(0, 6).forEach(a => { %>
+          <% const articleCity = cities.find(c => c.slug === a.city); %>
+          <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md hover:border-slate-300 transition-all duration-200 overflow-hidden group relative">
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-xs font-semibold uppercase tracking-wider text-water-600 bg-water-50 px-2 py-0.5 rounded-full">
+                  <%= articleCity ? articleCity.fullName : '' %>
+                </span>
+                <span class="text-xs text-gray-400"><%= a.readTime %></span>
+              </div>
+              <h3 class="font-bold text-lg text-slate-800 group-hover:text-water-700 transition-colors mb-2 line-clamp-2">
+                <a href="/restoration/<%= a.city %>/<%= a.slug %>/" class="after:absolute after:inset-0 relative">
+                  <%= a.title %>
+                </a>
+              </h3>
+              <p class="text-gray-600 text-sm line-clamp-3"><%= a.excerpt %></p>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <%- include('../partials/ad-inline') %>
+
+  <!-- Cities Section -->
+  <section class="py-12 md:py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-3 font-heading">Browse by City</h2>
+      <p class="text-gray-600 mb-8 max-w-2xl">Get water damage restoration information specific to your area — local risks, seasonal patterns, restoration costs, and insurance tips tailored to your city's climate.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% cities.forEach(c => { %>
+          <a href="/restoration/<%= c.slug %>/" class="block bg-slate-50 rounded-xl p-6 hover:bg-water-50 border border-slate-200 hover:border-water-300 transition-all group">
+            <h3 class="text-xl font-bold text-slate-800 group-hover:text-water-700 mb-2"><%= c.fullName %></h3>
+            <p class="text-gray-600 text-sm mb-3"><%= c.climate %></p>
+            <p class="text-sm font-semibold text-water-600 mb-3">Avg: <%= c.avgRestorationCost %></p>
+            <div class="flex flex-wrap gap-1.5">
+              <% c.topServices.slice(0, 3).forEach(svc => { %>
+                <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full"><%= svc.replace(/-/g, ' ') %></span>
+              <% }) %>
+            </div>
+            <p class="text-water-600 text-sm font-medium mt-3 group-hover:text-water-700">View local guide &rarr;</p>
+          </a>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <%- include('../partials/ad-adsterra') %>
+
+  <!-- Services Section -->
+  <section class="py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-3 font-heading">Browse by Service Type</h2>
+      <p class="text-gray-600 mb-8 max-w-2xl">Learn about specific restoration services — what's involved, typical costs, warning signs, and what your insurance is likely to cover.</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+        <% services.forEach(s => { %>
+          <a href="/restoration/services/<%= s.slug %>/" class="block bg-white rounded-xl p-5 hover:shadow-md border border-slate-200 hover:border-water-300 transition-all group">
+            <span class="text-3xl block mb-2"><%= s.icon %></span>
+            <h3 class="font-semibold text-slate-800 group-hover:text-water-700 text-sm leading-tight"><%= s.name %></h3>
+            <p class="text-xs text-gray-500 mt-1"><%= s.shortDesc %></p>
+            <p class="text-xs text-water-600 font-medium mt-2"><%= s.avgCost %></p>
+          </a>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <%- include('../partials/ad-adsterra') %>
+
+  <!-- High CPC Note / Trust Section -->
+  <section class="py-12 bg-slate-100 border-t border-slate-200">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4 font-heading">Why Trust Sunbelt Restoration Guide?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        <div class="p-4">
+          <div class="text-3xl mb-3">🔬</div>
+          <h3 class="font-semibold text-slate-800 mb-2">IICRC-Standard Information</h3>
+          <p class="text-gray-600 text-sm">Our guides follow IICRC S500 and S520 standards — the industry benchmarks for water damage and mold remediation.</p>
+        </div>
+        <div class="p-4">
+          <div class="text-3xl mb-3">📍</div>
+          <h3 class="font-semibold text-slate-800 mb-2">Locally Focused</h3>
+          <p class="text-gray-600 text-sm">Each guide is tailored to your city's specific climate, flood risks, and seasonal water damage patterns.</p>
+        </div>
+        <div class="p-4">
+          <div class="text-3xl mb-3">🚫</div>
+          <h3 class="font-semibold text-slate-800 mb-2">No Sales Pitches</h3>
+          <p class="text-gray-600 text-sm">We don't sell restoration services. Just honest information to help you make informed decisions after water damage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<%- include('../partials/footer', { cities, services, analyticsSlug }) %>

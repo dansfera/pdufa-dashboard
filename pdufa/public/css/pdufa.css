@@ -1,0 +1,1645 @@
+/* ============================================
+   PDUFA Tracker — Dan Sfera
+   Dark biotech theme
+   ============================================ */
+
+:root {
+  --bg-primary: #080c18;
+  --bg-secondary: #101829;
+  --bg-card: #131d30;
+  --bg-card-hover: #1a2540;
+  --border: #1e2d4a;
+  --border-light: #243552;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-teal: #00d4aa;
+  --accent-teal-dim: rgba(0, 212, 170, 0.12);
+  --accent-blue: #3b82f6;
+  --accent-blue-dim: rgba(59, 130, 246, 0.12);
+  --accent-purple: #a855f7;
+  --color-green: #22c55e;
+  --color-green-dim: rgba(34, 197, 94, 0.12);
+  --color-yellow: #f59e0b;
+  --color-yellow-dim: rgba(245, 158, 11, 0.15);
+  --color-red: #ef4444;
+  --color-red-dim: rgba(239, 68, 68, 0.15);
+  --color-orange: #f97316;
+  --color-orange-dim: rgba(249, 115, 22, 0.12);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent-teal); text-decoration: none; }
+a:hover { color: #00f0c0; text-decoration: underline; }
+
+/* ============ HEADER ============ */
+.site-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 900;
+  color: #0a0e1a;
+  flex-shrink: 0;
+}
+
+.logo-text { font-size: 17px; font-weight: 700; }
+.logo-sub { font-size: 11px; color: var(--text-muted); font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; }
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-nav a {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.header-nav a:hover { color: var(--text-primary); }
+
+.header-cta {
+  background: var(--accent-teal);
+  color: #0a0e1a !important;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  transition: background 0.15s !important;
+}
+.header-cta:hover { background: #00f0c0 !important; text-decoration: none !important; }
+
+/* ============ HERO ============ */
+.hero {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, #0d1526 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 20px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,212,170,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-teal-dim);
+  border: 1px solid rgba(0, 212, 170, 0.25);
+  color: var(--accent-teal);
+  padding: 4px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  margin: 0 0 12px;
+  font-size: clamp(24px, 5vw, 40px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.hero h1 span { color: var(--accent-teal); }
+
+.hero-sub {
+  color: var(--text-secondary);
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto 28px;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.stat-item { text-align: center; }
+.stat-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent-teal);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+/* ============ AD SLOT ============ */
+.ad-slot {
+  background: var(--bg-card);
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-slot-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+}
+
+/* ============ MAIN LAYOUT ============ */
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 20px;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .main-container { grid-template-columns: 1fr; }
+}
+
+/* ============ CALENDAR TABLE ============ */
+.calendar-section {}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.section-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 4px 0 0;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-tab:hover, .filter-tab.active {
+  background: var(--accent-teal-dim);
+  border-color: rgba(0, 212, 170, 0.4);
+  color: var(--accent-teal);
+}
+
+/* PDUFA Entry Cards */
+.pdufa-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pdufa-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  transition: all 0.15s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.pdufa-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-light);
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+/* Status border on left */
+.pdufa-card.overdue { border-left: 3px solid var(--color-red); }
+.pdufa-card.today { border-left: 3px solid var(--color-orange); }
+.pdufa-card.this-week { border-left: 3px solid var(--color-yellow); }
+.pdufa-card.this-month { border-left: 3px solid var(--accent-blue); }
+.pdufa-card.upcoming { border-left: 3px solid var(--accent-teal); }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 16px;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .card-grid { grid-template-columns: 1fr; gap: 10px; }
+}
+
+.card-date-block {
+  text-align: center;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.pdufa-card.overdue .card-date-block { background: var(--color-red-dim); border-color: rgba(239,68,68,0.3); }
+.pdufa-card.today .card-date-block { background: var(--color-orange-dim); border-color: rgba(249,115,22,0.3); }
+.pdufa-card.this-week .card-date-block { background: var(--color-yellow-dim); border-color: rgba(245,158,11,0.3); }
+.pdufa-card.this-month .card-date-block { background: var(--accent-blue-dim); border-color: rgba(59,130,246,0.3); }
+
+.date-month {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.date-day {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-primary);
+}
+.date-year {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.days-pill {
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 4px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.pdufa-card.overdue .days-pill { background: var(--color-red-dim); color: var(--color-red); }
+.pdufa-card.today .days-pill { background: var(--color-orange-dim); color: var(--color-orange); }
+.pdufa-card.this-week .days-pill { background: var(--color-yellow-dim); color: var(--color-yellow); }
+.pdufa-card.this-month .days-pill { background: var(--accent-blue-dim); color: var(--accent-blue); }
+.pdufa-card.upcoming .days-pill { background: var(--accent-teal-dim); color: var(--accent-teal); }
+
+.card-info { min-width: 0; }
+
+.card-drug-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-brand {
+  font-size: 13px;
+  color: var(--accent-teal);
+  font-weight: 500;
+}
+
+.card-company {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 4px 0;
+}
+
+.card-cashtag {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-blue);
+  background: var(--accent-blue-dim);
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.card-indication {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.badge-priority { background: var(--color-orange-dim); color: var(--color-orange); border: 1px solid rgba(249,115,22,0.25); }
+.badge-breakthrough { background: rgba(168,85,247,0.12); color: var(--accent-purple); border: 1px solid rgba(168,85,247,0.25); }
+.badge-orphan { background: rgba(100,116,139,0.15); color: #94a3b8; border: 1px solid rgba(100,116,139,0.25); }
+.badge-fasttrack { background: var(--accent-blue-dim); color: var(--accent-blue); border: 1px solid rgba(59,130,246,0.25); }
+.badge-accelerated { background: var(--color-green-dim); color: var(--color-green); border: 1px solid rgba(34,197,94,0.25); }
+.badge-rare-ped { background: rgba(236,72,153,0.1); color: #ec4899; border: 1px solid rgba(236,72,153,0.25); }
+.badge-nda { background: var(--accent-teal-dim); color: var(--accent-teal); border: 1px solid rgba(0,212,170,0.25); }
+
+.card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.poa-score {
+  text-align: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  min-width: 80px;
+}
+
+.poa-num {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.poa-high { color: var(--color-green); }
+.poa-med { color: var(--color-yellow); }
+.poa-low { color: var(--color-red); }
+
+.poa-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.poa-sublabel {
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.review-type-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.review-priority { background: var(--color-orange-dim); color: var(--color-orange); }
+.review-standard { background: rgba(100,116,139,0.15); color: var(--text-secondary); }
+
+/* ============ SIDEBAR ============ */
+.sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+.sidebar-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.sidebar-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* About Dan card */
+.dan-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #fff;
+  font-weight: 800;
+}
+
+.dan-name { font-size: 16px; font-weight: 700; margin: 0 0 2px; }
+.dan-title { font-size: 12px; color: var(--text-muted); margin: 0 0 12px; }
+.dan-bio { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px; }
+
+.social-links { display: flex; flex-direction: column; gap: 8px; }
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.social-link:hover { border-color: var(--border-light); color: var(--text-primary); text-decoration: none; }
+.social-link-icon { font-size: 16px; width: 20px; text-align: center; }
+
+/* Legend card */
+.legend-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.legend-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary); }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.legend-dot.overdue { background: var(--color-red); }
+.legend-dot.today { background: var(--color-orange); }
+.legend-dot.this-week { background: var(--color-yellow); }
+.legend-dot.this-month { background: var(--accent-blue); }
+.legend-dot.upcoming { background: var(--accent-teal); }
+
+/* Methodology card */
+.method-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.method-table td { padding: 6px 0; color: var(--text-secondary); }
+.method-table td:first-child { font-weight: 600; color: var(--text-primary); width: 55%; }
+.method-table td:last-child { color: var(--color-green); font-weight: 700; text-align: right; }
+.method-note { font-size: 11px; color: var(--text-muted); margin-top: 10px; line-height: 1.4; }
+
+/* ============ FOOTER ============ */
+.site-footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  padding: 32px 20px;
+  margin-top: 60px;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-tagline {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  font-size: 13px;
+  text-decoration: none;
+}
+.footer-links a:hover { color: var(--accent-teal); text-decoration: none; }
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.footer-disclaimer {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 12px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+
+/* ============ DRUG DETAIL ============ */
+.drug-detail {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px 20px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 13px;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+.back-link:hover { color: var(--accent-teal); text-decoration: none; }
+
+.drug-header {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 20px;
+}
+
+.drug-header-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 600px) {
+  .drug-header-grid { grid-template-columns: 1fr; }
+}
+
+.drug-title { font-size: 26px; font-weight: 800; margin: 0 0 4px; }
+.drug-subtitle { font-size: 15px; color: var(--accent-teal); font-weight: 600; margin-bottom: 8px; }
+.drug-company-line { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; }
+
+.drug-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.meta-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+}
+
+.meta-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.meta-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.drug-poa-large {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  min-width: 140px;
+}
+
+.poa-large-num {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.poa-large-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.poa-large-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.drug-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.drug-section h2 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.drug-indication-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.drug-notes {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.disclaimer-box {
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ============ ABOUT PAGE ============ */
+.about-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.about-page h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+.about-page h2 { font-size: 20px; font-weight: 700; color: var(--accent-teal); margin-top: 36px; margin-bottom: 10px; }
+.about-page p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px; }
+.about-page ul { color: var(--text-secondary); line-height: 1.8; padding-left: 24px; margin-bottom: 16px; }
+.about-page strong { color: var(--text-primary); }
+
+/* ============ 404 PAGE ============ */
+.page-404 {
+  max-width: 500px;
+  margin: 80px auto;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.page-404 h1 { font-size: 80px; font-weight: 900; color: var(--accent-teal); margin: 0; line-height: 1; }
+.page-404 h2 { font-size: 24px; font-weight: 700; margin: 12px 0 8px; }
+.page-404 p { color: var(--text-secondary); margin-bottom: 24px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.btn-primary {
+  background: var(--accent-teal);
+  color: #0a0e1a;
+}
+.btn-primary:hover { background: #00f0c0; text-decoration: none; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 640px) {
+  .card-right { display: none; }
+  .hero { padding: 32px 16px 28px; }
+  .hero-stats { gap: 20px; }
+  .header-nav { gap: 14px; }
+}
+
+@media (max-width: 480px) {
+  .header-nav .hide-mobile { display: none; }
+}
+
+/* ============ CATALYST TYPE SYSTEM ============ */
+
+/* Catalyst type pills in hero */
+.catalyst-type-pills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0 24px;
+}
+
+.catalyst-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.catalyst-pill-icon { font-size: 14px; }
+.catalyst-pill-label { font-size: 12px; font-weight: 600; }
+.catalyst-pill-count {
+  background: rgba(0,0,0,0.25);
+  padding: 1px 7px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.catalyst-pill-teal  { background: var(--accent-teal-dim);  color: var(--accent-teal);    border-color: rgba(0,212,170,0.3); }
+.catalyst-pill-orange{ background: var(--color-orange-dim); color: var(--color-orange);   border-color: rgba(249,115,22,0.3); }
+.catalyst-pill-purple{ background: rgba(168,85,247,0.12);   color: var(--accent-purple);  border-color: rgba(168,85,247,0.3); }
+.catalyst-pill-green { background: var(--color-green-dim);  color: var(--color-green);    border-color: rgba(34,197,94,0.3); }
+.catalyst-pill-blue  { background: var(--accent-blue-dim);  color: var(--accent-blue);    border-color: rgba(59,130,246,0.3); }
+
+/* Filter tab color variants */
+.filter-tab-teal:hover,  .filter-tab-teal.active  { background: var(--accent-teal-dim);  border-color: rgba(0,212,170,0.4);    color: var(--accent-teal); }
+.filter-tab-orange:hover,.filter-tab-orange.active { background: var(--color-orange-dim); border-color: rgba(249,115,22,0.4);   color: var(--color-orange); }
+.filter-tab-purple:hover,.filter-tab-purple.active { background: rgba(168,85,247,0.12);   border-color: rgba(168,85,247,0.4);   color: var(--accent-purple); }
+.filter-tab-green:hover, .filter-tab-green.active  { background: var(--color-green-dim);  border-color: rgba(34,197,94,0.4);    color: var(--color-green); }
+.filter-tab-blue:hover,  .filter-tab-blue.active   { background: var(--accent-blue-dim);  border-color: rgba(59,130,246,0.4);   color: var(--accent-blue); }
+
+/* Catalyst type badge on cards */
+.catalyst-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  border: 1px solid transparent;
+}
+
+.catalyst-badge-icon { font-size: 11px; }
+.catalyst-badge-text { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+
+.catalyst-badge-pdufa         { background: var(--accent-teal-dim);  color: var(--accent-teal);   border-color: rgba(0,212,170,0.2); }
+.catalyst-badge-adcom         { background: var(--color-orange-dim); color: var(--color-orange);  border-color: rgba(249,115,22,0.2); }
+.catalyst-badge-trial_readout { background: rgba(168,85,247,0.12);   color: var(--accent-purple); border-color: rgba(168,85,247,0.2); }
+.catalyst-badge-conference    { background: var(--color-green-dim);  color: var(--color-green);   border-color: rgba(34,197,94,0.2); }
+.catalyst-badge-earnings      { background: var(--accent-blue-dim);  color: var(--accent-blue);   border-color: rgba(59,130,246,0.2); }
+
+/* Card border colors by catalyst type */
+.pdufa-card.catalyst-teal   { border-left: 3px solid var(--accent-teal); }
+.pdufa-card.catalyst-orange { border-left: 3px solid var(--color-orange); }
+.pdufa-card.catalyst-purple { border-left: 3px solid var(--accent-purple); }
+.pdufa-card.catalyst-green  { border-left: 3px solid var(--color-green); }
+.pdufa-card.catalyst-blue   { border-left: 3px solid var(--accent-blue); }
+
+/* Override with time-urgency when imminent */
+.pdufa-card.overdue   { border-left: 3px solid var(--color-red) !important; }
+.pdufa-card.today     { border-left: 3px solid var(--color-orange) !important; }
+.pdufa-card.this-week { border-left: 3px solid var(--color-yellow) !important; }
+
+/* Phase badge for trial readout cards (shown instead of PoA) */
+.catalyst-phase-badge {
+  text-align: center;
+  background: rgba(168,85,247,0.1);
+  border: 1px solid rgba(168,85,247,0.25);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  min-width: 80px;
+}
+
+.phase-badge-text {
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent-purple);
+}
+
+.phase-badge-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Catalyst type legend in sidebar */
+.catalyst-legend-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.catalyst-legend-teal  { background: var(--accent-teal-dim); }
+.catalyst-legend-orange{ background: var(--color-orange-dim); }
+.catalyst-legend-purple{ background: rgba(168,85,247,0.12); }
+.catalyst-legend-green { background: var(--color-green-dim); }
+.catalyst-legend-blue  { background: var(--accent-blue-dim); }
+
+/* Catalyst-specific badge styles */
+.badge-adcom     { background: var(--color-orange-dim); color: var(--color-orange); border: 1px solid rgba(249,115,22,0.25); }
+.badge-phase3    { background: rgba(168,85,247,0.12);   color: var(--accent-purple); border: 1px solid rgba(168,85,247,0.25); }
+.badge-phase2    { background: rgba(168,85,247,0.08);   color: #c084fc; border: 1px solid rgba(168,85,247,0.2); }
+.badge-conference{ background: var(--color-green-dim);  color: var(--color-green); border: 1px solid rgba(34,197,94,0.25); }
+.badge-earnings  { background: var(--accent-blue-dim);  color: var(--accent-blue); border: 1px solid rgba(59,130,246,0.25); }
+
+/* ============ LOADING STATE ============ */
+.loading-skeleton {
+  background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+  height: 80px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ============ STATUS COUNT PILLS ============ */
+.count-summary {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.count-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.count-pill-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+
+/* ============ COMPREHENSIVE MOBILE FIXES ============ */
+
+/* Filter tabs: horizontally scrollable on mobile */
+@media (max-width: 640px) {
+  .filter-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+    gap: 6px;
+  }
+  .filter-tabs::-webkit-scrollbar { display: none; }
+  .filter-tab { white-space: nowrap; flex-shrink: 0; }
+
+  /* Section header stacks on mobile */
+  .section-header { flex-direction: column; align-items: flex-start; }
+
+  /* Card grid: smarter layout on mobile */
+  .card-grid {
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+  }
+
+  /* Drug detail: tighter padding */
+  .drug-detail { padding: 16px 14px; }
+
+  /* Drug header: full-width */
+  .drug-header { padding: 18px 16px; }
+
+  /* Meta grid: smaller min size */
+  .drug-meta-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+  .meta-item { padding: 10px 12px; }
+
+  /* Hero: tighter */
+  .hero { padding: 28px 14px 22px; }
+  .hero-sub { font-size: 14px; }
+
+  /* Sidebar hidden by default on mobile — show below content */
+  .sidebar { margin-top: 8px; }
+
+  /* Count pills: wrapping */
+  .count-summary { gap: 6px; }
+  .count-pill { font-size: 11px; padding: 3px 10px; }
+}
+
+/* Comment form: stack to 1 column on mobile */
+@media (max-width: 600px) {
+  .comment-form-fields {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* On phones, make financial data 1-col */
+@media (max-width: 480px) {
+  .drug-title { font-size: 20px; }
+  .drug-subtitle { font-size: 13px; }
+
+  /* Hero stats: 2x2 grid */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    text-align: center;
+  }
+
+  /* Catalyst pills: 2 per row */
+  .catalyst-type-pills { gap: 6px; }
+  .catalyst-pill { padding: 5px 10px; font-size: 11px; }
+
+  /* Financials grid: 1 col */
+  .fin-grid-2col {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Back link / breadcrumb: visible */
+  .back-link { font-size: 12px; margin-bottom: 14px; }
+}
+
+/* ============ FDA OUTCOME DISPLAY ============ */
+
+.outcome-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.outcome-banner-approved {
+  background: var(--color-green-dim);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: var(--color-green);
+}
+
+.outcome-banner-crl {
+  background: var(--color-red-dim);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: var(--color-red);
+}
+
+.outcome-banner-delayed {
+  background: var(--color-yellow-dim);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: var(--color-yellow);
+}
+
+.outcome-banner-withdrawn {
+  background: rgba(100, 116, 139, 0.15);
+  border: 1px solid rgba(100, 116, 139, 0.3);
+  color: var(--text-secondary);
+}
+
+.outcome-banner-icon { font-size: 16px; }
+
+.outcome-banner-text { flex: 1; }
+
+.outcome-banner-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+  margin-bottom: 1px;
+}
+
+.outcome-banner-value { font-size: 14px; font-weight: 700; line-height: 1.2; }
+
+.outcome-banner-notes {
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* Drug detail page: FDA decision section */
+.fda-decision-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+.fda-decision-section h2 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.outcome-result-large {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: var(--radius);
+}
+
+.outcome-result-large-approved {
+  background: var(--color-green-dim);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.outcome-result-large-crl {
+  background: var(--color-red-dim);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.outcome-result-large-delayed {
+  background: var(--color-yellow-dim);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.outcome-result-large-unknown {
+  background: rgba(100, 116, 139, 0.1);
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.outcome-result-icon { font-size: 28px; flex-shrink: 0; }
+
+.outcome-result-body { flex: 1; min-width: 0; }
+
+.outcome-result-verdict {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.outcome-result-verdict-approved { color: var(--color-green); }
+.outcome-result-verdict-crl { color: var(--color-red); }
+.outcome-result-verdict-delayed { color: var(--color-yellow); }
+.outcome-result-verdict-unknown { color: var(--text-secondary); }
+
+.outcome-result-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.outcome-result-notes {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* Calendar card: outcome inline badge */
+.card-outcome-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.card-outcome-approved {
+  background: var(--color-green-dim);
+  color: var(--color-green);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.card-outcome-crl {
+  background: var(--color-red-dim);
+  color: var(--color-red);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.card-outcome-delayed {
+  background: var(--color-yellow-dim);
+  color: var(--color-yellow);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.card-outcome-unknown {
+  background: rgba(100, 116, 139, 0.15);
+  color: var(--text-muted);
+  border: 1px solid rgba(100, 116, 139, 0.25);
+}
+
+/* =============================================
+   SUBSTACK CTA COMPONENTS
+   ============================================= */
+
+/* --- Sticky banner (above calendar filters) --- */
+.substack-banner {
+  background: linear-gradient(135deg, rgba(45,212,191,0.12) 0%, rgba(45,212,191,0.06) 100%);
+  border: 1px solid rgba(45,212,191,0.25);
+  border-radius: var(--radius);
+  margin: 0 0 20px;
+  padding: 14px 18px;
+  position: relative;
+  transition: opacity 0.3s, max-height 0.3s;
+  overflow: hidden;
+}
+.substack-banner.hidden {
+  display: none;
+}
+.substack-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.substack-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+.substack-banner-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.substack-banner-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.substack-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.substack-banner-cta {
+  display: inline-block;
+  background: var(--accent-teal);
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.substack-banner-cta:hover {
+  opacity: 0.85;
+}
+.substack-banner-dismiss {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.substack-banner-dismiss:hover {
+  color: var(--text-secondary);
+}
+/* After dismiss: show a small inline link in nav (toggled by JS) */
+.substack-nav-mini {
+  display: none;
+  font-size: 11px;
+  color: var(--accent-teal);
+  text-decoration: none;
+  padding: 2px 8px;
+  border: 1px solid rgba(45,212,191,0.3);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.substack-nav-mini.visible {
+  display: inline-block;
+}
+
+/* --- End-of-page newsletter CTA block --- */
+.newsletter-cta {
+  margin: 32px 0 8px;
+  padding: 32px 24px;
+  background: linear-gradient(135deg, rgba(45,212,191,0.1) 0%, rgba(45,212,191,0.04) 100%);
+  border: 1px solid rgba(45,212,191,0.2);
+  border-radius: var(--radius);
+  text-align: center;
+}
+.newsletter-cta-emoji {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.newsletter-cta-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+.newsletter-cta-sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+.newsletter-cta-btn {
+  display: inline-block;
+  background: var(--accent-teal);
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.newsletter-cta-btn:hover {
+  opacity: 0.85;
+}
+
+/* --- Drug page inline CTA (after financial card) --- */
+.drug-newsletter-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(45,212,191,0.1) 0%, rgba(45,212,191,0.04) 100%);
+  border: 1px solid rgba(45,212,191,0.2);
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+}
+.drug-newsletter-cta span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.drug-newsletter-cta a {
+  display: inline-block;
+  background: var(--accent-teal);
+  color: #000;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 16px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+.drug-newsletter-cta a:hover {
+  opacity: 0.85;
+}
+
+/* ============================================
+   UPCOMING THIS WEEK — Featured Catalyst Cards
+   ============================================ */
+
+.featured-week {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 8px;
+}
+
+.featured-week-inner {
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.06) 0%, rgba(59, 130, 246, 0.04) 100%);
+  border: 1px solid rgba(0, 212, 170, 0.15);
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.featured-week-header {
+  margin-bottom: 20px;
+}
+
+.featured-week-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.featured-week-icon {
+  font-size: 22px;
+}
+
+.featured-week-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-teal);
+  background: var(--accent-teal-dim);
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+}
+
+.featured-week-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Card grid — horizontal scroll on mobile, grid on desktop */
+.featured-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.featured-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+/* Top accent stripe colors by catalyst type */
+.featured-card.catalyst-teal::before { background: var(--accent-teal); }
+.featured-card.catalyst-orange::before { background: var(--color-orange); }
+.featured-card.catalyst-purple::before { background: var(--accent-purple); }
+.featured-card.catalyst-green::before { background: var(--color-green); }
+.featured-card.catalyst-blue::before { background: var(--accent-blue); }
+
+.featured-card:hover {
+  border-color: var(--border-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.featured-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.featured-card-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Type badge colors */
+.featured-card-type.catalyst-badge-pdufa { background: var(--accent-teal-dim); color: var(--accent-teal); }
+.featured-card-type.catalyst-badge-adcom { background: var(--color-orange-dim); color: var(--color-orange); }
+.featured-card-type.catalyst-badge-trial_readout { background: rgba(168, 85, 247, 0.12); color: var(--accent-purple); }
+.featured-card-type.catalyst-badge-conference { background: var(--color-green-dim); color: var(--color-green); }
+.featured-card-type.catalyst-badge-earnings { background: var(--accent-blue-dim); color: var(--accent-blue); }
+
+/* Countdown pill */
+.featured-card-countdown {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.countdown-today {
+  background: var(--color-red-dim);
+  color: var(--color-red);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.countdown-imminent {
+  background: var(--color-orange-dim);
+  color: var(--color-orange);
+}
+
+.countdown-soon {
+  background: var(--color-yellow-dim);
+  color: var(--color-yellow);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  50% { box-shadow: 0 0 12px 2px rgba(239, 68, 68, 0.25); }
+}
+
+.featured-card-drug {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.featured-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.featured-card-ticker {
+  font-weight: 700;
+  color: var(--accent-teal);
+}
+
+.featured-card-company {
+  color: var(--text-muted);
+}
+
+.featured-card-stakes {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.featured-card-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.featured-card-date-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.featured-card-poa {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-teal);
+  background: var(--accent-teal-dim);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Mobile: stack cards vertically, full width */
+@media (max-width: 640px) {
+  .featured-week {
+    padding: 0 12px 8px;
+  }
+
+  .featured-week-inner {
+    padding: 16px;
+  }
+
+  .featured-week-title {
+    font-size: 17px;
+  }
+
+  .featured-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .featured-card {
+    padding: 14px;
+  }
+
+  .featured-card-drug {
+    font-size: 15px;
+  }
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 641px) and (max-width: 900px) {
+  .featured-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

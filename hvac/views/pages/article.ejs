@@ -1,0 +1,166 @@
+<%- include('../partials/header', { title, metaDescription, canonicalUrl, cities, services, analyticsSlug, baseUrl, ogType: 'article' }) %>
+
+  <!-- Breadcrumbs -->
+  <div class="bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <nav class="text-sm text-gray-500" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-1 flex-wrap" itemscope itemtype="https://schema.org/BreadcrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/hvac/" itemprop="item" class="hover:text-hvac-600"><span itemprop="name">Home</span></a>
+            <meta itemprop="position" content="1" />
+          </li>
+          <span class="mx-1">&rsaquo;</span>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/hvac/<%= city.slug %>/" itemprop="item" class="hover:text-hvac-600"><span itemprop="name"><%= city.fullName %></span></a>
+            <meta itemprop="position" content="2" />
+          </li>
+          <span class="mx-1">&rsaquo;</span>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span class="text-slate-700 font-medium line-clamp-1" itemprop="name"><%= article.title %></span>
+            <meta itemprop="position" content="3" />
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+      <!-- Main Article -->
+      <article class="lg:col-span-2" itemscope itemtype="https://schema.org/Article">
+
+        <!-- Article Header -->
+        <header class="mb-6">
+          <div class="flex items-center gap-2 mb-3">
+            <a href="/hvac/<%= city.slug %>/" class="text-xs font-semibold uppercase tracking-wider text-hvac-600 bg-hvac-50 px-2.5 py-1 rounded-full hover:bg-hvac-100 transition-colors">
+              <%= city.fullName %>
+            </a>
+            <span class="text-xs text-gray-400"><%= article.readTime %></span>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold text-slate-800 leading-tight mb-4 font-heading" itemprop="headline"><%= article.title %></h1>
+          <div class="flex items-center gap-3 text-sm text-gray-500">
+            <span itemprop="author" itemscope itemtype="https://schema.org/Organization">
+              <span itemprop="name"><%= article.author %></span>
+            </span>
+            <span>&bull;</span>
+            <time datetime="<%= article.updatedDate %>" itemprop="dateModified">Updated <%= new Date(article.updatedDate + 'T00:00:00').toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'}) %></time>
+          </div>
+        </header>
+
+        <!-- Article Content -->
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-slate-200 mb-8">
+          <div class="article-content prose-width" itemprop="articleBody">
+            <%- article.content %>
+          </div>
+        </div>
+
+        <%- include('../partials/ad-inline') %>
+        <%- include('../partials/affiliate-cta') %>
+
+        <%- include('../partials/ad-adsterra') %>
+
+        <!-- Related Articles -->
+        <% if (related.length > 0) { %>
+          <div class="mb-8">
+            <h2 class="text-xl font-bold text-slate-800 mb-4 font-heading">Related Guides</h2>
+            <div class="space-y-4">
+              <% related.forEach(a => { %>
+                <% const relCity = cities.find(c => c.slug === a.city); %>
+                <a href="/hvac/<%= a.city %>/<%= a.slug %>/" class="block bg-white rounded-xl p-5 border border-slate-200 hover:border-hvac-300 hover:bg-hvac-50 transition-all group">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="text-xs text-hvac-600 font-semibold"><%= relCity ? relCity.fullName : '' %></span>
+                    <span class="text-xs text-gray-400"><%= a.readTime %></span>
+                  </div>
+                  <h3 class="font-bold text-slate-800 group-hover:text-hvac-700 transition-colors"><%= a.title %></h3>
+                  <p class="text-sm text-gray-600 mt-1 line-clamp-2"><%= a.excerpt %></p>
+                </a>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
+
+        <!-- City Guide CTA -->
+        <div class="bg-hvac-50 rounded-xl p-6 border border-hvac-200 mb-8">
+          <h3 class="font-bold text-hvac-800 mb-2">More HVAC Guides for <%= city.fullName %></h3>
+          <p class="text-hvac-700 text-sm mb-4">Get local cost data, seasonal tips, and city-specific HVAC advice for <%= city.fullName %>.</p>
+          <a href="/hvac/<%= city.slug %>/" class="inline-block bg-hvac-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-hvac-700 transition-colors">
+            View <%= city.fullName %> HVAC Guide &rarr;
+          </a>
+        </div>
+
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <div class="sidebar-sticky space-y-6">
+
+          <!-- City Box -->
+          <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+            <h3 class="font-bold text-slate-800 mb-3">📍 <%= city.fullName %></h3>
+            <p class="text-sm text-gray-600 mb-3"><%= city.climate %></p>
+            <div class="space-y-1.5 text-sm">
+              <% city.topServices.slice(0, 4).forEach(svc => { %>
+                <% const matchedSvc = services.find(s => s.slug === svc); %>
+                <% if (matchedSvc) { %>
+                  <a href="/hvac/services/<%= svc %>/" class="block text-hvac-600 hover:text-hvac-800 hover:underline flex items-center gap-1.5">
+                    <span><%= matchedSvc.icon %></span> <%= matchedSvc.name %>
+                  </a>
+                <% } %>
+              <% }) %>
+            </div>
+            <a href="/hvac/<%= city.slug %>/" class="block mt-3 text-sm font-semibold text-hvac-600 hover:text-hvac-800">Full <%= city.name %> Guide &rarr;</a>
+          </div>
+
+          <%- include('../partials/ad-sidebar') %>
+
+          <!-- All Articles -->
+          <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+            <h3 class="font-bold text-slate-800 mb-3">📚 All HVAC Guides</h3>
+            <ul class="space-y-2">
+              <% articles.filter(a => a.slug !== article.slug).forEach(a => { %>
+                <li>
+                  <a href="/hvac/<%= a.city %>/<%= a.slug %>/" class="text-sm text-hvac-600 hover:text-hvac-800 hover:underline leading-tight block">
+                    <%= a.title %>
+                  </a>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "<%= article.title %>",
+    "description": "<%= article.metaDescription %>",
+    "author": {
+      "@type": "Organization",
+      "name": "Sunbelt HVAC Guide"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Sunbelt HVAC Guide",
+      "url": "<%= baseUrl %>"
+    },
+    "datePublished": "<%= article.publishDate %>",
+    "dateModified": "<%= article.updatedDate %>",
+    "url": "<%= baseUrl %>/<%= article.city %>/<%= article.slug %>/",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "<%= baseUrl %>/"},
+        {"@type": "ListItem", "position": 2, "name": "<%= city.fullName %>", "item": "<%= baseUrl %>/<%= city.slug %>/"},
+        {"@type": "ListItem", "position": 3, "name": "<%= article.title %>", "item": "<%= baseUrl %>/<%= article.city %>/<%= article.slug %>/"}
+      ]
+    }
+  }
+  </script>
+
+<%- include('../partials/footer', { cities, services, analyticsSlug }) %>

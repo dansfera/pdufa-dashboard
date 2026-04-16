@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title : 'Sunbelt Restoration Guide — Water Damage Restoration Information' %></title>
+  <meta name="description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Your trusted source for water damage restoration information across the Sunbelt region. Guides on flood repair, mold remediation, and insurance claims.' %>">
+  <link rel="canonical" href="<%= (typeof baseUrl !== 'undefined' ? baseUrl : 'https://sunbeltrestorationguide.com') + (typeof canonicalUrl !== 'undefined' ? canonicalUrl : '') %>">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : 'Sunbelt Restoration Guide' %>">
+  <meta property="og:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Your trusted source for water damage restoration information across the Sunbelt region.' %>">
+  <meta property="og:type" content="<%= typeof ogType !== 'undefined' ? ogType : 'website' %>">
+  <meta property="og:url" content="<%= (typeof baseUrl !== 'undefined' ? baseUrl : 'https://sunbeltrestorationguide.com') + (typeof canonicalUrl !== 'undefined' ? canonicalUrl : '') %>">
+  <meta property="og:site_name" content="Sunbelt Restoration Guide">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= typeof title !== 'undefined' ? title : 'Sunbelt Restoration Guide' %>">
+  <meta name="twitter:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Your trusted source for water damage restoration information across the Sunbelt region.' %>">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            water: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a'
+            },
+            slate: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              300: '#cbd5e1',
+              400: '#94a3b8',
+              500: '#64748b',
+              600: '#475569',
+              700: '#334155',
+              800: '#1e293b',
+              900: '#0f172a'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            heading: ['Georgia', 'Cambria', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/restoration/css/style.css">
+
+
+  <!-- Google Analytics 4 -->
+  <% if (typeof ga4Id !== 'undefined' && ga4Id) { %>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ga4Id %>"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '<%= ga4Id %>');
+  </script>
+  <% } %>
+
+  <!-- Schema.org WebSite Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Sunbelt Restoration Guide",
+    "url": "https://sunbeltrestorationguide.com",
+    "description": "Expert water damage restoration guides for Sunbelt cities. Flood repair, mold remediation, insurance tips, and cost information.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Sunbelt Restoration Guide",
+      "url": "https://sunbeltrestorationguide.com"
+    }
+  }
+  </script>
+</head>
+<body class="bg-slate-50 text-gray-800 min-h-screen flex flex-col antialiased">
+
+
+  <!-- Site Header & Navigation -->
+  <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="/restoration/" class="flex items-center gap-2 text-xl font-bold text-slate-800 hover:text-slate-600 transition-colors shrink-0">
+          <span class="text-2xl" aria-hidden="true">💧</span>
+          <span class="font-heading tracking-tight">Sunbelt Restoration Guide</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
+          <a href="/restoration/" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors">Home</a>
+
+          <!-- Cities Dropdown -->
+          <div class="nav-dropdown relative group">
+            <button class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors inline-flex items-center gap-1">
+              Cities
+              <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="nav-dropdown__menu absolute left-0 top-full mt-1 w-56 bg-white rounded-xl shadow-lg border border-slate-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <% cities.forEach(function(c) { %>
+                <a href="/restoration/<%= c.slug %>/" class="block px-4 py-2 text-sm text-slate-700 hover:bg-water-50 hover:text-slate-900 transition-colors"><%= c.fullName %></a>
+              <% }); %>
+            </div>
+          </div>
+
+          <!-- Services Dropdown -->
+          <div class="nav-dropdown relative group">
+            <button class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors inline-flex items-center gap-1">
+              Services
+              <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="nav-dropdown__menu absolute left-0 top-full mt-1 w-64 bg-white rounded-xl shadow-lg border border-slate-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <% services.forEach(function(s) { %>
+                <a href="/restoration/services/<%= s.slug %>/" class="block px-4 py-2 text-sm text-slate-700 hover:bg-water-50 hover:text-slate-900 transition-colors"><%= s.icon %> <%= s.name %></a>
+              <% }); %>
+            </div>
+          </div>
+
+          <a href="/restoration/about" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors">About</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="r-mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" aria-label="Toggle navigation menu">
+          <svg class="hamburger-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg class="close-icon w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav id="r-mobile-menu" class="md:hidden hidden border-t border-slate-200 bg-white">
+      <div class="px-4 py-3 space-y-1 max-h-[70vh] overflow-y-auto">
+        <a href="/restoration/" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100">Home</a>
+        <details>
+          <summary class="px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100 cursor-pointer list-none flex items-center justify-between">Cities <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+          <div class="pl-4 pb-2 space-y-0.5 mt-1">
+            <% cities.forEach(function(c) { %>
+              <a href="/restoration/<%= c.slug %>/" class="block px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded"><%= c.fullName %></a>
+            <% }); %>
+          </div>
+        </details>
+        <details>
+          <summary class="px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100 cursor-pointer list-none flex items-center justify-between">Services <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+          <div class="pl-4 pb-2 space-y-0.5 mt-1">
+            <% services.forEach(function(s) { %>
+              <a href="/restoration/services/<%= s.slug %>/" class="block px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded"><%= s.icon %> <%= s.name %></a>
+            <% }); %>
+          </div>
+        </details>
+        <a href="/restoration/about" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1">

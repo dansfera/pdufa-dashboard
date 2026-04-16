@@ -1,0 +1,722 @@
+<%
+// Helper: badge class from designation string
+function badgeClass(desig) {
+  const d = desig.toLowerCase();
+  if (d.includes('breakthrough')) return 'badge-breakthrough';
+  if (d.includes('priority review')) return 'badge-priority';
+  if (d.includes('orphan')) return 'badge-orphan';
+  if (d.includes('fast track')) return 'badge-fasttrack';
+  if (d.includes('accelerated')) return 'badge-accelerated';
+  if (d.includes('rare pediatric') || d.includes('rare ped')) return 'badge-rare-ped';
+  if (d.includes('advisory committee')) return 'badge-adcom';
+  if (d.includes('phase 3') || d === 'phase 3') return 'badge-phase3';
+  if (d.includes('phase 2') || d === 'phase 2') return 'badge-phase2';
+  if (d.includes('major conference')) return 'badge-conference';
+  if (d.includes('earnings')) return 'badge-earnings';
+  return 'badge-nda';
+}
+
+function badgeLabel(desig) {
+  const d = desig.toLowerCase();
+  if (d.includes('breakthrough')) return 'BT Therapy';
+  if (d.includes('priority review')) return 'Priority';
+  if (d.includes('orphan')) return 'Orphan';
+  if (d.includes('fast track')) return 'Fast Track';
+  if (d.includes('accelerated')) return 'Accelerated';
+  if (d.includes('rare pediatric') || d.includes('rare ped')) return 'Rare Ped';
+  if (d.includes('advisory committee')) return 'AdCom';
+  if (d.includes('phase 3') || d === 'phase 3') return 'Phase 3';
+  if (d.includes('phase 2') || d === 'phase 2') return 'Phase 2';
+  if (d.includes('major conference')) return 'Major Conf';
+  if (d.includes('earnings')) return 'Earnings';
+  return desig;
+}
+
+function poaClass(score) {
+  if (!score) return 'poa-high';
+  if (score >= 80) return 'poa-high';
+  if (score >= 40) return 'poa-med';
+  return 'poa-low';
+}
+
+// Parse date month/day/year safely
+function getDateParts(dateStr) {
+  if (!dateStr) return { month: 'TBD', day: '--', year: '' };
+  const d = new Date(dateStr);
+  return {
+    month: d.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' }).toUpperCase(),
+    day: d.toLocaleString('en-US', { day: 'numeric', timeZone: 'UTC' }),
+    year: d.toLocaleString('en-US', { year: 'numeric', timeZone: 'UTC' })
+  };
+}
+
+// Catalyst type color class
+function catalystColorClass(type) {
+  const map = {
+    pdufa: 'catalyst-teal',
+    adcom: 'catalyst-orange',
+    trial_readout: 'catalyst-purple',
+    conference: 'catalyst-green',
+    earnings: 'catalyst-blue'
+  };
+  return map[type] || 'catalyst-teal';
+}
+
+// Count by status for pills
+const countByStatus = {};
+upcoming.forEach(d => { countByStatus[d.statusClass] = (countByStatus[d.statusClass] || 0) + 1; });
+
+// All catalyst types present in upcoming entries
+const presentTypes = Object.keys(typeCounts || {}).filter(t => typeCounts[t] > 0);
+%>
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<!-- Adsterra Header Ad -->
+<div class="ad-slot-header">
+  <%- include('../partials/ad-adsterra') %>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">
+    <span>●</span>
+    Live Biotech Catalyst Calendar — Updated Regularly
+  </div>
+  <h1>Biotech <span>Catalyst Calendar</span> 2026</h1>
+  <p class="hero-sub">
+    PDUFA dates, FDA AdCom meetings, Phase 3 trial readouts, and conference schedules.
+    Curated by Dan Sfera — 20+ years in clinical trials, 10K+ biotech subscribers.
+  </p>
+
+  <!-- Catalyst type pills row -->
+  <div class="catalyst-type-pills">
+    <div class="catalyst-pill catalyst-pill-teal">
+      <span class="catalyst-pill-icon">💊</span>
+      <span class="catalyst-pill-label">PDUFA</span>
+      <span class="catalyst-pill-count"><%= (typeCounts && typeCounts.pdufa) || 0 %></span>
+    </div>
+    <div class="catalyst-pill catalyst-pill-orange">
+      <span class="catalyst-pill-icon">🏛️</span>
+      <span class="catalyst-pill-label">AdCom</span>
+      <span class="catalyst-pill-count"><%= (typeCounts && typeCounts.adcom) || 0 %></span>
+    </div>
+    <div class="catalyst-pill catalyst-pill-purple">
+      <span class="catalyst-pill-icon">🔬</span>
+      <span class="catalyst-pill-label">Trial Readout</span>
+      <span class="catalyst-pill-count"><%= (typeCounts && typeCounts.trial_readout) || 0 %></span>
+    </div>
+    <div class="catalyst-pill catalyst-pill-green">
+      <span class="catalyst-pill-icon">📋</span>
+      <span class="catalyst-pill-label">Conference</span>
+      <span class="catalyst-pill-count"><%= (typeCounts && typeCounts.conference) || 0 %></span>
+    </div>
+    <div class="catalyst-pill catalyst-pill-blue">
+      <span class="catalyst-pill-icon">📊</span>
+      <span class="catalyst-pill-label">Earnings</span>
+      <span class="catalyst-pill-count"><%= (typeCounts && typeCounts.earnings) || 0 %></span>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num"><%= stats.upcomingTotal %></div>
+      <div class="stat-label">Upcoming Catalysts</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num"><%= stats.upcomingPdufa %></div>
+      <div class="stat-label">PDUFA Dates</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num"><%= stats.priorityPdufa %></div>
+      <div class="stat-label">Priority Review</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">85–93%</div>
+      <div class="stat-label">NDA/BLA Approval Range</div>
+    </div>
+  </div>
+</section>
+
+<!-- Upcoming This Week — Featured Catalyst Section -->
+<% if (thisWeek.length > 0 || nextUp) { %>
+<section class="featured-week">
+  <div class="featured-week-inner">
+    <div class="featured-week-header">
+      <% if (thisWeek.length > 0) { %>
+      <h2 class="featured-week-title">
+        <span class="featured-week-icon">🔥</span>
+        Upcoming This Week
+        <span class="featured-week-count"><%= thisWeek.length %> catalyst<%= thisWeek.length !== 1 ? 's' : '' %></span>
+      </h2>
+      <p class="featured-week-sub">Catalysts happening in the next 7 days — these move stocks</p>
+      <% } else if (nextUp) { %>
+      <h2 class="featured-week-title">
+        <span class="featured-week-icon">📍</span>
+        Next Up
+      </h2>
+      <p class="featured-week-sub">No catalysts this week — here's what's coming next</p>
+      <% } %>
+    </div>
+
+    <div class="featured-cards">
+      <% const featuredItems = thisWeek.length > 0 ? thisWeek : (nextUp ? [nextUp] : []);
+         featuredItems.forEach(function(drug) {
+           const parts = getDateParts(drug.pdufa_date);
+           const ctype = drug.catalyst_type || 'pdufa';
+           const cc = drug.catalystConfig || { label: 'PDUFA', icon: '💊', color: 'teal' };
+           const colorClass = catalystColorClass(ctype);
+
+           // Compute countdown text
+           const today = new Date();
+           today.setHours(0, 0, 0, 0);
+           const evtDate = new Date(drug.pdufa_date);
+           const diffMs = evtDate - today;
+           const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+           let countdown = '';
+           if (diffDays === 0) countdown = 'TODAY';
+           else if (diffDays === 1) countdown = 'TOMORROW';
+           else countdown = 'in ' + diffDays + ' days';
+
+           // One-line stakes description
+           let stakes = drug.indication || '';
+           if (ctype === 'pdufa') stakes = (drug.indication ? drug.indication + ' — ' : '') + 'FDA decision ' + countdown.toLowerCase();
+           else if (ctype === 'adcom') stakes = (drug.indication ? drug.indication + ' — ' : '') + 'FDA advisory vote ' + countdown.toLowerCase();
+           else if (ctype === 'trial_readout') stakes = (drug.indication ? drug.indication + ' — ' : '') + 'Data readout ' + countdown.toLowerCase();
+           else if (ctype === 'conference') stakes = drug.indication || 'Conference presentation ' + countdown.toLowerCase();
+           else if (ctype === 'earnings') stakes = 'Quarterly earnings ' + countdown.toLowerCase();
+      %>
+      <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/drug/<%= drug.slug %>"
+         class="featured-card <%= colorClass %>">
+        <div class="featured-card-top">
+          <div class="featured-card-type catalyst-badge-<%= ctype %>">
+            <span><%= cc.icon %></span>
+            <span><%= cc.label %></span>
+          </div>
+          <div class="featured-card-countdown <% if (diffDays === 0) { %>countdown-today<% } else if (diffDays <= 2) { %>countdown-imminent<% } else { %>countdown-soon<% } %>">
+            <%= countdown %>
+          </div>
+        </div>
+
+        <div class="featured-card-drug">
+          <% if (ctype === 'conference' || ctype === 'earnings') { %>
+          <%= drug.drug_name.length > 40 ? drug.drug_name.substring(0, 40) + '...' : drug.drug_name %>
+          <% } else { %>
+          <%= drug.brand_name || drug.drug_name %>
+          <% } %>
+        </div>
+
+        <div class="featured-card-meta">
+          <% if (drug.ticker) { %>
+          <span class="featured-card-ticker"><%= drug.cashtag || ('$' + drug.ticker) %></span>
+          <% } %>
+          <span class="featured-card-company"><%= drug.company %></span>
+        </div>
+
+        <div class="featured-card-stakes"><%= stakes %></div>
+
+        <div class="featured-card-date">
+          <span class="featured-card-date-label"><%= parts.month %> <%= parts.day %>, <%= parts.year %></span>
+          <% if (drug.showPoA && drug.basePoA) { %>
+          <span class="featured-card-poa"><%= drug.basePoA %>% PoA</span>
+          <% } %>
+        </div>
+      </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<!-- Weekly Schema.org ItemList -->
+<% if (typeof weeklySchema !== 'undefined' && weeklySchema) { %>
+<script type="application/ld+json"><%- weeklySchema %></script>
+<% } %>
+<% } %>
+
+<!-- Main Layout -->
+<div class="main-container">
+
+  <!-- Calendar Column -->
+  <main class="calendar-section">
+
+    <!-- Substack Sticky Banner -->
+    <div id="substack-banner" class="substack-banner">
+      <div class="substack-banner-inner">
+        <div class="substack-banner-content">
+          <span class="substack-banner-icon">📬</span>
+          <span class="substack-banner-text">Get weekly catalyst alerts — PDUFA decisions, trial readouts, and AdCom votes delivered to your inbox</span>
+        </div>
+        <div class="substack-banner-actions">
+          <a href="<%= appBase %>/go/substack?p=sticky_banner" target="_blank" rel="noopener" class="substack-banner-cta">Subscribe Free</a>
+          <button class="substack-banner-dismiss" onclick="dismissSubstackBanner()" title="Dismiss">✕</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Upcoming Catalysts</h2>
+        <p class="section-sub">Sorted by date · All dates are target / expected dates</p>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterCards('all', this)" data-filter="all">All</button>
+        <button class="filter-tab filter-tab-teal" onclick="filterCards('pdufa', this)" data-filter="pdufa">💊 PDUFA</button>
+        <button class="filter-tab filter-tab-orange" onclick="filterCards('adcom', this)" data-filter="adcom">🏛️ AdCom</button>
+        <button class="filter-tab filter-tab-purple" onclick="filterCards('trial_readout', this)" data-filter="trial_readout">🔬 Trial</button>
+        <button class="filter-tab filter-tab-green" onclick="filterCards('conference', this)" data-filter="conference">📋 Conf</button>
+        <button class="filter-tab filter-tab-blue" onclick="filterCards('earnings', this)" data-filter="earnings">📊 Earnings</button>
+      </div>
+    </div>
+
+    <!-- Status legend pills -->
+    <div class="count-summary">
+      <% if (countByStatus['today']) { %>
+      <div class="count-pill" style="background: var(--color-orange-dim); color: var(--color-orange);">
+        <div class="count-pill-dot" style="background: var(--color-orange);"></div>
+        Today: <%= countByStatus['today'] %>
+      </div>
+      <% } %>
+      <% if (countByStatus['this-week']) { %>
+      <div class="count-pill" style="background: var(--color-yellow-dim); color: var(--color-yellow);">
+        <div class="count-pill-dot" style="background: var(--color-yellow);"></div>
+        This Week: <%= countByStatus['this-week'] %>
+      </div>
+      <% } %>
+      <% if (countByStatus['this-month']) { %>
+      <div class="count-pill" style="background: var(--accent-blue-dim); color: var(--accent-blue);">
+        <div class="count-pill-dot" style="background: var(--accent-blue);"></div>
+        This Month: <%= countByStatus['this-month'] %>
+      </div>
+      <% } %>
+      <div class="count-pill" style="background: var(--accent-teal-dim); color: var(--accent-teal);">
+        <div class="count-pill-dot" style="background: var(--accent-teal);"></div>
+        Upcoming: <%= (countByStatus['upcoming'] || 0) %>
+      </div>
+      <% if (countByStatus['overdue']) { %>
+      <div class="count-pill" style="background: var(--color-red-dim); color: var(--color-red);">
+        <div class="count-pill-dot" style="background: var(--color-red);"></div>
+        Decision Past: <%= countByStatus['overdue'] %>
+      </div>
+      <% } %>
+    </div>
+
+    <% if (locals.error) { %>
+    <div style="background: var(--color-yellow-dim); border: 1px solid rgba(245,158,11,0.3); border-radius: var(--radius); padding: 14px 18px; margin-bottom: 16px; font-size: 13px; color: var(--color-yellow);">
+      ⚠️ <%= locals.error %>
+    </div>
+    <% } %>
+
+    <!-- Upcoming entries -->
+    <div class="pdufa-list" id="pdufa-list">
+      <% upcoming.forEach(function(drug) {
+        const parts = getDateParts(drug.pdufa_date);
+        const isPriority = drug.review_type === 'priority';
+        const ctype = drug.catalyst_type || 'pdufa';
+        const cc = drug.catalystConfig || { label: 'PDUFA', icon: '💊', color: 'teal' };
+        const colorClass = catalystColorClass(ctype);
+      %>
+      <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/drug/<%= drug.slug %>"
+         class="pdufa-card <%= drug.statusClass %> <%= colorClass %>"
+         data-review="<%= drug.review_type %>"
+         data-status="<%= drug.statusClass %>"
+         data-catalyst="<%= ctype %>">
+        <div class="card-grid">
+          <!-- Date Block -->
+          <div class="card-date-block">
+            <div class="date-month"><%= parts.month %></div>
+            <div class="date-day"><%= parts.day %></div>
+            <div class="date-year"><%= parts.year %></div>
+            <div class="days-pill"><%= drug.daysUntil %></div>
+          </div>
+
+          <!-- Drug / Event Info -->
+          <div class="card-info">
+            <!-- Catalyst type badge (prominent) -->
+            <div class="catalyst-type-badge catalyst-badge-<%= ctype %>">
+              <span class="catalyst-badge-icon"><%= cc.icon %></span>
+              <span class="catalyst-badge-text"><%= cc.label %></span>
+            </div>
+
+            <div class="card-drug-name">
+              <% if (ctype === 'conference' || ctype === 'earnings') { %>
+              <%= drug.drug_name.length > 50 ? drug.drug_name.substring(0, 50) + '...' : drug.drug_name %>
+              <% } else { %>
+              <%= drug.brand_name ? drug.brand_name + ' ' : '' %><span style="color: var(--text-secondary); font-size: 13px; font-weight: 500;">(<%= drug.drug_name.length > 28 ? drug.drug_name.substring(0, 28) + '...' : drug.drug_name %>)</span>
+              <% } %>
+            </div>
+            <div class="card-company">
+              <% if (drug.cashtag) { %><span class="card-cashtag"><%= drug.cashtag %></span><% } %>
+              <%= drug.company %>
+              <% if (drug.nda_bla_type) { %> · <span style="color: var(--text-muted); font-size: 11px;"><%= drug.nda_bla_type %></span><% } %>
+            </div>
+            <div class="card-indication"><%= drug.indication %></div>
+            <div class="card-badges">
+              <%
+              // Only show Priority/Standard review badge for PDUFA/AdCom entries
+              if (ctype === 'pdufa' || ctype === 'adcom') {
+                if (isPriority) {
+              %>
+              <span class="badge badge-priority">Priority Review</span>
+              <% } else { %>
+              <span class="badge badge-nda">Standard Review</span>
+              <% }
+              } %>
+              <% if (drug.designation && drug.designation.length) {
+                drug.designation.slice(0, 3).forEach(function(d) {
+                  if (d && d !== 'Priority Review') {
+              %>
+              <span class="badge <%= badgeClass(d) %>"><%= badgeLabel(d) %></span>
+              <% }}) } %>
+            </div>
+          </div>
+
+          <!-- PoA Score (PDUFA/AdCom only) or Catalyst context -->
+          <div class="card-right">
+            <% if (drug.showPoA && drug.basePoA) { %>
+            <div class="poa-score" title="<%= drug.poaRationale || 'FDA historical approval rate' %>. Based on FDA historical approval rates (2015–2025).">
+              <div class="poa-num <%= poaClass(drug.basePoA) %>"><%= drug.basePoA %>%</div>
+              <div class="poa-label">Base PoA</div>
+              <div class="poa-sublabel">historical</div>
+            </div>
+            <% } else if (ctype === 'trial_readout' && drug.phase) { %>
+            <div class="catalyst-phase-badge">
+              <div class="phase-badge-text"><%= drug.phase %></div>
+              <div class="phase-badge-label">trial phase</div>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </a>
+      <% }) %>
+
+      <!-- Past decisions section -->
+      <% if (past && past.length > 0) { %>
+      <div style="border-top: 1px solid var(--border); margin: 24px 0 16px; padding-top: 16px;">
+        <h3 style="font-size: 14px; font-weight: 600; color: var(--text-muted); margin: 0 0 12px; display: flex; align-items: center; gap: 8px;">
+          📋 Past Catalyst Dates
+          <span style="font-size: 11px; font-weight: 400; color: var(--text-muted);">— FDA decisions shown</span>
+        </h3>
+        <% past.forEach(function(drug) {
+          const parts = getDateParts(drug.pdufa_date);
+          const ctype = drug.catalyst_type || 'pdufa';
+          const cc = drug.catalystConfig || { label: 'PDUFA', icon: '💊', color: 'teal' };
+          const hasOutcome = drug.outcomeResult && (ctype === 'pdufa' || ctype === 'adcom');
+        %>
+        <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/drug/<%= drug.slug %>"
+           class="pdufa-card overdue"
+           style="opacity: 0.75;"
+           data-review="<%= drug.review_type %>"
+           data-status="overdue"
+           data-catalyst="<%= ctype %>">
+          <div class="card-grid">
+            <div class="card-date-block">
+              <div class="date-month"><%= parts.month %></div>
+              <div class="date-day"><%= parts.day %></div>
+              <div class="date-year"><%= parts.year %></div>
+              <div class="days-pill"><%= drug.daysUntil %></div>
+            </div>
+            <div class="card-info">
+              <div class="catalyst-type-badge catalyst-badge-<%= ctype %>" style="opacity: 0.8;">
+                <span class="catalyst-badge-icon"><%= cc.icon %></span>
+                <span class="catalyst-badge-text"><%= cc.label %></span>
+              </div>
+              <div class="card-drug-name"><%= drug.brand_name || drug.drug_name %></div>
+              <div class="card-company">
+                <% if (drug.cashtag) { %><span class="card-cashtag"><%= drug.cashtag %></span><% } %>
+                <%= drug.company %>
+              </div>
+              <div class="card-indication"><%= drug.indication %></div>
+
+              <% if (hasOutcome) { %>
+              <!-- FDA Decision Outcome Badge -->
+              <div style="margin-top: 8px;">
+                <span class="card-outcome-badge card-outcome-<%= drug.outcomeClass %>">
+                  <%= drug.outcomeLabel %>
+                </span>
+                <% if (drug.outcome_notes) { %>
+                <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.4;"><%= drug.outcome_notes %></div>
+                <% } %>
+                <% if (drug.outcome_date) { %>
+                <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">Decision: <%= typeof formatDate !== 'undefined' ? formatDate(drug.outcome_date) : drug.outcome_date %></div>
+                <% } %>
+              </div>
+              <% } else if (ctype === 'pdufa' || ctype === 'adcom') { %>
+              <div style="margin-top: 8px;">
+                <span class="card-outcome-badge card-outcome-unknown">⏳ Outcome Not Yet Recorded</span>
+              </div>
+              <% } %>
+            </div>
+            <div class="card-right">
+              <% if (drug.showPoA && drug.basePoA) { %>
+              <div class="poa-score" style="opacity: 0.5;">
+                <div class="poa-num" style="color: var(--text-muted)"><%= drug.basePoA %>%</div>
+                <div class="poa-label">Base PoA</div>
+                <div class="poa-sublabel">historical</div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </a>
+        <% }) %>
+      </div>
+      <% } %>
+    </div>
+
+    <!-- Empty state -->
+    <% if (!upcoming.length && !past.length && !locals.error) { %>
+    <div style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
+      <div style="font-size: 48px; margin-bottom: 16px;">📅</div>
+      <div style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-secondary);">Calendar Loading</div>
+      <div style="font-size: 14px;">Catalyst data will appear here once the database is seeded.</div>
+    </div>
+    <% } %>
+
+    <!-- No results message (shown by JS filter) -->
+    <div id="no-results" style="display:none; text-align: center; padding: 40px 20px; color: var(--text-muted);">
+      <div style="font-size: 32px; margin-bottom: 12px;">🔍</div>
+      <div style="font-size: 16px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px;">No results for this filter</div>
+      <div style="font-size: 13px;">Try a different catalyst type or select All.</div>
+    </div>
+
+    <!-- Newsletter End-of-Page CTA -->
+    <div class="newsletter-cta">
+      <div class="newsletter-cta-emoji">📬</div>
+      <h3 class="newsletter-cta-title">Never miss a catalyst.</h3>
+      <p class="newsletter-cta-sub">Join 10,000+ biotech investors getting weekly FDA calendar updates, PDUFA decisions, and trial readouts.</p>
+      <a href="<%= appBase %>/go/substack?p=table_block" target="_blank" rel="noopener" class="newsletter-cta-btn">Subscribe Free on Substack →</a>
+    </div>
+
+  </main>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <!-- About Dan -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">About the Tracker</div>
+      <div class="dan-avatar">DS</div>
+      <div class="dan-name">Dan Sfera</div>
+      <div class="dan-title">Clinical Trial Veteran · Biotech Investor</div>
+      <div class="dan-bio">
+        20+ years in clinical trials. 10K+ Substack subscribers tracking biotech catalysts, FDA decisions, and approval probability analysis.
+      </div>
+      <div class="social-links">
+        <a href="https://substack.com/@dansfera1" target="_blank" rel="noopener" class="social-link">
+          <span class="social-link-icon">📧</span>
+          Substack Newsletter (@dansfera1)
+        </a>
+        <a href="https://x.com/dansfera" target="_blank" rel="noopener" class="social-link">
+          <span class="social-link-icon">𝕏</span>
+          Follow @dansfera on X
+        </a>
+      </div>
+    </div>
+
+    <!-- Adsterra Sidebar Ad -->
+    <%- include('../partials/ad-adsterra') %>
+
+    <!-- Catalyst Type Legend -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">Catalyst Types</div>
+      <ul class="legend-list">
+        <li class="legend-item">
+          <div class="catalyst-legend-dot catalyst-legend-teal">💊</div>
+          <div>
+            <div style="font-size: 13px; color: var(--text-primary); font-weight: 600;">PDUFA</div>
+            <div style="font-size: 11px; color: var(--text-muted);">FDA target action date</div>
+          </div>
+        </li>
+        <li class="legend-item">
+          <div class="catalyst-legend-dot catalyst-legend-orange">🏛️</div>
+          <div>
+            <div style="font-size: 13px; color: var(--text-primary); font-weight: 600;">AdCom</div>
+            <div style="font-size: 11px; color: var(--text-muted);">FDA advisory committee vote</div>
+          </div>
+        </li>
+        <li class="legend-item">
+          <div class="catalyst-legend-dot catalyst-legend-purple">🔬</div>
+          <div>
+            <div style="font-size: 13px; color: var(--text-primary); font-weight: 600;">Trial Readout</div>
+            <div style="font-size: 11px; color: var(--text-muted);">Phase 2/3 data release</div>
+          </div>
+        </li>
+        <li class="legend-item">
+          <div class="catalyst-legend-dot catalyst-legend-green">📋</div>
+          <div>
+            <div style="font-size: 13px; color: var(--text-primary); font-weight: 600;">Conference</div>
+            <div style="font-size: 11px; color: var(--text-muted);">ASCO, AACR, ASH, ESMO</div>
+          </div>
+        </li>
+        <li class="legend-item">
+          <div class="catalyst-legend-dot catalyst-legend-blue">📊</div>
+          <div>
+            <div style="font-size: 13px; color: var(--text-primary); font-weight: 600;">Earnings</div>
+            <div style="font-size: 11px; color: var(--text-muted);">Quarterly earnings calls</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Date Color Legend -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">Date Urgency Guide</div>
+      <ul class="legend-list">
+        <li class="legend-item">
+          <div class="legend-dot overdue"></div>
+          Date has passed
+        </li>
+        <li class="legend-item">
+          <div class="legend-dot today"></div>
+          Date is today
+        </li>
+        <li class="legend-item">
+          <div class="legend-dot this-week"></div>
+          Within 7 days
+        </li>
+        <li class="legend-item">
+          <div class="legend-dot this-month"></div>
+          Within 30 days
+        </li>
+        <li class="legend-item">
+          <div class="legend-dot upcoming"></div>
+          Future date
+        </li>
+      </ul>
+    </div>
+
+    <!-- PoA Methodology -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">Baseline PoA Rates</div>
+      <p style="font-size: 11px; color: var(--text-muted); margin: 0 0 10px;">
+        PoA scores apply to <strong style="color: var(--accent-teal)">PDUFA</strong> and <strong style="color: var(--color-orange)">AdCom</strong> entries only.
+      </p>
+      <table class="method-table">
+        <tr><td>NDA (standard)</td><td>85%</td></tr>
+        <tr><td>NDA (priority)</td><td>90%</td></tr>
+        <tr><td>BLA (standard)</td><td>80%</td></tr>
+        <tr><td>BLA (priority)</td><td>88%</td></tr>
+        <tr><td>sNDA / sBLA</td><td>92%</td></tr>
+        <tr><td>Orphan / Rare disease</td><td>93%</td></tr>
+        <tr><td>Phase III readout</td><td>58%</td></tr>
+        <tr><td>Phase II</td><td>33%</td></tr>
+        <tr><td>Phase I</td><td>70%</td></tr>
+        <tr><td>CRL resubmission</td><td style="color: var(--color-red);">−28%</td></tr>
+      </table>
+      <p class="method-note">
+        Based on FDA historical approval rates by submission type (2015–2025). Source: FDA CDER Annual Reports.
+        Sentiment-adjusted PoA coming soon (powered by xAI).
+      </p>
+    </div>
+
+    <!-- Adsterra Sidebar Ad 2 -->
+    <%- include('../partials/ad-adsterra') %>
+
+  </aside>
+
+</div>
+
+<!-- SEO Content Cluster Cross-links -->
+<div style="max-width: 900px; margin: 32px auto; padding: 0 16px;">
+  <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px;">
+    <p style="font-size: 13px; font-weight: 700; color: var(--text-secondary); letter-spacing: 0.05em; margin: 0 0 12px; text-transform: uppercase;">Guides & Calendars</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+      <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/biotech-catalysts-q2-2026"
+         style="color: var(--accent); font-weight: 600; text-decoration: none; font-size: 14px;">
+        📅 Q2 2026 Biotech Catalysts →
+      </a>
+      <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/pdufa-explained"
+         style="color: var(--accent); font-weight: 600; text-decoration: none; font-size: 14px;">
+        📖 PDUFA Dates Explained →
+      </a>
+      <a href="<%= typeof appBase !== 'undefined' ? appBase : '' %>/how-to-trade-pdufa-dates"
+         style="color: var(--accent); font-weight: 600; text-decoration: none; font-size: 14px;">
+        📈 How to Trade PDUFA Dates →
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Substack banner dismiss (localStorage-based, 30-day)
+(function() {
+  var KEY = 'pdufa_sub_dismissed';
+  var banner = document.getElementById('substack-banner');
+  var dismissed = false;
+  try {
+    var ts = localStorage.getItem(KEY);
+    if (ts && (Date.now() - parseInt(ts, 10)) < 30 * 24 * 60 * 60 * 1000) dismissed = true;
+  } catch(e) {}
+  if (dismissed && banner) {
+    banner.classList.add('hidden');
+    showNavMini();
+  }
+})();
+
+function dismissSubstackBanner() {
+  var banner = document.getElementById('substack-banner');
+  if (banner) banner.classList.add('hidden');
+  try { localStorage.setItem('pdufa_sub_dismissed', Date.now().toString()); } catch(e) {}
+  showNavMini();
+}
+
+function showNavMini() {
+  // After dismiss, reveal the small nav link (if present)
+  var mini = document.getElementById('substack-nav-mini');
+  if (mini) mini.classList.add('visible');
+}
+
+function filterCards(type, btn) {
+  // Update active tab
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+
+  const cards = document.querySelectorAll('.pdufa-card');
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    let show = false;
+    if (type === 'all') {
+      show = true;
+    } else {
+      show = card.dataset.catalyst === type;
+    }
+    card.style.display = show ? 'block' : 'none';
+    if (show) visibleCount++;
+  });
+
+  // Show/hide no-results message
+  const noResults = document.getElementById('no-results');
+  if (noResults) {
+    noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+  }
+
+  // Also hide/show section headers that become empty
+  const pastSection = document.querySelector('[data-section="past"]');
+  // (future enhancement: smart section hiding)
+}
+
+// Analytics: backup CTA click tracking (primary tracking is via /go/substack redirect)
+// Uses renamed endpoint /api/evt to avoid ad-blocker filter lists
+function trackCtaClick(placement) {
+  try {
+    var payload = JSON.stringify({
+      event_type: 'cta_click',
+      placement: placement,
+      page: window.location.pathname
+    });
+    if (navigator.sendBeacon) {
+      var blob = new Blob([payload], { type: 'application/json' });
+      navigator.sendBeacon('/api/evt', blob);
+    } else {
+      fetch('/api/evt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true
+      }).catch(function() {});
+    }
+  } catch(e) {}
+}
+</script>
+
+<%- include('../partials/footer') %>
