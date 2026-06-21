@@ -1,0 +1,33 @@
+<div class="book-signup">
+  <p class="bs-title">Get notified when the book is ready</p>
+  <p class="bs-sub">One email when there is real news about ALL CAPS. No spam, and you can leave anytime.</p>
+  <form class="bs-form" id="bookSignupForm" action="https://docs.google.com/forms/d/e/1FAIpQLSeru37uips90PvJddvG__8bdq8QQdLte-2sIHK9IMfu4Ub8IA/formResponse" method="POST" target="bookSignupSink">
+    <input type="email" name="entry.1897303005" required placeholder="you@email.com" aria-label="Email address">
+    <button type="submit">Notify me</button>
+  </form>
+  <p class="bs-done" id="bookSignupDone" hidden>Thanks. You are on the list.</p>
+  <iframe name="bookSignupSink" class="bs-sink" title="signup target"></iframe>
+</div>
+<style>
+  .book-signup { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 26px; margin: 18px 0 0; }
+  .book-signup .bs-title { font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 0 0 4px; }
+  .book-signup .bs-sub { font-size: 14px; color: var(--text-muted); margin: 0 0 14px; }
+  .book-signup .bs-form { display: flex; gap: 10px; flex-wrap: wrap; }
+  .book-signup input[type=email] { flex: 1; min-width: 220px; padding: 12px 14px; border: 1px solid var(--border-light); border-radius: var(--radius-sm); background: var(--bg); color: var(--text-primary); font-size: 15px; }
+  .book-signup button { padding: 12px 22px; border: 0; border-radius: var(--radius-sm); background: var(--accent-teal); color: #06241d; font-weight: 600; font-size: 15px; cursor: pointer; }
+  .book-signup .bs-done { font-size: 15px; color: var(--accent-teal); font-weight: 600; margin: 12px 0 0; }
+  .book-signup .bs-sink { display: none; width: 0; height: 0; border: 0; }
+</style>
+<script>
+  (function () {
+    var f = document.getElementById('bookSignupForm');
+    if (!f) return;
+    f.addEventListener('submit', function () {
+      setTimeout(function () {
+        f.style.display = 'none';
+        var d = document.getElementById('bookSignupDone');
+        if (d) d.hidden = false;
+      }, 400);
+    });
+  })();
+</script>
