@@ -59,6 +59,13 @@
   .hatbook .btn-primary { background: var(--accent-teal); color: #06241d; }
   .hatbook .btn-ghost { border: 1px solid var(--border-light); color: var(--text-primary); }
   .hatbook .footnote { font-size: 14px; color: var(--text-muted); margin-top: 28px; }
+  .hatbook .chapter-list { margin: 8px 0 0; border-top: 1px solid var(--border); }
+  .hatbook .chapter-row { display: flex; gap: 16px; align-items: baseline; padding: 14px 4px; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .hatbook .chapter-row:hover { background: var(--bg-card); }
+  .hatbook .chapter-num { flex: 0 0 54px; font-size: 13px; font-weight: 700; color: var(--accent-teal); text-transform: uppercase; letter-spacing: 0.04em; }
+  .hatbook .chapter-meta { display: flex; flex-direction: column; gap: 3px; }
+  .hatbook .chapter-title { font-size: 17px; font-weight: 600; color: var(--text-primary); }
+  .hatbook .chapter-teaser { font-size: 14px; color: var(--text-muted); line-height: 1.45; }
 </style>
 
 <div class="hatbook">
@@ -139,6 +146,22 @@
     </ul>
   </div>
   <% } %>
+
+  <% if (typeof chapters !== 'undefined' && Array.isArray(chapters) && chapters.length) { %>
+  <hr class="rule" />
+  <h2>Browse the chapters</h2>
+  <p>Short, spoiler-free previews of every chapter. New material is added as the manuscript grows.</p>
+  <div class="chapter-list">
+    <% chapters.forEach(function (ch) { %>
+      <a class="chapter-row" href="<%= (typeof appBase !== 'undefined' ? appBase : '') %>/hatbook/chapter/<%= ch.slug %>">
+        <span class="chapter-num">Ch <%= ch.num %></span>
+        <span class="chapter-meta"><span class="chapter-title"><%= ch.title %></span><span class="chapter-teaser"><%= ch.teaser %></span></span>
+      </a>
+    <% }); %>
+  </div>
+  <% } %>
+
+  <%- include('../partials/book-signup') %>
 
   <div class="cta">
     <a href="https://substack.com/@dansfera1" target="_blank" rel="noopener" class="btn btn-primary">Get release updates on Substack</a>
