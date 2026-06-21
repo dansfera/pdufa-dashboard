@@ -1,0 +1,140 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<style>
+  .hatbook { max-width: 760px; margin: 0 auto; padding: 8px 0 64px; }
+  .hatbook .eyebrow {
+    text-transform: uppercase; letter-spacing: 0.18em; font-size: 12px;
+    font-weight: 600; color: var(--accent-teal); margin-bottom: 18px;
+  }
+  .hatbook h1 {
+    font-size: clamp(48px, 9vw, 88px); font-weight: 900; letter-spacing: -0.03em;
+    line-height: 0.95; margin: 0 0 14px;
+  }
+  .hatbook .subtitle {
+    font-size: clamp(20px, 3.4vw, 28px); font-weight: 500; color: var(--text-primary);
+    line-height: 1.3; margin: 0 0 28px; max-width: 40ch;
+  }
+  .hatbook .lede {
+    font-size: 19px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 22px;
+  }
+  .hatbook .rule {
+    height: 1px; background: var(--border); border: 0; margin: 40px 0;
+  }
+  .hatbook h2 {
+    font-size: 15px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--text-muted); font-weight: 700; margin: 0 0 16px;
+  }
+  .hatbook p { font-size: 17px; line-height: 1.75; color: var(--text-secondary); margin: 0 0 18px; }
+  .hatbook .pull {
+    font-size: 22px; line-height: 1.5; font-weight: 600; color: var(--text-primary);
+    border-left: 3px solid var(--accent-teal); padding: 4px 0 4px 22px; margin: 0 0 8px;
+  }
+  .peek {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 26px 28px; margin: 8px 0 0;
+  }
+  .peek .peek-head {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px; margin-bottom: 6px;
+  }
+  .peek .peek-title { font-size: 15px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); font-weight: 700; margin: 0; }
+  .peek .badge {
+    font-size: 12px; font-weight: 600; color: var(--accent-teal);
+    background: var(--accent-teal-dim); padding: 4px 10px; border-radius: 999px;
+  }
+  .peek .meta { font-size: 14px; color: var(--text-muted); margin: 0 0 18px; }
+  .peek .stat { font-size: 17px; color: var(--text-primary); margin: 0 0 6px; }
+  .peek ul { margin: 14px 0 0; padding: 0; list-style: none; }
+  .peek li {
+    font-size: 16px; line-height: 1.6; color: var(--text-secondary);
+    padding: 10px 0 10px 22px; border-top: 1px solid var(--border); position: relative;
+  }
+  .peek li:before { content: "\2014"; position: absolute; left: 0; color: var(--accent-teal); }
+  .hatbook .cta { margin-top: 40px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .hatbook .btn {
+    display: inline-block; padding: 13px 22px; border-radius: var(--radius-sm);
+    font-weight: 600; font-size: 16px;
+  }
+  .hatbook .btn-primary { background: var(--accent-teal); color: #06241d; }
+  .hatbook .btn-ghost { border: 1px solid var(--border-light); color: var(--text-primary); }
+  .hatbook .footnote { font-size: 14px; color: var(--text-muted); margin-top: 28px; }
+</style>
+
+<div class="hatbook">
+  <div class="eyebrow">A book in progress &middot; by Dan Sfera</div>
+  <h1>FITTED</h1>
+  <p class="subtitle">The Language America Wears on Its Head.</p>
+
+  <p class="lede">
+    For a hundred and fifty years, Americans have said things to each other with a wool cap and
+    a stitched logo. Where you are from. Who you root for. What you survived, what you can afford,
+    and which year you were paying attention. <strong>FITTED</strong> is a cultural history of the
+    baseball cap, and an argument that the most ordinary object in the closet is actually a language,
+    one most of us speak fluently without ever noticing.
+  </p>
+
+  <p class="pull">It starts before baseball had a hat at all, and it ends with a 2026 drop that sold out before you finished reading about it.</p>
+
+  <hr class="rule" />
+
+  <h2>What it covers</h2>
+  <p>
+    The book runs the full arc: the pre-Civil War origins of the brim, the cap on the field
+    and the cap in the street, the makers who built the thing and the cultures that gave it meaning.
+    It moves through the league that started it, the artists and labels who rewrote what the cap could say,
+    the cities that claimed it, the resale economy that prices it, and the rooms, here and overseas,
+    where the next colorway is decided.
+  </p>
+  <p>
+    It is not a coffee-table picture book and it is not a brand history. It treats the cap the way a
+    good music critic treats a genre: seriously, and with an ear for where the meaning actually lives.
+  </p>
+
+  <h2>The voices in it</h2>
+  <p>
+    Much of the book is built on original, on-the-record interviews with the people who make these caps,
+    sell them, and built the culture that surrounds them. They are the ones who get to say what really
+    happened. Those conversations are still going.
+  </p>
+
+  <hr class="rule" />
+
+  <div class="peek">
+    <div class="peek-head">
+      <p class="peek-title">Where it stands this week</p>
+      <% if (typeof hatbook !== 'undefined' && hatbook && hatbook.status) { %>
+        <span class="badge"><%= hatbook.status %></span>
+      <% } %>
+    </div>
+    <% if (typeof hatbook !== 'undefined' && hatbook && hatbook.lastUpdated) { %>
+      <p class="meta">Updated weekly &middot; last refreshed <%= hatbook.lastUpdated %></p>
+    <% } %>
+
+    <% if (typeof hatbook !== 'undefined' && hatbook && hatbook.chaptersLine) { %>
+      <p class="stat"><%= hatbook.chaptersLine %></p>
+    <% } %>
+    <% if (typeof hatbook !== 'undefined' && hatbook && hatbook.spanLine) { %>
+      <p class="stat" style="color: var(--text-secondary);"><%= hatbook.spanLine %></p>
+    <% } %>
+
+    <% if (typeof hatbook !== 'undefined' && hatbook && Array.isArray(hatbook.thisWeek) && hatbook.thisWeek.length) { %>
+      <ul>
+        <% hatbook.thisWeek.forEach(function(item) { %>
+          <li><%= item %></li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+
+  <div class="cta">
+    <a href="https://substack.com/@dansfera1" target="_blank" rel="noopener" class="btn btn-primary">Get release updates on Substack</a>
+    <a href="https://x.com/dansfera" target="_blank" rel="noopener" class="btn btn-ghost">Follow @dansfera on X</a>
+  </div>
+
+  <p class="footnote">
+    No release date yet. This page is a living preview and refreshes as the manuscript grows.
+  </p>
+</div>
+
+<%- include('../partials/footer') %>
