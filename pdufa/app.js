@@ -835,6 +835,29 @@ app.get('/dan-sfera', (req, res) => {
   });
 });
 
+// FITTED hat book — living sneak-peek page (content refreshed weekly from data/hatbook.json)
+app.get('/hatbook', (req, res) => {
+  const appBase = req.pdufaBase !== undefined ? req.pdufaBase : '';
+  let hatbook = null;
+  try {
+    const fs = require('fs');
+    hatbook = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'hatbook.json'), 'utf8'));
+  } catch (e) {
+    hatbook = null;
+  }
+  res.render('pages/hatbook', {
+    title: 'FITTED — The Language America Wears on Its Head | Dan Sfera',
+    metaDescription: "A living preview of FITTED, Dan Sfera's cultural history of the baseball cap and the argument that the fitted hat is a language. Updated weekly.",
+    canonicalUrl: '/hatbook',
+    ogType: 'book',
+    pageSchema: null,
+    BASE_URL,
+    appBase,
+    analyticsSlug,
+    hatbook
+  });
+});
+
 // API: Get real-time financial data for a ticker (cached, server-side)
 app.get('/api/quote/:ticker', async (req, res) => {
   try {
@@ -1669,6 +1692,7 @@ app.get('/sitemap.xml', async (req, res) => {
     xml += `  <url><loc>${BASE_URL}/how-to-trade-pdufa-dates</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>\n`;
     xml += `  <url><loc>${BASE_URL}/biotech-catalysts-q2-2026</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>\n`;
     xml += `  <url><loc>${BASE_URL}/dan-sfera</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>\n`;
+    xml += `  <url><loc>${BASE_URL}/hatbook</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>\n`;
     entries.forEach(d => {
       // Prefer updated_at, fall back to pdufa_date, then today
       const lastmod = d.updated_at
