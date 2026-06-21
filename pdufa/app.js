@@ -836,6 +836,17 @@ app.get('/dan-sfera', (req, res) => {
 });
 
 // FITTED hat book — living sneak-peek page (content refreshed weekly from data/hatbook.json)
+// Hat book chapter data loader (data/hatbook-chapters.json)
+function loadHatbookChapters() {
+  try {
+    const fs = require('fs');
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'hatbook-chapters.json'), 'utf8'));
+    return Array.isArray(data.chapters) ? data.chapters : [];
+  } catch (e) {
+    return [];
+  }
+}
+
 app.get('/hatbook', (req, res) => {
   const appBase = req.pdufaBase !== undefined ? req.pdufaBase : '';
   let hatbook = null;
@@ -845,16 +856,43 @@ app.get('/hatbook', (req, res) => {
   } catch (e) {
     hatbook = null;
   }
+  const chapters = loadHatbookChapters();
+  const bookTitle = (hatbook && hatbook.title) ? hatbook.title : 'ALL CAPS: THE HISTORY OF THE AMERICAN BASEBALL HAT';
   res.render('pages/hatbook', {
-    title: 'FITTED — The Language America Wears on Its Head | Dan Sfera',
-    metaDescription: "A living preview of FITTED, Dan Sfera's cultural history of the baseball cap and the argument that the fitted hat is a language. Updated weekly.",
+    title: bookTitle + ' | Dan Sfera',
+    metaDescription: "A living preview of ALL CAPS, Dan Sfera's cultural history of the American baseball hat, from before the Civil War to the drops of 2026, with chapter previews.",
     canonicalUrl: '/hatbook',
     ogType: 'book',
     pageSchema: null,
-    BASE_URL,
-    appBase,
-    analyticsSlug,
-    hatbook
+    BASE_URL: BASE_URL,
+    appBase: appBase,
+    analyticsSlug: analyticsSlug,
+    hatbook: hatbook,
+    chapters: chapters
+  });
+});
+
+// Hat book - individual chapter SEO page (data from data/hatbook-chapters.json)
+app.get('/hatbook/chapter/:slug', (req, res, next) => {
+  const appBase = req.pdufaBase !== undefined ? req.pdufaBase : '';
+  const chapters = loadHatbookChapters();
+  const idx = chapters.findIndex(function (c) { return c.slug === req.params.slug; });
+  if (idx === -1) return next();
+  const chapter = chapters[idx];
+  const prevChapter = idx > 0 ? chapters[idx - 1] : null;
+  const nextChapter = idx < chapters.length - 1 ? chapters[idx + 1] : null;
+  res.render('pages/hatbook-chapter', {
+    title: 'Chapter ' + chapter.num + ': ' + chapter.title + ' | ALL CAPS by Dan Sfera',
+    metaDescription: chapter.blurb,
+    canonicalUrl: '/hatbook/chapter/' + chapter.slug,
+    ogType: 'article',
+    pageSchema: null,
+    BASE_URL: BASE_URL,
+    appBase: appBase,
+    analyticsSlug: analyticsSlug,
+    chapter: chapter,
+    prev: prevChapter,
+    next: nextChapter
   });
 });
 
@@ -1693,6 +1731,9 @@ app.get('/sitemap.xml', async (req, res) => {
     xml += `  <url><loc>${BASE_URL}/biotech-catalysts-q2-2026</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>\n`;
     xml += `  <url><loc>${BASE_URL}/dan-sfera</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>\n`;
     xml += `  <url><loc>${BASE_URL}/hatbook</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>\n`;
+    loadHatbookChapters().forEach(function (c) {
+      xml += `  <url><loc>${BASE_URL}/hatbook/chapter/${c.slug}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n`;
+    });
     entries.forEach(d => {
       // Prefer updated_at, fall back to pdufa_date, then today
       const lastmod = d.updated_at
