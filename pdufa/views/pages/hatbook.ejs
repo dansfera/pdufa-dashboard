@@ -63,13 +63,13 @@
 
 <div class="hatbook">
   <div class="eyebrow">A book in progress &middot; by Dan Sfera</div>
-  <h1>FITTED</h1>
+  <h1><%= (typeof hatbook !== 'undefined' && hatbook && hatbook.title) ? hatbook.title : 'THE HISTORY OF THE AMERICAN BASEBALL HAT' %></h1>
   <p class="subtitle">The Language America Wears on Its Head.</p>
 
   <p class="lede">
     For a hundred and fifty years, Americans have said things to each other with a wool cap and
     a stitched logo. Where you are from. Who you root for. What you survived, what you can afford,
-    and which year you were paying attention. <strong>FITTED</strong> is a cultural history of the
+    and which year you were paying attention. <strong>The History of the American Baseball Hat</strong> is a cultural history of the
     baseball cap, and an argument that the most ordinary object in the closet is actually a language,
     one most of us speak fluently without ever noticing.
   </p>
@@ -126,6 +126,19 @@
       </ul>
     <% } %>
   </div>
+
+  <% if (typeof hatbook !== 'undefined' && hatbook && Array.isArray(hatbook.chapterHighlights) && hatbook.chapterHighlights.length) { %>
+  <div class="peek" style="margin-top:18px;">
+    <div class="peek-head">
+      <p class="peek-title">Chapter highlights</p>
+    </div>
+    <ul>
+      <% hatbook.chapterHighlights.forEach(function(item) { %>
+        <li><%= item %></li>
+      <% }); %>
+    </ul>
+  </div>
+  <% } %>
 
   <div class="cta">
     <a href="https://substack.com/@dansfera1" target="_blank" rel="noopener" class="btn btn-primary">Get release updates on Substack</a>
