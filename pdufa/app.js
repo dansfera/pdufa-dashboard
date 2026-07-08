@@ -1593,6 +1593,20 @@ app.get('/api/admin/refresh-catalysts', requireAdminSecret, async (req, res) => 
   }
 });
 
+// ============ ADMIN: RESEED CATALYSTS FROM seed-data.js ============
+// POST /api/admin/reseed — upsert all catalysts from pdufa/seed-data.js and purge retired slugs.
+// Requires x-admin-secret header (same admin secret as the other admin endpoints).
+app.post('/api/admin/reseed', requireAdminSecret, async (req, res) => {
+  try {
+    const { seed } = require('./seed-data');
+    await seed();
+    res.json({ success: true, message: 'Reseed complete. Catalysts upserted from seed-data.js and retired slugs purged.' });
+  } catch (err) {
+    console.error('[Admin Reseed] error:', err.message);
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 // Google Search Console HTML verification file
 // Set GOOGLE_VERIFICATION_FILE_SLUG env var to the code from GSC (e.g. "1234567890abcdef")
 app.get('/google:code.html', (req, res, next) => {
