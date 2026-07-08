@@ -572,23 +572,6 @@ const CATALYST_DATA = [
     notes: 'Oral LANCL2 agonist. Phase 3 data demonstrated remission in moderate-to-severe UC.',
     slug: 'omilancor-ulcerative-colitis'
   },
-  {
-    catalyst_type: 'pdufa',
-    drug_name: 'zilebesiran',
-    brand_name: null,
-    company: 'Alnylam Pharmaceuticals',
-    ticker: 'ALNY',
-    cashtag: '$ALNY',
-    pdufa_date: '2026-09-15',
-    indication: 'Hypertension (RNA interference — twice-yearly injection)',
-    review_type: 'priority',
-    designation: ['Fast Track', 'Breakthrough Therapy'],
-    phase: 'NDA',
-    nda_bla_type: 'NDA',
-    status: 'upcoming',
-    notes: 'RNAi therapy reducing blood pressure with twice-yearly dosing. Potential paradigm shift in HTN treatment.',
-    slug: 'zilebesiran-alny-hypertension-rnai'
-  },
 
   // === Q4 2026 (Oct–Dec) ===
   {
@@ -598,66 +581,15 @@ const CATALYST_DATA = [
     company: 'Regeneron',
     ticker: 'REGN',
     cashtag: '$REGN',
-    pdufa_date: '2026-10-01',
+    pdufa_date: '2026-10-20',
     indication: 'VEXAS syndrome (complement C5 inhibitor)',
     review_type: 'priority',
     designation: ['Priority Review', 'Breakthrough Therapy', 'Orphan Drug'],
     phase: 'BLA',
     nda_bla_type: 'BLA',
     status: 'upcoming',
-    notes: 'First targeted therapy for VEXAS — inflammatory disease caused by UBA1 mutations.',
+    notes: 'First potential targeted therapy for VEXAS syndrome, a rare inflammatory disease caused by somatic UBA1 mutations. Pozelimab (anti-C5 antibody) BLA under Priority Review with a PDUFA target action date of October 20, 2026.',
     slug: 'pozelimab-regn-vexas-syndrome'
-  },
-  {
-    catalyst_type: 'pdufa',
-    drug_name: 'donidalorsen',
-    brand_name: null,
-    company: 'KalVista Pharmaceuticals',
-    ticker: 'KALV',
-    cashtag: '$KALV',
-    pdufa_date: '2026-10-20',
-    indication: 'Hereditary angioedema (HAE) — on-demand oral treatment',
-    review_type: 'priority',
-    designation: ['Priority Review', 'Orphan Drug', 'Fast Track'],
-    phase: 'NDA',
-    nda_bla_type: 'NDA',
-    status: 'upcoming',
-    notes: 'First oral on-demand treatment for HAE attacks from KalVista\'s pipeline (distinct from EKTERLY/sebetralstat which launched in July 2025). ZENITH-1 and ZENITH-2 Phase 3 data. Note: EKTERLY (sebetralstat) is KalVista\'s already-approved HAE drug; donidalorsen is a separate NDA submission.',
-    slug: 'donidalorsen-kalv-hereditary-angioedema'
-  },
-  {
-    catalyst_type: 'pdufa',
-    drug_name: 'elebsiran',
-    brand_name: null,
-    company: 'Alnylam / Roche',
-    ticker: 'ALNY',
-    cashtag: '$ALNY',
-    pdufa_date: '2026-11-10',
-    indication: 'Hepatitis B virus (HBV) — functional cure combination therapy',
-    review_type: 'priority',
-    designation: ['Priority Review', 'Breakthrough Therapy'],
-    phase: 'NDA',
-    nda_bla_type: 'NDA',
-    status: 'upcoming',
-    notes: 'RNAi therapy in combination with imdusiran targeting functional cure for chronic HBV.',
-    slug: 'elebsiran-alny-hepatitis-b'
-  },
-  {
-    catalyst_type: 'pdufa',
-    drug_name: 'suzetrigine',
-    brand_name: 'Journavx',
-    company: 'Vertex Pharmaceuticals',
-    ticker: 'VRTX',
-    cashtag: '$VRTX',
-    pdufa_date: '2026-12-05',
-    indication: 'Moderate-to-severe chronic lower back pain (NaV1.8 blocker)',
-    review_type: 'standard',
-    designation: ['Fast Track', 'Breakthrough Therapy'],
-    phase: 'sNDA',
-    nda_bla_type: 'sNDA',
-    status: 'upcoming',
-    notes: 'Supplemental NDA expanding Journavx to chronic pain following acute pain approval.',
-    slug: 'journavx-suzetrigine-vrtx-chronic-back-pain'
   },
 
   // ==========================================================================
@@ -680,23 +612,6 @@ const CATALYST_DATA = [
     status: 'approved',
     notes: 'AdCom was expected ~2 months before the original August 2026 PDUFA date. Drug was FDA approved December 19, 2025 (PDUFA date: Dec 26, 2025) — ahead of any AdCom. MYQORZO now commercial in US and approved in EU and China. No AdCom was ultimately needed.',
     slug: 'adcom-aficamten-cytk-hcm-2026'
-  },
-  {
-    catalyst_type: 'adcom',
-    drug_name: 'donidalorsen',
-    brand_name: null,
-    company: 'KalVista Pharmaceuticals',
-    ticker: 'KALV',
-    cashtag: '$KALV',
-    pdufa_date: '2026-08-20',
-    indication: 'Hereditary angioedema (HAE) — on-demand oral treatment',
-    review_type: 'standard',
-    designation: ['Advisory Committee'],
-    phase: 'NDA',
-    nda_bla_type: null,
-    status: 'upcoming',
-    notes: 'FDA Pulmonary-Allergy Drugs Advisory Committee meeting for donidalorsen NDA. AdCom expected ~2 months before October 2026 PDUFA date. ZENITH Phase 3 data to be reviewed.',
-    slug: 'adcom-donidalorsen-kalv-hae-2026'
   },
 
   // ==========================================================================
@@ -1409,14 +1324,14 @@ const CATALYST_DATA = [
     company: 'Cytokinetics',
     ticker: 'CYTK',
     cashtag: '$CYTK',
-    pdufa_date: '2026-10-30',
+    pdufa_date: '2026-11-14',
     indication: 'Obstructive HCM — aficamten vs standard of care beta-blocker as monotherapy alternative',
     review_type: 'standard',
     designation: ['Fast Track'],
     phase: 'sNDA',
     nda_bla_type: 'sNDA',
     status: 'upcoming',
-    notes: 'sNDA submitted Q1 2026. PDUFA estimated Q4 2026 (company guidance: "regulatory approval for sNDA for MAPLE-HCM expected by Q4 2026"). MAPLE-HCM Phase 3 demonstrated superiority of aficamten to standard of care beta-blocker (metoprolol) in improving peak exercise capacity (pVO2) in oHCM — positions MYQORZO as a first-line option rather than only add-on therapy. Significant label expansion opportunity. ACC 2026 data presentations included new MAPLE-HCM analyses on exercise capacity and treatment interruption flexibility.',
+    notes: 'sNDA submitted Q1 2026. PDUFA target action date November 14, 2026 (FDA accepted the MAPLE-HCM obstructive HCM sNDA). MAPLE-HCM Phase 3 demonstrated superiority of aficamten to standard of care beta-blocker (metoprolol) in improving peak exercise capacity (pVO2) in oHCM — positions MYQORZO as a first-line option rather than only add-on therapy. Significant label expansion opportunity. ACC 2026 data presentations included new MAPLE-HCM analyses on exercise capacity and treatment interruption flexibility.',
     slug: 'aficamten-cytk-maple-hcm-snda'
   },
 
@@ -1749,8 +1664,7 @@ const CATALYST_DATA = [
 
 async function seed() {
   if (!process.env.DATABASE_URL) {
-    console.error('DATABASE_URL not set. Exiting.');
-    process.exit(1);
+    throw new Error('DATABASE_URL not set.');
   }
 
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
@@ -1805,6 +1719,21 @@ async function seed() {
       upserted++;
     }
 
+    // Purge entries removed from the calendar (wrong company, already approved elsewhere, or no real PDUFA)
+    const RETIRED_SLUGS = [
+      'donidalorsen-kalv-hereditary-angioedema',
+      'adcom-donidalorsen-kalv-hae-2026',
+      'zilebesiran-alny-hypertension-rnai',
+      'elebsiran-alny-hepatitis-b',
+      'journavx-suzetrigine-vrtx-chronic-back-pain'
+    ];
+    let retired = 0;
+    for (const s of RETIRED_SLUGS) {
+      const rr = await client.query('DELETE FROM pdufa_dates WHERE slug = $1', [s]);
+      retired += rr.rowCount || 0;
+    }
+    console.log('Retired', retired, 'obsolete entries');
+
     // Count by catalyst type
     const typeCounts = {};
     CATALYST_DATA.forEach(e => {
@@ -1830,7 +1759,11 @@ async function seed() {
   }
 }
 
-seed().catch(err => {
-  console.error(err);
-  process.exit(1);
-});
+if (require.main === module) {
+  seed().catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+}
+
+module.exports = { seed };
